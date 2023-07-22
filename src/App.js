@@ -1,3 +1,4 @@
+import * as React from 'react';
 import './App.css';
 import Header from './component/Header';
 import SideBar from './component/SideBar';
@@ -9,8 +10,12 @@ import HomePage from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/signup';
 import Dashbord from './pages/dashbord';
+import ChallengePage from './pages/mosabeqat';
+import ContactUs from './pages/ContactUs';
+
 
 function App() {
+ 
   return (
     <div className="App">
       <Header/>
@@ -23,10 +28,14 @@ function App() {
           <Route path='/panel' element={<Dashbord/>}/>
           <Route path='/coins/buy' element={<KharidCoin/>}/>
           <Route path='/coins/sell' element={<FurushCoin/>}/>
+          <Route path='/panel' element={<Dashbord/>}/>
+          <Route path='/mosabeqat' element={<ChallengePage/>}/>
+          <Route path='/contactus' element={<ContactUs/>}/>
 
 
       </Routes>
-    </div>
+     </div>
+
   );
 }
 

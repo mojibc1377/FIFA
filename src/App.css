@@ -69,6 +69,10 @@ input{
 .btn-secondary {
   z-index: 1;
 }
+.header-logo{
+  z-index: 2;
+
+}
 @keyframes fadeOut {
   from {
     opacity: 0;
@@ -77,4 +81,27 @@ input{
     opacity: 1;
   }
 }
+@keyframes loadingAnimation {
+  0% {
+    opacity: 0.1;
+  }
+  25% {
+    opacity: 0.5;
+  }
+  50%{
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.3;
+  }
+  90%{
+    opacity: 0.5;
 
+  }
+  100%{
+    opacity: 1;
+  }
+}
+challengelist {
+  animation: 3s infinite alternate slidein;
+}
