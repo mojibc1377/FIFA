@@ -12,6 +12,9 @@ import Signup from './pages/signup';
 import Dashbord from './pages/dashbord';
 import ChallengePage from './pages/mosabeqat';
 import ContactUs from './pages/ContactUs';
+import ChallengeForm from './component/challengeForm';
+import Settings from './component/Settings';
+import CurrentAcceptedChallenges from './pages/currentAcceptedChallenge';
 
 
 function App() {
@@ -25,11 +28,14 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/signup' element={<Signup/>}/>
           <Route path='/coins' element={<Coins/>}/>
-          <Route path='/panel' element={<Dashbord/>}/>
           <Route path='/coins/buy' element={<KharidCoin/>}/>
           <Route path='/coins/sell' element={<FurushCoin/>}/>
           <Route path='/panel' element={<Dashbord/>}/>
           <Route path='/mosabeqat' element={<ChallengePage/>}/>
+          <Route path='/mosabeqat/new' element={<ChallengeForm/>}/>
+          <Route path='/settings' element={<Settings/>}/>
+          <Route path='/mosabeqat/current' element={<CurrentAcceptedChallenges/>}/>
+
           <Route path='/contactus' element={<ContactUs/>}/>
 
 

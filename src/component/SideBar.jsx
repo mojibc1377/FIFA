@@ -36,7 +36,7 @@ function SideBar(){
   <div className="offcanvas-header">
   </div>
 </div>
-<div className="offcanvas offcanvas-start text-gray-400 w-60 lg:w-80 md:w-60 sm:w-40 border-r-2 rounded-r-2xl border-gray-500 shadow-2xl" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
+<div className="offcanvas offcanvas-start text-gray-400 w-60 lg:w-80 md:w-60 sm:w-40" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
   <div className="offcanvas-header">
     <h5 className="offcanvas-title font-serif font-extralight italic" id="offcanvasWithBackdropLabel">FIFA MOJI</h5>
     <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"><AiOutlineClose/></button>
@@ -82,7 +82,7 @@ function SideBar(){
   </div>
   {(localStorage.getItem('loggedInUser')) ? (
               // Show user's profile information when logged in
-              <div className="offcanvas-footer flex px-4 py-2 w-full lg:px-2 lg:py-3 md:px-1 md:py-2 sm:px-0.5 sm:py-1 Xs:px-1 Xs:py-1 rounded-br-2xl bg-slate-700 gap-2 rounded-t-lg">
+              <div className="offcanvas-footer flex px-4 py-2 w-full lg:px-2 lg:py-3 md:px-1 md:py-2 sm:px-0.5 sm:py-1 Xs:px-1 Xs:py-1  bg-slate-700 gap-2 rounded-t-lg">
                 <FaRegUserCircle className="profile-pic text-3xl lg:text-3xl md:text-2xl sm:text-xl text-center text-gray-100" />
                 <span className="profile-userName font-black self-center text-left text-gray-50">
                   {(localStorage.getItem('loggedInUser'))} {/* Display user's name */}
@@ -90,7 +90,7 @@ function SideBar(){
               </div>
             ) : (
               // Show login link when not logged in
-              <div className='offcanvas-footer flex  px-4 py-2 w-full lg:px-2 lg:py-3 md:px-1 md:py-2 sm:px-0.5 sm:py-1 Xs:px-1 Xs:py-1 rounded-br-2xl bg-slate-700 gap-2 rounded-t-lg'>
+              <div className='offcanvas-footer flex  px-4 py-2 w-full lg:px-2 lg:py-3 md:px-1 md:py-2 sm:px-0.5 sm:py-1 Xs:px-1 Xs:py-1  bg-slate-700 gap-2 rounded-t-lg'>
         <FaRegUserCircle className='profile-pic text-3xl lg:text-3xl md:text-2xl sm:text-xl text-center text-gray-100'/>
         <span className='profile-userName font-black self-center text-left text-gray-50'>GUEST USER</span>
   </div>

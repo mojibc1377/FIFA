@@ -1,4 +1,4 @@
-const challenges =  [
+const challengesData =  [
     {
         id:Date.now(),
         challengerName:'MojiBc',
@@ -25,4 +25,4 @@ const challenges =  [
     }
 
 ]
-export default challenges;
+export default challengesData;

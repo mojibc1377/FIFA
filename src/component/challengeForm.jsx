@@ -1,6 +1,6 @@
 // ChallengeForm.js
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function ChallengeForm() {
   const [gameName, setGameName] = useState('');
@@ -22,25 +22,26 @@ function ChallengeForm() {
     const value = event.target.value.replace(/\D/, '');
     setChallengeAmount(value);
   };
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const HandleSubmit = (event) => {
     
     //implement logic to send the formdata to backend API for storage
 
-    
+
     console.log('Game Name:', gameName);
     console.log('Console Type:', consoleType);
     console.log('Challenge Amount:', challengeAmount);
 
-    <Navigate to='/' />
-    alert("your challenge is posted in mosabeqat")
+      alert("your challenge is posted in mosabeqat")
+      navigate('/panel');
 
   };
 
   return (
-    <div className=" bg-gray-700 text-gray-100 p-8 px-10 mx-4 rounded-md shadow-xl ">
+    <div className=" absolute inset-0 h-max my-auto mx-5 bg-gray-700 text-gray-100 p-8 px-10 rounded-md shadow-2xl ">
       <h2 className="animate-pulse text-2xl font-semibold text-gray-300 mb-4">Create a New Challenge</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={HandleSubmit}>
         <div className=" fade-out mb-4">
           <label htmlFor="challengerName" className=" fade-out block mb-1 font-extrabold text-2xl text-blue-500">
             {localStorage.getItem("loggedInUser")}
@@ -60,7 +61,7 @@ function ChallengeForm() {
             <option value="EA FC 24">EA FC 24</option>
           </select>
         </div>
-        <div className=" fade-out mb-4">
+        <div className="fade-out mb-4">
           <label htmlFor="consoleType" className=" fade-out block mb-1">
             Console Type:
           </label>

@@ -105,3 +105,19 @@ input{
 challengelist {
   animation: 3s infinite alternate slidein;
 }
+/* Define the keyframes for the sliding animation */
+@keyframes slideFromTop {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Apply the animation to the target div */
+.sliding-div {
+  animation: slideFromTop 1s forwards;
+}

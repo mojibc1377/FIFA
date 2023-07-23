@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import { TiTickOutline } from 'react-icons/ti';
 
-function ChallengesList({ challenges }) {
+
+function ChallengesList({ challenges, onAcceptChallenge }) {
   const [showBackdrop, setShowBackdrop] = useState(false);
   const [selectedChallengeIndex, setSelectedChallengeIndex] = useState(null);
 
@@ -22,12 +23,11 @@ function ChallengesList({ challenges }) {
 
   const handleConfirmationYes = () => {
     if (selectedChallengeIndex !== null) {
-     //Add challenge to the challenges List
+      // Get the selected challenge
+      const selectedChallenge = challenges[selectedChallengeIndex];
 
-
-
-
-
+      // Call the onAcceptChallenge function from the parent component to accept the selected challenge
+      onAcceptChallenge(selectedChallenge);
 
       // Hide the backdrop
       handleHideBackdrop();
