@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Users from '../data/users'; // Import the Users data
+import { request } from '../services/requests';
 
 function Signup() {
   const [name, setName] = useState('');
@@ -33,32 +34,33 @@ function Signup() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Check if the username already exists in the Users array
     const isUsernameTaken = Users.some((user) => user.username === username);
 
     if (isUsernameTaken) {
       alert('Username is already taken. Please choose a different one.');
       return;
     }
-
-    // Create a new user object and add it to the Users array (for demonstration purposes only)
-    const newUser = {
-      id: Users.length + 1, // Generate a unique ID (replace this with a more robust approach in a real app)
-      name: name,
-      username: username,
-      password: password,
-      number: phoneNumber,
-      psnId: psnId,
-      accountCredit: '0',
+    
+    const userData = {
+      name,
+      username,
+      password,
+      number : phoneNumber,
+      psnId,
+      accountCredit: '0'
     };
 
-    Users.push(newUser); // Add the new user to the Users array (for demonstration purposes only)
-
-    // You might want to save the Users array to a backend or database in a real app
-
-    alert('Signup successful. Please log in with your new account.');
-    navigate('/login');
+    try {
+      request.post('/api/signup', userData);
+      alert('Signup successful. Please log in with your new account.');
+      navigate('/login');
+    } catch (error) {
+      // Handle errors if the request fails
+      console.error('Error registering user:', error);
+      alert('An error occurred while registering user. Please try again.');
+    }
   };
+   
 
   return (
     <div className="flex flex-col fade-out items-center">

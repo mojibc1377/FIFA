@@ -1,11 +1,15 @@
 // ChallengeForm.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { request } from '../services/requests';
 
 function ChallengeForm() {
   const [gameName, setGameName] = useState('');
   const [consoleType, setConsoleType] = useState('');
   const [challengeAmount, setChallengeAmount] = useState('');
+  const challengerName = (JSON.parse(localStorage.getItem('user')).name)
+  const challengerId = (JSON.parse(localStorage.getItem('user'))._id)
+  console.log(challengerId)
 
   const handleGameNameChange = (event) => {
     setGameName(event.target.value);
@@ -15,27 +19,44 @@ function ChallengeForm() {
     setConsoleType(event.target.value);
   };
 
-
-
   const handleChallengeAmountChange = (event) => {
     // Ensure that the input only accepts numeric values
     const value = event.target.value.replace(/\D/, '');
     setChallengeAmount(value);
   };
+  
   const navigate = useNavigate();
 
   const HandleSubmit = (event) => {
     
-    //implement logic to send the formdata to backend API for storage
+    const challengeData = {
+      challengerName,
+      gameName,
+      consoleType,
+      challengeAmount,
+      challengerId,
+      accepterId : ''
+    };
 
+    // challengerName:'AshkanLifkoohi',
+    //     gameName:'EA FC 24',
+    //     consoleType : "PS4",
+    //     challengeAmount : "10000", schema 
 
-    console.log('Game Name:', gameName);
-    console.log('Console Type:', consoleType);
-    console.log('Challenge Amount:', challengeAmount);
+    try {
 
-      alert("your challenge is posted in mosabeqat")
+      request.post('/api/challenges/new/post', challengeData);
+      console.log('New challenge created:', challengeData);
+      alert('Your challenge is posted in mosabeqat');
       navigate('/panel');
 
+    } catch (error) {
+
+      console.error('Error creating a challenge:', error);
+      alert('An error occurred while posting the challenge');
+      navigate('/panel');
+
+    }
   };
 
   return (

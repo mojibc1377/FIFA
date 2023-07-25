@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
+import { request } from '../services/requests';
 
 function Settings() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [number, setNumber] = useState('');
   const [psnId, setPsnId] = useState('');
+  const user = JSON.parse(localStorage.getItem("user")) 
+  
+  const name= user.name
+  const credit = user.accountCredit
+  const userId = user._id  
+  console.log(userId) 
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -20,25 +27,42 @@ function Settings() {
   };
 
   const handlePhoneNumberChange = (event) => {
-    setPhoneNumber(event.target.value);
+    setNumber(event.target.value);
   };
 
   const handlePsnIdChange = (event) => {
     setPsnId(event.target.value);
   };
+  
+
 
   const handleSubmit = (event) => {
+    const dataToUpdate = {
+      name,
+      username,
+      password : newPassword,
+      number,
+      psnId,
+      credit
+    };
+    // name: String,
+    // username: String,
+    // password: String,
+    // number: String,
+    // psnId: String,
+    // accountCredit: String, // schema
 
-    // Implement logic to update the user's account settings in the backend
-   
-    console.log('Updated Username:', username);
-    console.log('Updated Password:', newPassword);
-    console.log('Old Password:', password);
-    console.log('Phone Number:', phoneNumber);
-    console.log('PSN ID:', psnId);
+    try {
+      request.put(`/api/users/${userId}`, dataToUpdate);
 
+      // Handle the response if needed
+    } catch (error) {
+      // Handle errors if the request fails
+      console.error('Error updating account information:', error);
+      alert('An error occurred while updating account information');
+    }
+  
     
-   alert('data has been changed successfully')
   };
 
   return (
@@ -94,7 +118,7 @@ function Settings() {
           <input
             type="number"
             id="phoneNumber"
-            value={phoneNumber}
+            value={number}
             onChange={handlePhoneNumberChange}
             placeholder="Enter your phone number"
             required

@@ -1,9 +1,10 @@
 // ChallengesList.js
 import React, { useState } from 'react';
 import { TiTickOutline } from 'react-icons/ti';
+import { request } from '../services/requests';
 
 
-function ChallengesList({ challenges, onAcceptChallenge }) {
+function ChallengesList({ challenges, onAcceptChallenge ,status}) {
   const [showBackdrop, setShowBackdrop] = useState(false);
   const [selectedChallengeIndex, setSelectedChallengeIndex] = useState(null);
 
@@ -21,18 +22,26 @@ function ChallengesList({ challenges, onAcceptChallenge }) {
     handleShowBackdrop(index);
   };
 
-  const handleConfirmationYes = () => {
+  const handleConfirmationYes = async () => {
     if (selectedChallengeIndex !== null) {
-      // Get the selected challenge
-      const selectedChallenge = challenges[selectedChallengeIndex];
+      try {
+        // Get the selected challenge
+        const selectedChallenge = challenges[selectedChallengeIndex];
 
-      // Call the onAcceptChallenge function from the parent component to accept the selected challenge
-      onAcceptChallenge(selectedChallenge);
-
-      // Hide the backdrop
-      handleHideBackdrop();
+        // Call the onAcceptChallenge function from the parent component to accept the selected challenge
+        onAcceptChallenge(selectedChallenge);
+  
+        // Send an HTTP PUT request to update the challenge in the database
+        request.put(`/api/challenges/${selectedChallenge._id}`, selectedChallenge);
+        // Hide the backdrop
+        handleHideBackdrop();
+      } catch (error) {
+        console.error('Error updating challenge:', error);
+        // Handle error appropriately (e.g., show an error message)
+      }
     }
   };
+  
 
   const handleConfirmationNo = () => {
     handleHideBackdrop();
@@ -69,12 +78,12 @@ function ChallengesList({ challenges, onAcceptChallenge }) {
                 </span>
               </p>
             </div>
-            <button
+            {status === true && <button
               className="addBtn pr-10"
               onClick={() => handleChallengeConfirmation(index)}
             >
               <TiTickOutline className="w-10 mb-4 cursor-pointer text-2xl hover:text-4xl text-green-600 font" />
-            </button>
+            </button>}
           </li>
         ))}
       </ul>

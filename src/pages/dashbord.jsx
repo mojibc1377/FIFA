@@ -7,8 +7,11 @@ function Dashboard() {
   const navigate = useNavigate();
 
   const handleCreateChallenge = () => {
-    navigate('/mosabeqat/new');
+    navigate('/challenges/new');
   };
+  const handleCurrentChallenges = () =>{
+    navigate('challenges/current')
+  }
   const handleSettings = () => {
     navigate('/settings');
   };
@@ -22,6 +25,13 @@ function Dashboard() {
           className="bg-blue-500 border-1 hover:bg-blue-600 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           Post Challenge
+        </button>
+        <button
+          type="submit"
+          onClick={handleCurrentChallenges}
+          className="bg-blue-500 border-1 hover:bg-blue-600 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          accepted Challenges
         </button>
         <button
           type="button"

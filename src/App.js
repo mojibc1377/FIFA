@@ -31,14 +31,11 @@ function App() {
           <Route path='/coins/buy' element={<KharidCoin/>}/>
           <Route path='/coins/sell' element={<FurushCoin/>}/>
           <Route path='/panel' element={<Dashbord/>}/>
-          <Route path='/mosabeqat' element={<ChallengePage/>}/>
-          <Route path='/mosabeqat/new' element={<ChallengeForm/>}/>
+          <Route path='/panel/challenges/current' element={<CurrentAcceptedChallenges/>}/>
+          <Route path='/challenges' element={<ChallengePage/>}/>
+          <Route path='/challenges/new' element={<ChallengeForm/>}/>
           <Route path='/settings' element={<Settings/>}/>
-          <Route path='/mosabeqat/current' element={<CurrentAcceptedChallenges/>}/>
-
           <Route path='/contactus' element={<ContactUs/>}/>
-
-
       </Routes>
      </div>
 

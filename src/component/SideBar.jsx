@@ -9,21 +9,23 @@ import {IoIosCall,IoMdSettings} from "react-icons/io"
 import {RiLoginBoxFill,RiLogoutBoxRFill} from "react-icons/ri"
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-import Users from '../data/users';
+import axios from "axios";
+import {request} from "../services/requests"
+
+
 
 function SideBar(){
   const location = useLocation();
   const [isActive, setIsActive] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false); // Default isLoggedIn to false
-  const userProfile = isLoggedIn ? Users.find((user) => user.username) : null;
-
+  
   useEffect(() => {
     const storedIsLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
     setIsLoggedIn(storedIsLoggedIn !== null ? storedIsLoggedIn : false);
   }, []);
 
   const handleLogout = () => {
-    localStorage.setItem('isLoggedIn', JSON.stringify(false)); // Set isLoggedIn to false in localStorage
+    localStorage.setItem('isLoggedIn', JSON.stringify(false)); 
     setIsLoggedIn(false); // Update state
     localStorage.clear()
   };
@@ -39,13 +41,12 @@ function SideBar(){
 <div className="offcanvas offcanvas-start text-gray-400 w-60 lg:w-80 md:w-60 sm:w-40" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
   <div className="offcanvas-header">
     <h5 className="offcanvas-title font-serif font-extralight italic" id="offcanvasWithBackdropLabel">FIFA MOJI</h5>
-    <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"><AiOutlineClose/></button>
   </div>
   <div className="offcanvas-body flex-col ">
         <ul className='offcanvas-list flex-col ps-4 text-left justify-between gap-0'>
             <a href='/'><li className='flex flex-row align-middle gap-2 my-8 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><HiHome className='mt-1 text-blue-400'/>Home</li></a>
             <a href='/coins'><li className='flex flex-row align-middle gap-2 my-8 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-2 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><FaBitcoin className='mt-1 text-blue-400'/>Coin</li></a>
-            <a href='/mosabeqat'><li className='flex flex-row align-middle gap-2 my-8 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><GiChampions className='mt-1 text-blue-400'/>mosabeqat</li></a>
+            <a href='/challenges'><li className='flex flex-row align-middle gap-2 my-8 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><GiChampions className='mt-1 text-blue-400'/>Challenges</li></a>
             {JSON.parse(localStorage.getItem('isLoggedIn')) ? (
               <a href="/panel">
                 <li

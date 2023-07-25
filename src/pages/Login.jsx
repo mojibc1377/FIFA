@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Users from '../data/users'; // Import the Users data
+import { request } from '../services/requests';
 
 function Login(onLogin) {
   const [username, setUsername] = useState('');
@@ -14,17 +14,25 @@ function Login(onLogin) {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
-
+  const [Users , setUsers] = React.useState([])
+  React.useEffect(()=>{
+    const fetchProducts = async() =>{
+      const {data} = await request.get('/api/users');
+      setUsers(data)
+      console.log("users are fetched")
+    }
+    fetchProducts();
+  },[])
   const handleSubmit = (event) => {
     event.preventDefault();
     const foundUser = Users.find((user) => user.username === username && user.password === password);
-
     if (foundUser) {
       // User found, set isLoggedIn to true and navigate to home page
       // You can use local storage or a state management library for a persistent login state
       localStorage.setItem('isLoggedIn', true); // Storing the login status in localStorage (not the best solution, but for simplicity)
-      localStorage.setItem('loggedInUser' , (username,username))
-      console.log(localStorage.getItem("loggedInUser"))
+      localStorage.setItem('loggedInUser' , (foundUser.username))
+      localStorage.setItem("user", JSON.stringify(foundUser));
+    
       navigate('/');
     } else {
       // User not found, show alert and navigate to signup page
