@@ -2,13 +2,15 @@
 import React, { useState } from 'react';
 import { TiTickOutline } from 'react-icons/ti';
 import { request } from '../services/requests';
+import {AiOutlineLoading} from "react-icons/ai"
 
 
 function ChallengesList({ challenges, onAcceptChallenge,status }) {
   const [showBackdrop, setShowBackdrop] = useState(false);
   const [selectedChallengeIndex, setSelectedChallengeIndex] = useState(null);
   const accepterId = (JSON.parse(localStorage.getItem('user')))._id
-
+  const [isLoading, setIsLoading] = useState(true)
+  setTimeout(()=> setIsLoading(false) , 2000)
   const handleShowBackdrop = (index) => {
     setSelectedChallengeIndex(index);
     setShowBackdrop(true);
@@ -41,6 +43,7 @@ function ChallengesList({ challenges, onAcceptChallenge,status }) {
         console.log(data)
         // Hide the backdrop
         handleHideBackdrop();
+        setIsLoading(false)
 
       } catch (error) {
         console.error('Error updating challenge:', error);
@@ -59,7 +62,7 @@ function ChallengesList({ challenges, onAcceptChallenge,status }) {
     <div className="text-gray-200 absolute w-full top-14 fade-out pt-4 rounded-md shadow-md">
       <h2 className="text-2xl font-semibold mb-4">Challenges List</h2>
       <ul className="space-y-10">
-        {challenges?.map((challenge, index) => (
+        {isLoading === true ? <AiOutlineLoading className='loading absolute left-1/2 mt-10 text-blue-400 animate-spin'/> :challenges?.map((challenge, index) => (
           <li
             key={index}
             className="border-b flex align-middle justify-between flex-row pl-10 fade-out border-gray-600 pb-2"
