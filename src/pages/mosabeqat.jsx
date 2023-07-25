@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ChallengesList from '../component/challengeList';
 import { request } from '../services/requests';
 
 function ChallengePage() {
   // eslint-disable-next-line no-unused-vars
   const [challenges, setChallenges] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [acceptedChallenges, setAcceptedChallenges] = useState([]);
   React.useEffect(()=>{
     const fetchProducts = async() =>{
@@ -19,16 +20,13 @@ function ChallengePage() {
     
     setAcceptedChallenges((prevAcceptedChallenges) => [...prevAcceptedChallenges, challenge]);
   };
-  useEffect(() => {
-    //db
-        localStorage.setItem("acceptedChallenges", JSON.stringify(acceptedChallenges));
 
-  }, [acceptedChallenges]);
-  
+  const pendingChallenges = challenges.filter((challenge) => challenge.accepterId === '');
+
   return (
     <div>
       <ChallengesList
-        challenges={challenges}
+        challenges={pendingChallenges}
         onAcceptChallenge={handleAcceptChallenge}
         status={true} //status means for accept(+accept button)"true" fro show (-acceot button ) "false"
       />

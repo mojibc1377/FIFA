@@ -4,9 +4,10 @@ import { TiTickOutline } from 'react-icons/ti';
 import { request } from '../services/requests';
 
 
-function ChallengesList({ challenges, onAcceptChallenge ,status}) {
+function ChallengesList({ challenges, onAcceptChallenge,status }) {
   const [showBackdrop, setShowBackdrop] = useState(false);
   const [selectedChallengeIndex, setSelectedChallengeIndex] = useState(null);
+  const accepterId = (JSON.parse(localStorage.getItem('user')))._id
 
   const handleShowBackdrop = (index) => {
     setSelectedChallengeIndex(index);
@@ -27,17 +28,24 @@ function ChallengesList({ challenges, onAcceptChallenge ,status}) {
       try {
         // Get the selected challenge
         const selectedChallenge = challenges[selectedChallengeIndex];
-
+        selectedChallenge.accepterId = accepterId
+  
         // Call the onAcceptChallenge function from the parent component to accept the selected challenge
         onAcceptChallenge(selectedChallenge);
+        console.log(selectedChallenge)
+
   
         // Send an HTTP PUT request to update the challenge in the database
-        request.put(`/api/challenges/${selectedChallenge._id}`, selectedChallenge);
+        const {data} = await request.put(`/api/challenges/${selectedChallenge._id}`, selectedChallenge);
+
+        console.log(data)
         // Hide the backdrop
         handleHideBackdrop();
+
       } catch (error) {
         console.error('Error updating challenge:', error);
         // Handle error appropriately (e.g., show an error message)
+        
       }
     }
   };
@@ -51,7 +59,7 @@ function ChallengesList({ challenges, onAcceptChallenge ,status}) {
     <div className="text-gray-200 absolute w-full top-14 fade-out pt-4 rounded-md shadow-md">
       <h2 className="text-2xl font-semibold mb-4">Challenges List</h2>
       <ul className="space-y-10">
-        {challenges.map((challenge, index) => (
+        {challenges?.map((challenge, index) => (
           <li
             key={index}
             className="border-b flex align-middle justify-between flex-row pl-10 fade-out border-gray-600 pb-2"
@@ -78,12 +86,14 @@ function ChallengesList({ challenges, onAcceptChallenge ,status}) {
                 </span>
               </p>
             </div>
-            {status === true && <button
-              className="addBtn pr-10"
-              onClick={() => handleChallengeConfirmation(index)}
-            >
-              <TiTickOutline className="w-10 mb-4 cursor-pointer text-2xl hover:text-4xl text-green-600 font" />
-            </button>}
+          { status === true &&
+              <button
+                className="addBtn pr-10"
+                onClick={() => handleChallengeConfirmation(index)}
+              >
+                <TiTickOutline className="w-10 mb-4 cursor-pointer text-2xl hover:text-4xl text-green-600 font" />
+              </button>
+              }
           </li>
         ))}
       </ul>

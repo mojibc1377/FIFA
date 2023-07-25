@@ -9,11 +9,8 @@ function CurrentAcceptedChallenges (){
   React.useEffect(() => {
     const fetchAcceptedChallenges = async () => {
       try {
-        const {data} = await request.get(`/api/challenges?accepterId=${(JSON.parse(localStorage.getItem('user'))._id)}`);
-        //this line wont work idk why 
-        console.log(data)
-        setAcceptedChallenges(data);
-        
+        const {data} = await request.get(`/api/challenges/?accepterId=${(JSON.parse(localStorage.getItem('user')))._id}`);
+        setAcceptedChallenges(data);        
       } catch (error) {
         console.error('Error fetching accepted challenges:', error);
       }
@@ -21,9 +18,7 @@ function CurrentAcceptedChallenges (){
 
     fetchAcceptedChallenges();
   }, []); 
-  console.log(acceptedChallenges); // Log the value of acceptedChallenges here
-  console.log("yes")
-
+  console.log(acceptedChallenges)
     return(
         <ChallengesList
         challenges={acceptedChallenges}
