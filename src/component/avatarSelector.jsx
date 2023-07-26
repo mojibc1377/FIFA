@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const avatars = [
     '/images/avatars/EJCj0hJ5N4Ki940uwZyk--3--syi4d.jpg',
@@ -14,49 +14,93 @@ const avatars = [
     '/images/avatars/cristiano-ronaldo-profile-avatar-soccer-related-iypa1hDVpF-watermarked.png',
     // Add the paths of all 20 avatars here
   ];
+ 
+  function AvatarSelector({ onAvatarSelect }) {
+    const [selectedAvatar, setSelectedAvatar] = useState(avatars[0]); // Default selection
   
-
-function AvatarSelector({ onAvatarSelect }) {
-  const [selectedAvatar, setSelectedAvatar] = useState(avatars[0]); // Default selection
-
-  const handleAvatarChange = (avatar) => {
-    setSelectedAvatar(avatar);
-    onAvatarSelect(selectedAvatar)
-
-  };
-
-  return (
-    <div>
-      <h3>Select your avatar:</h3>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        {avatars.map((avatar, index) => (
-          <img
-            key={index}
-            src={avatar}
-            alt={`Avatar ${index + 1}`}
-            style={{
-              cursor: 'pointer',
-              border: selectedAvatar === avatar ? '2px solid blue' : 'none',
-              borderRadius: '50%',
-              width: '40px',
-              height: '40px',
-            }}
-            onClick={() => handleAvatarChange(avatar)}
-          />
-        ))}
-      </div>
-      {selectedAvatar && (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '10px' }}>
-          <h3>Preview:</h3>
-          <img
-            src={selectedAvatar}
-            alt="Preview Avatar"
-            style={{ borderRadius: '50%', width: '100px', height: '100px' }}
-          />
+    const handleAvatarChange = (avatar) => {
+      setSelectedAvatar(avatar);
+      onAvatarSelect(avatar);
+    };
+  
+    const containerRef = useRef(null);
+  
+    useEffect(() => {
+      let intervalId;
+      const scrollToEndAndBack = () => {
+        const container = containerRef.current;
+        if (container) {
+          container.scrollLeft = 0; // Reset the scroll position to 0 before starting the animation
+          const scrollWidth = container.scrollWidth - container.clientWidth;
+          const duration = 4000; // 2 seconds
+          const scrollStep = (scrollWidth * 10) / duration; // Adjust scrolling speed here
+          let currentTime = 0;
+          const animateScroll = () => {
+            currentTime += 10;
+            container.scrollLeft += scrollStep;
+            if (currentTime < duration / 2) {
+              requestAnimationFrame(animateScroll);
+            } else if (currentTime >= duration / 2 && currentTime < duration) {
+              container.scrollLeft -= scrollStep;
+              requestAnimationFrame(animateScroll);
+            } else {
+              clearInterval(intervalId); // Stop the animation after it completes
+            }
+          };
+  
+          intervalId = setInterval(animateScroll, 10);
+        }
+      };
+  
+      scrollToEndAndBack();
+  
+      return () => clearInterval(intervalId);
+    }, []);
+  
+  
+    return (
+        <div className="par w-60 overflow-x-hidden relative hide-scrollbar">
+          <style>
+            {`
+              .hide-scrollbar::-webkit-scrollbar {
+                width: 0.4em;
+              }
+    
+              .hide-scrollbar::-webkit-scrollbar-track {
+                background-color: transparent;
+              }
+    
+              .hide-scrollbar::-webkit-scrollbar-thumb {
+                background-color: #888;
+                border-radius: 1em;
+              }
+            `}
+          </style>
+          <h3 className="text-lg font-bold mb-2">Select your avatar:</h3>
+          <div
+            className="flex items-center gap-4 mb-4 overflow-x-auto"
+            ref={containerRef}
+          >
+            {avatars.map((avatar, index) => (
+              <img
+                key={index}
+                src={avatar}
+                alt={`Avatar ${index + 1}`}
+                className={`cursor-pointer rounded-full w-16 h-16 border-2 ${
+                  selectedAvatar === avatar ? 'border-blue-500' : 'border-transparent'
+                }`}
+                onClick={() => handleAvatarChange(avatar)}
+              />
+            ))}
+          </div>
+          {selectedAvatar && (
+            <div className="flex flex-col items-center">
+              <h3 className="text-lg font-bold mb-2">Preview:</h3>
+              <img src={selectedAvatar} alt="Preview Avatar" className="rounded-full w-40 h-40" />
+            </div>
+          )}
         </div>
-      )}
-    </div>
-  );
-}
-
-export default AvatarSelector;
+      );
+  }
+  
+  export default AvatarSelector;
