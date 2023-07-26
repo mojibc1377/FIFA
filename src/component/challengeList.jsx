@@ -55,7 +55,7 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
   };
 
   return (
-    <div className="text-gray-200 absolute w-full top-14 fade-out pt-4 pb-4 rounded-md ">
+    <div className="text-gray-200 absolute w-full top-14 fade-out duration-1000 pt-4 pb-4 rounded-md ">
     <h2 className="text-2xl font-semibold mb-4">{list ==="accepted" ? "Accepted challenges" : "Challenges List"}</h2>
     <ul className="flex flex-col gap-5 justify-center w-11/12 pl-9">
       {isLoading === true ? (
