@@ -78,7 +78,7 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
               <div className="challengeAmount animate-pulse">${challenge.challengeAmount}</div>
             {challenge.challengerId !== accepterId && status === true ? (
               <button className="addBtn" onClick={() => handleChallengeConfirmation(index)}>
-                <TiTickOutline className="w-10 cursor-pointer text-2xl hover:text-4xl text-green-600 font" />
+                <TiTickOutline className="w-10 cursor-pointer text-2xl lg:hover:text-4xl text-green-600 font" />
               </button>
             ) : (
               <button className="addBtn" onClick={() => alert("waiting to be accepted")}>
