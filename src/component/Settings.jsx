@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { request } from '../services/requests';
 import AvatarSelector from './avatarSelector';
+import {useNavigate } from 'react-router-dom';
 
 function Settings() {
   const [username, setUsername] = useState('');
@@ -10,7 +11,8 @@ function Settings() {
   const [psnId, setPsnId] = useState('');
   const [ avatar ,setAvatar] = useState('')
   const user = JSON.parse(localStorage.getItem("user")) 
-  
+  const navigate = useNavigate();
+
   const name= user.name
   const credit = user.accountCredit
   const userId = user._id  
@@ -59,8 +61,11 @@ function Settings() {
     // accountCredit: String, // schema
 
     try {
-      request.put(`/api/users/${userId}`, dataToUpdate);
-
+      request.put(`/api/settings/users/${userId}`, dataToUpdate);
+      localStorage.clear()
+      alert("please login with your new information")
+      navigate("/login")
+      
       // Handle the response if needed
     } catch (error) {
       // Handle errors if the request fails
