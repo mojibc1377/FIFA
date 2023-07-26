@@ -23,7 +23,7 @@ function CurrentAcceptedChallenges (){
         <ChallengesList
         challenges={acceptedChallenges}
         status={false}
-
+        list="accepted"
       />
     )
 }

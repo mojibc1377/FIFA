@@ -3,13 +3,16 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { request } from '../services/requests';
 
+//avatar pas bede
+
 function ChallengeForm() {
   const [gameName, setGameName] = useState('');
   const [consoleType, setConsoleType] = useState('');
   const [challengeAmount, setChallengeAmount] = useState('');
   const challengerName = (JSON.parse(localStorage.getItem('user')).name)
   const challengerId = (JSON.parse(localStorage.getItem('user'))._id)
-  console.log(challengerId)
+  const avatar = JSON.parse(localStorage.getItem('user')).avatar
+
 
   const handleGameNameChange = (event) => {
     setGameName(event.target.value);
@@ -35,7 +38,8 @@ function ChallengeForm() {
       consoleType,
       challengeAmount,
       challengerId,
-      accepterId : ''
+      accepterId : '',
+      avatar : avatar
     };
 
     // challengerName:'AshkanLifkoohi',
@@ -47,8 +51,8 @@ function ChallengeForm() {
 
       request.post('/api/challenges/new/post', challengeData);
       console.log('New challenge created:', challengeData);
-      alert('Your challenge is posted in mosabeqat');
-      navigate('/panel');
+      alert('Your challenge is posted in challenges');
+      navigate('/');
 
     } catch (error) {
 
@@ -115,6 +119,7 @@ function ChallengeForm() {
             step={1} // Set the step value to 1 (only accept integer values)
             className=" fade-out w-full px-3 py-2 rounded-md bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
+
         </div>
         <div>
           <button

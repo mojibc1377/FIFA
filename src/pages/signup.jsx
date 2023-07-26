@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Users from '../data/users'; // Import the Users data
 import { request } from '../services/requests';
+import AvatarSelector from '../component/avatarSelector';
 
 function Signup() {
   const [name, setName] = useState('');
@@ -9,7 +9,12 @@ function Signup() {
   const [password, setPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [psnId, setPsnId] = useState('');
+  const [selectedAvatar, setSelectedAvatar] = useState('');
   const navigate = useNavigate();
+
+  const handleAvatarSelect = (avatarLink) => {
+    setSelectedAvatar(avatarLink);
+  };
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -31,33 +36,37 @@ function Signup() {
     setPsnId(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const isUsernameTaken = Users.some((user) => user.username === username);
-
-    if (isUsernameTaken) {
-      alert('Username is already taken. Please choose a different one.');
-      return;
+    try {
+      const users = await request.get('/api/users')
+      const isUsernameTaken = (users.data).some((user) => user.username === username);
+      if (isUsernameTaken) {
+          alert('Username is already taken. Please choose a different one.');
+          return;
+        }
+    } catch (error) {
+      console.error('Error registering user:', error);
     }
-    
     const userData = {
       name,
       username,
       password,
-      number : phoneNumber,
+      number: phoneNumber,
       psnId,
-      accountCredit: '0'
+      accountCredit: '0',
+      avatar: selectedAvatar, 
     };
 
     try {
+
       request.post('/api/signup', userData);
       alert('Signup successful. Please log in with your new account.');
       navigate('/login');
     } catch (error) {
-      // Handle errors if the request fails
+
       console.error('Error registering user:', error);
-      alert('An error occurred while registering user. Please try again.');
+      alert('An error occurred while registering user. Please try again Later.');
     }
   };
    
@@ -105,6 +114,7 @@ function Signup() {
           placeholder="PSN ID"
           required
         />
+      <AvatarSelector onAvatarSelect={handleAvatarSelect} />
         <button
           type="submit"
           className="bg-blue-500 hover:bg-blue-600 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"

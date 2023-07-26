@@ -18,7 +18,8 @@ function SideBar(){
   const location = useLocation();
   const [isActive, setIsActive] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false); // Default isLoggedIn to false
-  
+  const user = JSON.parse(localStorage.getItem('user'));
+
   useEffect(() => {
     const storedIsLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
     setIsLoggedIn(storedIsLoggedIn !== null ? storedIsLoggedIn : false);
@@ -81,10 +82,10 @@ function SideBar(){
             )}
         </ul>
   </div>
-  {(localStorage.getItem('loggedInUser')) ? (
+  {(user && user.name) ? (
               // Show user's profile information when logged in
               <div className="offcanvas-footer flex px-4 py-2 w-full lg:px-2 lg:py-3 md:px-1 md:py-2 sm:px-0.5 sm:py-1 Xs:px-1 Xs:py-1  bg-slate-700 gap-2 rounded-t-lg">
-                <FaRegUserCircle className="profile-pic text-3xl lg:text-3xl md:text-2xl sm:text-xl text-center text-gray-100" />
+                <img className="profile-pic text-3xl lg:text-3xl md:text-2xl sm:text-xl text-center text-gray-100 w-10 rounded-full" src={(JSON.parse(localStorage.getItem("user"))).avatar} alt='user-avatar'/>
                 <span className="profile-userName font-black self-center text-left text-gray-50">
                   {(localStorage.getItem('loggedInUser'))} {/* Display user's name */}
                 </span>
