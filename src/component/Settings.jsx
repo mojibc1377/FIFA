@@ -79,6 +79,7 @@ function Settings() {
   return (
     <div className="bg-gray-700 absolute w-full top-14 sliding-div text-gray-100 p-8 rounded-md shadow-md">
       <h2 className="text-2xl font-semibold mb-4">Account Settings</h2>
+      <div className="flex flex-col items-center"> {/* Create a flex container */}
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="username" className="block mb-1">
@@ -160,6 +161,7 @@ function Settings() {
           </button>
         </div>
       </form>
+      </div>
     </div>
   );
 }

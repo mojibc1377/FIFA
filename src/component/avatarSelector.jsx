@@ -60,22 +60,6 @@ const avatars = [
   
     return (
         <div className="par w-60 overflow-x-hidden relative hide-scrollbar">
-          <style>
-            {`
-              .hide-scrollbar::-webkit-scrollbar {
-                width: 0.4em;
-              }
-    
-              .hide-scrollbar::-webkit-scrollbar-track {
-                background-color: transparent;
-              }
-    
-              .hide-scrollbar::-webkit-scrollbar-thumb {
-                background-color: #888;
-                border-radius: 1em;
-              }
-            `}
-          </style>
           <h3 className="text-lg font-bold mb-2">Select your avatar:</h3>
           <div
             className="flex items-center gap-4 mb-4 overflow-x-auto"
