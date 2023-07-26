@@ -10,10 +10,10 @@ function Coins(){
   const resolvedPath = useResolvedPath();
 
   // Check if the "kharid" link is active
-  const isKharidActive = useMatch('/guz');
+  const isKharidActive = useMatch('/coins/buy');
 
   // Check if the "furush" link is active
-  const isFurushActive = useMatch('/chos');
+  const isFurushActive = useMatch('/coins/sell');
 
   return (
     <div className="coinss flex fade-out flex-row justify-center gap-20 pt-16">
