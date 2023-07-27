@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 
@@ -5,8 +6,6 @@ import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 function Coins(){
     const [isActive, setIsActive] = React.useState(false);
 
-  // Get the resolved path for the current location
-  // eslint-disable-next-line no-unused-vars
   const resolvedPath = useResolvedPath();
 
   // Check if the "kharid" link is active

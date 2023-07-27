@@ -1,4 +1,3 @@
-// ChallengeForm.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { request } from '../services/requests';
@@ -23,7 +22,6 @@ function ChallengeForm() {
   };
 
   const handleChallengeAmountChange = (event) => {
-    // Ensure that the input only accepts numeric values
     const value = event.target.value.replace(/\D/, '');
     setChallengeAmount(value);
   };
@@ -102,6 +100,7 @@ function ChallengeForm() {
             <option value="ps4">PS4</option>
             <option value="xbox">Xbox</option>
             <option value="pc">PC</option>
+            
           </select>
         </div>
         <div className=" fade-out mb-4">
@@ -115,8 +114,8 @@ function ChallengeForm() {
             onChange={handleChallengeAmountChange}
             placeholder="MONEY AMOUNT"
             required
-            max={50000} // Set the maximum value
-            step={1} // Set the step value to 1 (only accept integer values)
+            max={50000} 
+            step={1} // Set the step value to 1 (only accept integer values) or min value
             className=" fade-out w-full px-3 py-2 rounded-md bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 

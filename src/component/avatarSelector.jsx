@@ -12,7 +12,6 @@ const avatars = [
     '/images/avatars/craiyon_011030_ronaldo_nazario_funny_caricature.png',
     '/images/avatars/craiyon_011148_messi_funny_caricature.png',
     '/images/avatars/cristiano-ronaldo-profile-avatar-soccer-related-iypa1hDVpF-watermarked.png',
-    // Add the paths of all 20 avatars here
   ];
  
   function AvatarSelector({ onAvatarSelect }) {
@@ -30,10 +29,10 @@ const avatars = [
       const scrollToEndAndBack = () => {
         const container = containerRef.current;
         if (container) {
-          container.scrollLeft = 0; // Reset the scroll position to 0 before starting the animation
+          container.scrollLeft = 0;
           const scrollWidth = container.scrollWidth - container.clientWidth;
-          const duration = 4000; // 2 seconds
-          const scrollStep = (scrollWidth * 10) / duration; // Adjust scrolling speed here
+          const duration = 4000; // 4 seconds
+          const scrollStep = (scrollWidth * 10) / duration; // scrolling speed 
           let currentTime = 0;
           const animateScroll = () => {
             currentTime += 10;

@@ -1,4 +1,3 @@
-// ContactUs.js
 import React from 'react';
 import { FaPhone, FaWhatsapp, FaEnvelope } from 'react-icons/fa';
 

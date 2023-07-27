@@ -27,17 +27,14 @@ function Login(onLogin) {
     event.preventDefault();
     const foundUser = Users.find((user) => user.username === username && user.password === password);
     if (foundUser) {
-      // User found, set isLoggedIn to true and navigate to home page
-      // You can use local storage or a state management library for a persistent login state
-      localStorage.setItem('isLoggedIn', true); // Storing the login status in localStorage (not the best solution, but for simplicity)
+      
+      localStorage.setItem('isLoggedIn', true); 
       localStorage.setItem('loggedInUser' , (foundUser.username))
       localStorage.setItem("user", JSON.stringify(foundUser));
     
       navigate('/');
     } else {
-      // User not found, show alert and navigate to signup page
       alert('User not found ,Try Again');
-      // navigate('/signup');
     }
   };
 

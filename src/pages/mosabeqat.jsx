@@ -1,11 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import ChallengesList from '../component/challengeList';
 import { request } from '../services/requests';
 
 function ChallengePage() {
-  // eslint-disable-next-line no-unused-vars
   const [challenges, setChallenges] = useState([]);
-  // eslint-disable-next-line no-unused-vars
   const [acceptedChallenges, setAcceptedChallenges] = useState([]);
   React.useEffect(()=>{
     const fetchProducts = async() =>{

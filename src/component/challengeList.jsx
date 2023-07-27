@@ -1,20 +1,20 @@
 /* eslint-disable no-unused-vars */
-// ChallengesList.js
 import React, { useEffect, useState } from 'react';
 import { TiTickOutline } from 'react-icons/ti';
 import { request } from '../services/requests';
 import {AiOutlineLoading} from "react-icons/ai"
 import {VscLoading} from "react-icons/vsc"
+import { Navigate } from 'react-router-dom';
+import checkIfLoggedIn from './Middleware/checkLoggedIn';
 
-//avatar
 
 function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
   const [showBackdrop, setShowBackdrop] = useState(false);
   const [selectedChallengeIndex, setSelectedChallengeIndex] = useState(null);
-  const accepterId = (JSON.parse(localStorage.getItem('user')))._id
-  const [isLoading, setIsLoading] = useState(true)
+  const accepterId = JSON.parse(localStorage.getItem('user'))?._id; 
+  const [isLoading, setIsLoading] = useState(true);
 
-  setTimeout(()=> setIsLoading(false) , 2000)
+  setTimeout(() => setIsLoading(false), 2000);
   const handleShowBackdrop = (index) => {
     setSelectedChallengeIndex(index);
     setShowBackdrop(true);
@@ -28,31 +28,37 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
   const handleChallengeConfirmation = (index) => {
     handleShowBackdrop(index);
   };
+
   const handleConfirmationYes = async () => {
     if (selectedChallengeIndex !== null) {
       try {
-        // Get the selected challenge
         const selectedChallenge = challenges[selectedChallengeIndex];
-        selectedChallenge.accepterId = accepterId
+        if (!accepterId) {
+          alert("You need to be logged in to accept challenges.");
+        }
+        selectedChallenge.accepterId = accepterId;
         onAcceptChallenge(selectedChallenge);
 
-  
-        // eslint-disable-next-line no-unused-vars
-        const {data} = await request.put(`/api/challenges/${selectedChallenge._id}`, selectedChallenge);
+        const { data } = await request.put(`/api/challenges/${selectedChallenge._id}`, selectedChallenge);
 
         handleHideBackdrop();
-        setIsLoading(false)
+        setIsLoading(false);
 
       } catch (error) {
         console.error('Error updating challenge:', error);
-        
       }
     }
   };
-  
+
   const handleConfirmationNo = () => {
     handleHideBackdrop();
   };
+
+  if (!checkIfLoggedIn()) {
+    alert("please login first")
+    return <Navigate to="/login" replace={true} />;
+  }
+
 
   return (
     <div className="text-gray-200 absolute w-full top-14 fade-out duration-1000 pt-4 pb-4 rounded-md ">
@@ -93,7 +99,6 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
       )}
     </ul>
   
-    {/* Backdrop */}
     {showBackdrop && (
       <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-70 px-10">
         <div className="bg-gray-700 p-6 rounded-md shadow-md">
