@@ -121,19 +121,3 @@ challengelist {
 .sliding-div {
   animation: slideFromTop 1s forwards;
 }
-.green{
-  color : #189157
-}
-
-    .hide-scrollbar::-webkit-scrollbar {
-      width: 0.4em;
-    }
-
-    .hide-scrollbar::-webkit-scrollbar-track {
-      background-color: none;
-    }
-
-    .hide-scrollbar::-webkit-scrollbar-thumb {
-      background-color: #888;
-      border-radius: 1em;
-    }
