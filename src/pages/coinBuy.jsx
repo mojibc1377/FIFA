@@ -1,18 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
+import { request } from '../services/requests';
+import checkIfLoggedIn from '../component/Middleware/checkLoggedIn';
 import Coins from '../component/coins';
 import { Navigate } from 'react-router-dom';
-import { request } from '../services/requests';
-import { useEffect } from 'react';
-import CheckIfLoggedIn from '../component/Middleware/checkLoggedIn';
+
 
 function KharidCoin() {
-  const [mizan, setMizan] = React.useState('');
-  const [psnId, setPsnId] = React.useState('');
+  const [mizan, setMizan] = useState('');
+  const [cost, setCost] = useState(0);
   const requestType = "buy";
-  const [cost, setCost] = React.useState(0);
+  const user = (JSON.parse(localStorage.getItem('user')));
+
+  const [accountCredit, setAccountCredit] = useState(0);
 
   useEffect(() => {
+    // Calculate the cost whenever the mizan value changes
     if (mizan) {
       const calculatedCost = parseFloat(mizan) * 0.8;
       setCost(calculatedCost);
@@ -21,65 +25,73 @@ function KharidCoin() {
     }
   }, [mizan]);
 
-  React.useEffect(() => {
-    if (CheckIfLoggedIn()) {
-      const userData = JSON.parse(localStorage.getItem("user"));
-      setPsnId(userData?.psnId || "");
-    }
+  useEffect(() => {
+    // Fetch user's account credit
+    const fetchAccountCredit = async () => {
+      try {
+        const { data } = await request.get(`/api/users?userId=${user._id}`);
+       
+        console.log(data[0])
+        setAccountCredit(data[0].accountCredit);
+      } catch (error) {
+        console.error('Error fetching account credit:', error);
+      }
+    };
+
+    fetchAccountCredit();
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handlePurchase = async () => {
     try {
-      const response = await request.post('/api/coins', {
-        mizan: mizan,
-        psnId: psnId,
-        requestType: requestType
+      // const response = await request.post('/api/users/purchase-coins', {
+      //   userId: JSON.parse(localStorage.getItem('user'))._id,
+      //   amount: parseFloat(mizan),
+      // });
+      request.post('/api/coins', {
+        mizan: parseFloat(mizan),
+        psnId: user.psnId, 
+        requestType: requestType, 
       });
-
-      alert("Your request submitted successfully");
+  alert("subimted")
+      // Update the account credit after successful purchase
+      // setAccountCredit(response.data.accountCredit);
+  
+      // Reset the input field
+      setMizan('');
+      setCost(0);
+  
+      alert('Coins purchased successfully!');
     } catch (error) {
-      console.error('Error:', error);
-      alert("Error occurred while submitting your request");
+      console.error('Error purchasing coins:', error);
+      alert('An error occurred while purchasing coins. Please try again later.');
     }
   };
-
+  
   return (
     <>
       <Coins />
-      {CheckIfLoggedIn() ? (
-        <form onSubmit={handleSubmit}>
-          <ul className='coin-buy flex fade-out flex-col justify-evenly gap-10 pr-3 mt-5'>
-            <li className='flex flex-row-reverse'>
-              <p className='firstLine font-medium'>: میزان کوین درخواستی </p>
-              <input
-                className='mizan font-extralight text-white text-right px-2 w-40 mr-2 rounded-md bg-gray-700'
-                type="number"
-                required
-                placeholder='مقدار به اعداد انگلیسی'
-                value={mizan}
-                onChange={(e) => setMizan(e.target.value)}
-              />
-            </li>
-            <li className='flex flex-row-reverse'>
-              <p className='font-medium'>: آیدی PSN</p>
-              <input
-                className='id font-extralight text-white text-left px-2 w-40 mr-2 rounded-md bg-gray-700'
-                placeholder={psnId} 
-                value={psnId}
-                onChange={(e) => setPsnId(e.target.value)}
-              />
-            </li>
-            <li className='flex flex-row-reverse'>
-              <p className='font-medium'> : قیمت سفارش </p>
-              <p className='coin-buy-price px-2'>${cost.toFixed()}</p>
-            </li>
-            <div className='bottun container w-full flex justify-end'>
-              <button type="submit" className='submit justify-start text-blue-200 px-4 py-2 border-1 w-32 rounded-md hover:bg-blue-500 ml-2'>Submit</button>
-            </div>
-          </ul>
-        </form>
+      {checkIfLoggedIn() ? (
+        <div className="flex flex-col items-center gap-10 fade-out pt-20">
+        <h2 className="text-3xl font-light mb-8">Buy Coins</h2>
+        <div className="flex lg:flex-row flex-col gap-20">
+          <input
+            className="rounded-md border bg-slate-600 text-gray-300 border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            type="number"
+            value={mizan}
+            onChange={(e) => setMizan(e.target.value)}
+            placeholder="Enter the amount of coins to purchase"
+            required
+          />
+          <p className="text-gray-300">Cost: ${cost.toFixed()}</p>
+        </div>
+        <p className="text-gray-300">Account Credit: ${Number(accountCredit).toFixed()}</p>
+        <button
+          onClick={handlePurchase}
+          className="bg-blue-500 hover:bg-blue-600 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-2"
+        >
+          Purchase
+        </button>
+      </div>
       ) : (
         alert("please login first"),
         <Navigate to="/login" replace={true} />
@@ -87,5 +99,6 @@ function KharidCoin() {
     </>
   );
 }
+
 
 export default KharidCoin;

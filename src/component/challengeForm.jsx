@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { request } from '../services/requests';
+import moment from "moment"
 
 //avatar pas bede
 
@@ -29,7 +30,8 @@ function ChallengeForm() {
   const navigate = useNavigate();
 
   const HandleSubmit = (event) => {
-    
+    const timestamp = moment().toISOString(); // Generate the timestamp using moment
+
     const challengeData = {
       challengerName,
       gameName,
@@ -37,7 +39,8 @@ function ChallengeForm() {
       challengeAmount,
       challengerId,
       accepterId : '',
-      avatar : avatar
+      avatar : avatar,
+      createdAt : timestamp
     };
 
     // challengerName:'AshkanLifkoohi',
@@ -62,7 +65,7 @@ function ChallengeForm() {
   };
 
   return (
-    <div className=" absolute inset-0 h-max my-auto mx-5 bg-gray-700 text-gray-100 p-8 px-10 rounded-md shadow-2xl ">
+    <div className=" absolute inset-0 h-max my-auto mx-5 lg:bg-opacity-0 lg:w-1/2 lg:mx-0 lg:left-1/4 bg-gray-700 text-gray-100 p-8 px-10 rounded-md shadow-2xl ">
       <h2 className="animate-pulse text-2xl font-semibold text-gray-300 mb-4">Create a New Challenge</h2>
       <form onSubmit={HandleSubmit}>
         <div className=" fade-out mb-4">

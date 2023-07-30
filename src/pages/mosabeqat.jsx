@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ChallengesList from '../component/challengeList';
 import { request } from '../services/requests';
+
 
 function ChallengePage() {
   const [challenges, setChallenges] = useState([]);
@@ -14,6 +15,23 @@ function ChallengePage() {
     }
     fetchProducts();
   },[])
+  useEffect(() => {
+    // Periodically call the server's delete route to delete old challenges
+    const deleteOldChallengesInterval = setInterval(async () => {
+      try {
+        await request.delete('/api/challenges/delete-old');
+        console.log('Old challenges deleted successfully.');
+        // Fetch the updated challenges after deletion
+        const { data } = await request.get('/api/challenges');
+        setChallenges(data);
+      } catch (error) {
+        console.error('Error deleting old challenges:', error);
+      }
+    }, 48 * 60 * 60 * 1000); // 48 hours in milliseconds
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(deleteOldChallengesInterval);
+  }, []);
 
   const handleAcceptChallenge = (challenge) => {
     

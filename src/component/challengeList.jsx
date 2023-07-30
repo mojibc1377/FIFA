@@ -6,6 +6,7 @@ import {AiOutlineLoading} from "react-icons/ai"
 import {VscLoading} from "react-icons/vsc"
 import { Navigate } from 'react-router-dom';
 import checkIfLoggedIn from './Middleware/checkLoggedIn';
+import sendSMSNotification from './Middleware/sendSms';
 
 
 function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
@@ -38,9 +39,11 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
         }
         selectedChallenge.accepterId = accepterId;
         onAcceptChallenge(selectedChallenge);
+        console.log(selectedChallenge)
 
         const { data } = await request.put(`/api/challenges/${selectedChallenge._id}`, selectedChallenge);
-
+        const challenger = await request.get(`/api/users?userId=${selectedChallenge.challengerId}`)
+        sendSMSNotification(challenger.data[0].number ,455379, [{name : "NAME" , value : challenger.data[0].username }] )
         handleHideBackdrop();
         setIsLoading(false);
 
@@ -61,30 +64,29 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
 
 
   return (
-    <div className="text-gray-200 absolute w-full top-14 fade-out duration-1000 pt-4 pb-4 rounded-md ">
+    <div className="text-gray-200 absolute w-full top-14 fade-out duration-2000 pt-4 pb-4 rounded-md ">
     <h2 className="text-2xl font-semibold mb-4">{list ==="accepted" ? "Accepted challenges" : "Challenges List"}</h2>
     <ul className="flex flex-col gap-5 justify-center w-11/12 pl-9">
       {isLoading === true ? (
         <AiOutlineLoading className="loading absolute left-1/2 mt-10 text-blue-400 animate-spin " />
       ) : (
         challenges?.map((challenge, index) => (
-          <li key={index} className="border-1 flex flex-col rounded-xl border-gray-600 shadow-2xl p-4 challenge-card">
-            <div className="challengeData flex flex-col gap-3 align-middle justify-center">
+          <li key={index} className="border-1 flex flex-col bg-opacity-20 bg-gray-500 backdrop-blur-lg rounded-xl border-gray-600 shadow-2xl p-4 challenge-card">
+            <div className="challengeData flex flex-col gap-4 align-middle justify-center">
               <div className="avatar-wrapper flex flex-row justify-between">
                 <img alt="avatar" src={challenge.avatar} className="avatar mr-0 rounded-full w-24" />
                 {challenge.consoleType === 'ps5' && <img alt="consoleType" className='conoleType w-26 h-14 pr-2 pl-4 mt-3' src='/images/systems/ps5.png'></img>}
                 {challenge.consoleType === 'ps4' && <img alt="consoleType" className='conoleType w-28 h-auto pl-2 mr-1' src='/images/systems/ps4.png'></img>}
                 {challenge.consoleType === 'xbox' && <img alt="consoleType" className='conoleType w-28 pl-2' src='/images/systems/Xbox.png'></img >}
                 {challenge.consoleType === 'pc' &&  <img alt="consoleType" className='conoleType w-28 pl-3 pr-3' src='/images/systems/pc.png'></img >}
-
               </div>
-           
+          
               <div className="gameName text-left text-3xl font-light">{challenge.gameName}</div>
               <div className='lastRow flex flex-row justify-between'>
-              <div className="challengeAmount animate-pulse">${challenge.challengeAmount}</div>
+              <div className="challengeAmount align mt-3 animate-pulse">${challenge.challengeAmount}</div>
             {challenge.challengerId !== accepterId && status === true ? (
-              <button className="addBtn" onClick={() => handleChallengeConfirmation(index)}>
-                <TiTickOutline className="w-10 cursor-pointer text-2xl lg:hover:text-4xl text-green-600 font" />
+              <button className="addBtn border-1 bg-green-600 bg-opacity-60 mb-0 rounded-md px-4 py-2" onClick={() => handleChallengeConfirmation(index)}>
+                Accept
               </button>
             ) : (
               <button className="addBtn" onClick={() => alert("waiting to be accepted")}>

@@ -1,0 +1,85 @@
+import React, { useEffect, useState } from 'react';
+import { REQUEST } from '../services/requests';
+import { useNavigate } from 'react-router-dom';
+import sendSMSNotification from "../component/Middleware/sendSms"
+
+
+
+const ChargingPage = () => {
+    const [userId, setUserId] = useState(JSON.parse(localStorage.getItem('user'))._id);
+    const [amount, setAmount] = useState('');
+    const navigate = useNavigate()
+    const handleUserIdChange = (e) => {
+      setUserId(e.target.value);
+    };
+  
+    const handleAmountChange = (e) => {
+      setAmount(e.target.value);
+    };
+    useEffect(() => {
+    }, [amount]);
+  
+    const body =  JSON.stringify({ userId, amount }) // Pass userId and amount to the backend
+  const handleCharge = () => {
+    
+    try {
+            REQUEST.post('/api/users/charge-wallet',body)
+            sendSMSNotification("9330726042",607499,[
+            {name : "NAME", value:(JSON.parse(localStorage.getItem('user')).username)} ,
+            {name : "CREDIT" , value :amount}
+            ]);
+            alert("your account has been charged")
+            navigate('/')
+            
+
+    } catch (error) {
+        console.error('Error registering user:', error);
+               alert('An error occurred while charging account. Please try again Later.');
+    }
+    
+}
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-700">
+      <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md">
+        <h1 className="text-2xl font-bold mb-6">Charge Your Wallet</h1>
+        <form>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              User ID:
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              value={userId}
+              defaultValue={(JSON.parse(localStorage.getItem('user'))._id)}
+              onChange={handleUserIdChange}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Amount:
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="number"
+              value={amount}
+              onChange={handleAmountChange}
+            />
+          </div>
+          <div className="flex items-center justify-center">
+            <button
+              className="bg-blue-500 hover:bg-blue-700  font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="button"
+              onClick={handleCharge}
+            >
+              Charge
+            </button>
+          </div>
+        </form>
+       
+      </div>
+    </div>
+  );
+};
+
+export default ChargingPage;
