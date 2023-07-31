@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { request } from '../services/requests';
 import moment from "moment"
 
-//avatar pas bede
 
 function ChallengeForm() {
   const [gameName, setGameName] = useState('');

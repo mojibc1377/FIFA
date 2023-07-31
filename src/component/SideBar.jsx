@@ -34,7 +34,6 @@ function SideBar(){
     return(
         <>
 <button className="btn btn-secondry text-white bg-blue-600 absolute mx-0 ms-2 mt-2 left-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop"><RxHamburgerMenu/></button>
-
 <div className="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
   <div className="offcanvas-header">
   </div>
@@ -67,8 +66,7 @@ function SideBar(){
                 </li>
               </a>
             )}
-                        <a href='/contactus'><li className='flex flex-row align-middle gap-2 my-8 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><IoIosCall className='mt-1 text-blue-400'/>contact us</li></a>
-
+              <a href='/contactus'><li className='flex flex-row align-middle gap-2 my-8 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><IoIosCall className='mt-1 text-blue-400'/>contact us</li></a>
             {(JSON.parse(localStorage.getItem('isLoggedIn'))) && (
               <a href='/'>
                 <li

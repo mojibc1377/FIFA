@@ -2,15 +2,15 @@ import * as React from 'react';
 import ChallengesList from '../component/challengeList';
 import { request } from '../services/requests';
 
-function CurrentAcceptedChallenges (){
-  const [acceptedChallenges, setAcceptedChallenges] = React.useState([]);
+function MyChallenges (){
+  const [myChallenges, setMyChallenges] = React.useState([]);
 
 // fetch accepted challenge based on accepterId(logged in User's id )
   React.useEffect(() => {
     const fetchAcceptedChallenges = async () => {
       try {
-        const {data} = await request.get(`/api/challenges/?accepterId=${(JSON.parse(localStorage.getItem('user')))._id}`);
-        setAcceptedChallenges(data);        
+        const {data} = await request.get(`/api/challenges/?challengerId=${(JSON.parse(localStorage.getItem('user')))._id}`);
+        setMyChallenges(data);        
       } catch (error) {
         console.error('Error fetching accepted challenges:', error);
       }
@@ -20,10 +20,10 @@ function CurrentAcceptedChallenges (){
   }, []); 
     return(
         <ChallengesList
-        challenges={acceptedChallenges}
+        challenges={myChallenges}
         status={false}
-        list="accepted"
+        list="myChallenges"
       />
     )
 }
-export default CurrentAcceptedChallenges;
+export default MyChallenges;

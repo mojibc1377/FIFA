@@ -31,7 +31,6 @@ function KharidCoin() {
       try {
         const { data } = await request.get(`/api/users?userId=${user._id}`);
        
-        console.log(data[0])
         setAccountCredit(data[0].accountCredit);
       } catch (error) {
         console.error('Error fetching account credit:', error);
@@ -75,7 +74,7 @@ function KharidCoin() {
         <h2 className="text-3xl font-light mb-8">Buy Coins</h2>
         <div className="flex lg:flex-row flex-col gap-20">
           <input
-            className="rounded-md border bg-slate-600 text-gray-300 border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="rounded-md border bg-slate-600 text-gray-300 border-gray-300 px-4 py-2  bg-opacity-5 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="number"
             value={mizan}
             onChange={(e) => setMizan(e.target.value)}

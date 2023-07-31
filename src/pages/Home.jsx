@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 function HomePage() {
   return (
-    <div className="bg-gradient-to-r from-slate-500 to-slate-700 bg-opacity-30  min-h-screen pt-20 p-8">
-      <div className="max-w-md mx-auto bg-opacity-30 bg-gray-100 backdrop-blur-lg p-8 rounded-lg">
+    <div className="backgroundPattern fade-out min-h-screen pt-20 p-8">
+      <div className="max-w-md mx-auto  bg-gray-100 bg-opacity-5 backdrop-blur-sm p-8 rounded-lg">
         <h1 className="text-5xl font-bold mb-8">Welcome to Your Website</h1>
         <p className="text-xl mb-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt ex eget tellus euismod, eu auctor mauris pulvinar.</p>
         <div className="flex gap-4">
@@ -17,12 +17,8 @@ function HomePage() {
         </div>
       </div>
 
-      {/* Navigation Section */}
-      {/* ... Your navigation section with smooth scroll links here ... */}
-
-      {/* About Section */}
       <section id="about" className="py-20">
-        <div className="max-w-md mx-auto bg-opacity-30 bg-gray-100 backdrop-blur-lg p-8 rounded-lg">
+        <div className="max-w-md mx-auto  bg-opacity-5 backdrop-blur-sm bg-gray-100 p-8 rounded-lg">
           <h2 className="text-4xl font-bold mb-8">About Us</h2>
           <p className="text-lg mb-12">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt ex eget tellus euismod, eu auctor mauris pulvinar.
@@ -34,7 +30,7 @@ function HomePage() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-opacity-30 bg-gray-100 backdrop-blur-lg p-8 rounded-lg">
+      <section id="services" className="py-20 bg-opacity-5 bg-gray-100 backdrop-blur-sm p-8 rounded-lg">
         <div className="max-w-md mx-auto">
           <h2 className="text-4xl font-bold mb-8">Our Services</h2>
           <p className="text-lg mb-12">
@@ -48,7 +44,7 @@ function HomePage() {
 
       {/* Contact Section */}
       <section id="contact" className="py-20">
-        <div className="max-w-md mx-auto bg-opacity-30 bg-gray-100 backdrop-blur-lg p-8 rounded-lg">
+        <div className="max-w-md mx-auto bg-opacity-5 bg-gray-100 backdrop-blur-sm p-8 rounded-lg">
           <h2 className="text-4xl font-bold mb-8">Contact Us</h2>
           <p className="text-lg mb-12">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt ex eget tellus euismod, eu auctor mauris pulvinar.
@@ -60,7 +56,7 @@ function HomePage() {
       </section>
 
       {/* Sell/Buy Coins Section */}
-      <section id="sellBuyCoins" className="py-20 bg-opacity-30 bg-gray-100 backdrop-blur-lg p-8 rounded-lg">
+      <section id="sellBuyCoins" className="py-20 bg-opacity-5 bg-gray-100 backdrop-blur-sm p-8 rounded-lg">
         <div className="max-w-md mx-auto">
           <h2 className="text-4xl font-bold mb-8">Sell/Buy Coins</h2>
           {/* ... Your content for 24-Hour Sell or Buy for Coins Option ... */}
@@ -69,14 +65,14 @@ function HomePage() {
 
       {/* Daily Coin Prices Section */}
       <section id="dailyCoinPrices" className="py-20">
-        <div className="max-w-md mx-auto bg-opacity-30 bg-gray-100 backdrop-blur-lg p-8 rounded-lg">
+        <div className="max-w-md mx-auto bg-opacity-5 bg-gray-100 backdrop-blur-sm p-8 rounded-lg">
           <h2 className="text-4xl font-bold mb-8">Daily Coin Prices</h2>
           {/* ... Your content for Daily Coin Prices for Buy and Sell ... */}
         </div>
       </section>
 
       {/* Site Rules Section */}
-      <section id="siteRules" className="py-20 bg-opacity-30 bg-gray-100 backdrop-blur-lg p-8 rounded-lg">
+      <section id="siteRules" className="py-20 bg-opacity-5 bg-gray-100 backdrop-blur-sm p-8 rounded-lg">
         <div className="max-w-md mx-auto">
           <h2 className="text-4xl font-bold mb-8">Site Rules</h2>
           {/* ... Your content for Site Rules ... */}

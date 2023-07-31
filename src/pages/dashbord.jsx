@@ -11,12 +11,15 @@ function Dashboard() {
   const handleCurrentChallenges = () =>{
     navigate('challenges/current')
   }
+  const handleMyChallenges = () =>{
+    navigate('challenges/my')
+  }
   const handleSettings = () => {
     navigate('/settings');
   };
 
   return (
-    <div className="bg-gray-700 text-gray-100 pt-20 p-8 rounded-md shadow-md flex flex-col items-center">
+    <div className=" text-gray-100 pt-20 p-8 rounded-md fade-out flex flex-col items-center">
       <button
         type="submit"
         onClick={handleCreateChallenge}
@@ -30,6 +33,13 @@ function Dashboard() {
         className="bg-blue-500 border-1 hover:bg-blue-600 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-2"
       >
         accepted Challenges
+      </button>
+      <button
+        type="submit"
+        onClick={handleMyChallenges}
+        className="bg-blue-500 border-1 hover:bg-red-600 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-2"
+      >
+        My Challenges
       </button>
       <button
         type="button"

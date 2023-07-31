@@ -1,12 +1,17 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
-import { TiTickOutline } from 'react-icons/ti';
 import { request } from '../services/requests';
 import {AiOutlineLoading} from "react-icons/ai"
+import {MdDoNotDisturb} from "react-icons/md"
 import {VscLoading} from "react-icons/vsc"
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import checkIfLoggedIn from './Middleware/checkLoggedIn';
 import sendSMSNotification from './Middleware/sendSms';
+import CheckChallengeCount from './Middleware/hasTwoAccepted';
+import useChallengeCount from "./Middleware/hasTwoAccepted"
+import {BsSkipForward} from "react-icons/bs"
+import MoreButton from './moreButton';
+
 
 
 function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
@@ -14,8 +19,17 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
   const [selectedChallengeIndex, setSelectedChallengeIndex] = useState(null);
   const accepterId = JSON.parse(localStorage.getItem('user'))?._id; 
   const [isLoading, setIsLoading] = useState(true);
+  const hasTwoAcceptedChallenges = useChallengeCount(accepterId);
+  const [dataFetched, setDataFetched] = useState(false); // New state to track data fetching status
 
-  setTimeout(() => setIsLoading(false), 2000);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+      setDataFetched(true); // Set dataFetched to true after the data is fetched
+    }, 3000);
+  }, []);
+
+  setTimeout(() => setIsLoading(false), 4000);
   const handleShowBackdrop = (index) => {
     setSelectedChallengeIndex(index);
     setShowBackdrop(true);
@@ -39,7 +53,6 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
         }
         selectedChallenge.accepterId = accepterId;
         onAcceptChallenge(selectedChallenge);
-        console.log(selectedChallenge)
 
         const { data } = await request.put(`/api/challenges/${selectedChallenge._id}`, selectedChallenge);
         const challenger = await request.get(`/api/users?userId=${selectedChallenge.challengerId}`)
@@ -62,31 +75,52 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
     return <Navigate to="/login" replace={true} />;
   }
 
-
+  const formatTime = (utcTimestamp) => {
+    const utcDate = new Date(utcTimestamp);
+    const hours = utcDate.getUTCHours().toString().padStart(2, '0');
+    const minutes = utcDate.getUTCMinutes().toString().padStart(2, '0');
+    const month = (utcDate.getUTCMonth() + 1).toString().padStart(2, '0');
+    const day = utcDate.getUTCDate().toString().padStart(2, '0');
+    return `${hours}:${minutes}-${month}/${day}`;
+  };
   return (
-    <div className="text-gray-200 absolute w-full top-14 fade-out duration-2000 pt-4 pb-4 rounded-md ">
-    <h2 className="text-2xl font-semibold mb-4">{list ==="accepted" ? "Accepted challenges" : "Challenges List"}</h2>
+    <div className="backgroundPattern text-gray-200 absolute w-full top-14 fade-out duration-2000 pt-4 pb-4 rounded-md ">
+    <h2 className="text-2xl font-semibold mb-4">{list ==="accepted" ? "Accepted challenges" : list=== "myChallenges"? " My Challenges": "Challenges List"}</h2>
     <ul className="flex flex-col gap-5 justify-center w-11/12 pl-9">
       {isLoading === true ? (
         <AiOutlineLoading className="loading absolute left-1/2 mt-10 text-blue-400 animate-spin " />
       ) : (
         challenges?.map((challenge, index) => (
-          <li key={index} className="border-1 flex flex-col bg-opacity-20 bg-gray-500 backdrop-blur-lg rounded-xl border-gray-600 shadow-2xl p-4 challenge-card">
+          <li key={index} className="border-1 flex flex-col fade-out bg-opacity-50 bg-gray-500 backdrop-blur-xl rounded-xl border-gray-600 shadow-2xl p-4 challenge-card">
             <div className="challengeData flex flex-col gap-4 align-middle justify-center">
               <div className="avatar-wrapper flex flex-row justify-between">
-                <img alt="avatar" src={challenge.avatar} className="avatar mr-0 rounded-full w-24" />
-                {challenge.consoleType === 'ps5' && <img alt="consoleType" className='conoleType w-26 h-14 pr-2 pl-4 mt-3' src='/images/systems/ps5.png'></img>}
-                {challenge.consoleType === 'ps4' && <img alt="consoleType" className='conoleType w-28 h-auto pl-2 mr-1' src='/images/systems/ps4.png'></img>}
-                {challenge.consoleType === 'xbox' && <img alt="consoleType" className='conoleType w-28 pl-2' src='/images/systems/Xbox.png'></img >}
-                {challenge.consoleType === 'pc' &&  <img alt="consoleType" className='conoleType w-28 pl-3 pr-3' src='/images/systems/pc.png'></img >}
+                <img alt="avatar" src={challenge.avatar} className="avatar mr-0 rounded-2xl w-24 h-28" />
+                <div className='toptop flex flex-col text-right'>
+                {challenge.consoleType === 'ps5' && <img alt="consoleType" className='conoleType w-28  h-8 mb-2 mt-4 ' src='/images/systems/ps5.png'></img>}
+                {challenge.consoleType === 'ps4' && <img alt="consoleType" className='conoleType w-28  h-8 mb-2 mt-4 ' src='/images/systems/ps4.png'></img>}
+                {challenge.consoleType === 'xbox' && <img alt="consoleType" className='conoleType w-28  h-8 mb-2 mt-4' src='/images/systems/xbox.png'></img >}
+                {challenge.consoleType === 'pc' &&  <img alt="consoleType" className='conoleType w-24 h-auto ' src='/images/systems/pc.png'></img >}
+                <div className="challengeAmount align font-light text-lg mt-3 mr-2 animate-pulse">﷼ {challenge.challengeAmount}</div>
+
+            </div>  
+            </div>
+              
+          <div className='gamename flex flex-row justify-between '>
+            <div className='gamee pt-2 text-gray-400'>Game :</div>
+              <div className="gameName flex flex-row text-left text-3xl font-light">{challenge.gameName}</div>
               </div>
-          
-              <div className="gameName text-left text-3xl font-light">{challenge.gameName}</div>
+              
               <div className='lastRow flex flex-row justify-between'>
-              <div className="challengeAmount align mt-3 animate-pulse">${challenge.challengeAmount}</div>
+              <div className="infoBtnWrapper justify-start lg:w-24 ">
+                  {list === "accepted" || list === "myChallenges" ? (
+                    <Link to={`/challenge-detail/${challenge._id}`}>
+                      <button className="infoBtn flex flex-row text-right gap-1"><MoreButton className="more" />More</button>{status}
+                    </Link>
+                  ) : status === true ? (formatTime(challenge.createdAt)) : null}
+              </div>
             {challenge.challengerId !== accepterId && status === true ? (
-              <button className="addBtn border-1 bg-green-600 bg-opacity-60 mb-0 rounded-md px-4 py-2" onClick={() => handleChallengeConfirmation(index)}>
-                Accept
+              <button className={`addBtn border-1 bg-green-600 bg-opacity-60 mb-0 rounded-md ${hasTwoAcceptedChallenges ? "disabled-button" : ""} px-4 py-2`} disabled={hasTwoAcceptedChallenges} onClick={() => handleChallengeConfirmation(index)}>
+                {hasTwoAcceptedChallenges ? <MdDoNotDisturb className='notDisturb text-xl'/> : "Accept"}
               </button>
             ) : (
               <button className="addBtn" onClick={() => alert("waiting to be accepted")}>

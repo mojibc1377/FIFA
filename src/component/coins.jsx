@@ -19,7 +19,7 @@ function Coins(){
       <Link to="/coins/buy">
         <div
           className={`coin-buttons border-solid border-1 rounded-md py-1 px-4 text-2xl border-blue-400 ${
-            isKharidActive || isActive ? 'bg-gray-500 border-blue-500' : 'hover:bg-blue-500 hover:bg-opacity-50 hover:border-white'
+            isKharidActive || isActive ? 'bg-gray-500 border-blue-500 bg-opacity-20' : 'hover:bg-blue-500 hover:bg-opacity-50 hover:border-white'
           }`}
           onClick={() => setIsActive(!isActive)}
         >
@@ -29,7 +29,7 @@ function Coins(){
       <Link to="/coins/sell">
         <div
           className={`coin-buttons border-solid border-1 rounded-md py-1 px-4 text-2xl border-blue-400 ${
-            isFurushActive ? 'bg-gray-500 border-blue-500' : 'hover:bg-blue-500 hover:bg-opacity-50 hover:border-white'
+            isFurushActive ? 'bg-gray-500 border-blue-500 bg-opacity-20' : 'hover:bg-blue-500 hover:bg-opacity-50 hover:border-white'
           }`}
         >
           فروش
