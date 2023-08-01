@@ -28,7 +28,7 @@ function ChallengeForm() {
   
   const navigate = useNavigate();
 
-  const HandleSubmit = (event) => {
+  const HandleSubmit = async (event) => {
     const timestamp = moment().toISOString(); // Generate the timestamp using moment
 
     const challengeData = {
@@ -41,18 +41,20 @@ function ChallengeForm() {
       avatar : avatar,
       createdAt : timestamp
     };
-
-    // challengerName:'AshkanLifkoohi',
-    //     gameName:'EA FC 24',
-    //     consoleType : "PS4",
-    //     challengeAmount : "10000", schema 
+   
+ //api nextPay
 
     try {
 
       request.post('/api/challenges/new/post', challengeData);
-      console.log('New challenge created:', challengeData);
+      request.post('/api/users/purchase-coins', {
+        userId: challengerId,
+        amount: parseFloat(challengeAmount),
+      });
+  
       alert('Your challenge is posted in challenges');
       navigate('/');
+
 
     } catch (error) {
 

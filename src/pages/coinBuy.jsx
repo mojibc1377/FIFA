@@ -42,10 +42,10 @@ function KharidCoin() {
 
   const handlePurchase = async () => {
     try {
-      // const response = await request.post('/api/users/purchase-coins', {
-      //   userId: JSON.parse(localStorage.getItem('user'))._id,
-      //   amount: parseFloat(mizan),
-      // });
+      const response = await request.post('/api/users/purchase-coins', {
+        userId: JSON.parse(localStorage.getItem('user'))._id,
+        amount: parseFloat(mizan*8),
+      });
       request.post('/api/coins', {
         mizan: parseFloat(mizan),
         psnId: user.psnId, 
@@ -53,7 +53,7 @@ function KharidCoin() {
       });
   alert("subimted")
       // Update the account credit after successful purchase
-      // setAccountCredit(response.data.accountCredit);
+      setAccountCredit(response.data.accountCredit);
   
       // Reset the input field
       setMizan('');

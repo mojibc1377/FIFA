@@ -23,7 +23,7 @@ function Coins(){
           }`}
           onClick={() => setIsActive(!isActive)}
         >
-          خرید
+          Buy
         </div>
       </Link>
       <Link to="/coins/sell">
@@ -32,7 +32,7 @@ function Coins(){
             isFurushActive ? 'bg-gray-500 border-blue-500 bg-opacity-20' : 'hover:bg-blue-500 hover:bg-opacity-50 hover:border-white'
           }`}
         >
-          فروش
+          Sell
         </div>
       </Link>
     </div>

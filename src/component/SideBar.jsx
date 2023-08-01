@@ -6,6 +6,7 @@ import {FaRegUserCircle, FaBitcoin} from "react-icons/fa"
 import {HiHome} from "react-icons/hi"
 import {GiChampions} from "react-icons/gi"
 import {IoIosCall,IoMdSettings} from "react-icons/io"
+import {BsCreditCard2BackFill} from "react-icons/bs"
 import {RiLoginBoxFill,RiLogoutBoxRFill} from "react-icons/ri"
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -44,13 +45,14 @@ function SideBar(){
   </div>
   <div className="offcanvas-body flex-col ">
         <ul className='offcanvas-list flex-col ps-4 text-left justify-between gap-0'>
-            <a href='/'><li className='flex flex-row align-middle gap-2 my-8 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><HiHome className='mt-1 text-blue-400'/>Home</li></a>
-            <a href='/coins'><li className='flex flex-row align-middle gap-2 my-8 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-2 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><FaBitcoin className='mt-1 text-blue-400'/>Coin</li></a>
-            <a href='/challenges'><li className='flex flex-row align-middle gap-2 my-8 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><GiChampions className='mt-1 text-blue-400'/>Challenges</li></a>
+            <a href='/'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><HiHome className='mt-1 text-blue-400'/>Home</li></a>
+            <a href='/coins'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-2 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><FaBitcoin className='mt-1 text-blue-400'/>Coin</li></a>
+            <a href='/challenges'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><GiChampions className='mt-1 text-blue-400'/>Challenges</li></a>
+
             {JSON.parse(localStorage.getItem('isLoggedIn')) ? (
               <a href="/panel">
                 <li
-                  className={`flex flex-row align-middle gap-2 my-8 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
+                  className={`flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
                 >
                   <IoMdSettings className="mt-1 text-blue-400" />
                   Panel
@@ -59,19 +61,21 @@ function SideBar(){
             ) : (
               <a href="/login">
                 <li
-                  className={`flex flex-row align-middle gap-2 my-8 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
+                  className={`flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
                 >
                   <RiLoginBoxFill className="mt-1 text-blue-400" />
                   Login / Signup
                 </li>
               </a>
             )}
-              <a href='/contactus'><li className='flex flex-row align-middle gap-2 my-8 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><IoIosCall className='mt-1 text-blue-400'/>Contact Us</li></a>
+                        <a href='/charge'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><BsCreditCard2BackFill className='mt-1 text-blue-400'/>Credit</li></a>
+
+              <a href='/contactus'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><IoIosCall className='mt-1 text-blue-400'/>Contact Us</li></a>
             {(JSON.parse(localStorage.getItem('isLoggedIn'))) && (
               <a href='/'>
                 <li
                   onClick={handleLogout}
-                  className={`flex flex-row align-middle gap-2 my-8 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
+                  className={`flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
                 >
                   <RiLogoutBoxRFill className="mt-1 text-red-400" />
                   Logout

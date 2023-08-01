@@ -7,6 +7,8 @@ function Signup() {
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+
   const [phoneNumber, setPhoneNumber] = useState('');
   const [psnId, setPsnId] = useState('');
   const [selectedAvatar, setSelectedAvatar] = useState('');
@@ -27,6 +29,9 @@ function Signup() {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+  const handlePasswordConfirmChange = (event) => {
+    setPasswordConfirm(event.target.value);
+  };
 
   const handlePhoneNumberChange = (event) => {
     setPhoneNumber(event.target.value);
@@ -45,6 +50,10 @@ function Signup() {
           alert('Username is already taken. Please choose a different one.');
           return;
         }
+        if (password !== passwordConfirm) {
+          alert('passwords doesnt match');
+          return;
+        }
     } catch (error) {
       console.error('Error registering user:', error);
     }
@@ -52,12 +61,11 @@ function Signup() {
       name,
       username,
       password,
-      number: phoneNumber,
+      phoneNumber,
       psnId,
       accountCredit: '0',
       avatar: selectedAvatar, 
     };
-
     try {
 
       request.post('/api/signup', userData);
@@ -78,7 +86,7 @@ function Signup() {
           type="text"
           value={name}
           onChange={handleNameChange}
-          className="rounded-md border bg-slate-600 text-gray-300 border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="rounded-md border bg-slate-600 bg-opacity-40 text-gray-300 border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Name"
           required
         />
@@ -86,7 +94,7 @@ function Signup() {
           type="text"
           value={username}
           onChange={handleUsernameChange}
-          className="rounded-md border bg-slate-600 text-gray-300 border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="rounded-md border bg-slate-600 bg-opacity-40 text-gray-300 border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Username"
           required
         />
@@ -94,23 +102,31 @@ function Signup() {
           type="password"
           value={password}
           onChange={handlePasswordChange}
-          className="rounded-md border bg-slate-600 text-gray-300 border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="rounded-md border bg-slate-600 bg-opacity-40 text-gray-300 border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Password"
+          required
+        />
+        <input
+          type="password"
+          value={passwordConfirm}
+          onChange={handlePasswordConfirmChange}
+          className="rounded-md border bg-slate-600 bg-opacity-40 text-gray-300 border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter Password Again"
           required
         />
         <input
           type="text"
           value={phoneNumber}
           onChange={handlePhoneNumberChange}
-          className="rounded-md border bg-slate-600 text-gray-300 border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Phone Number"
+          className="rounded-md border bg-slate-600 bg-opacity-40 text-gray-300 border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="09*********"
           required
         />
         <input
           type="text"
           value={psnId}
           onChange={handlePsnIdChange}
-          className="rounded-md border bg-slate-600 text-gray-300 border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="rounded-md border bg-slate-600 bg-opacity-40 text-gray-300 border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="PSN ID"
           required
         />

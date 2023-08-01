@@ -53,6 +53,10 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
         }
         selectedChallenge.accepterId = accepterId;
         onAcceptChallenge(selectedChallenge);
+        const response = await request.post('/api/users/purchase-coins', {
+          userId: JSON.parse(localStorage.getItem('user'))._id,
+          amount: parseFloat(selectedChallenge.challengeAmount),
+        });
 
         const { data } = await request.put(`/api/challenges/${selectedChallenge._id}`, selectedChallenge);
         const challenger = await request.get(`/api/users?userId=${selectedChallenge.challengerId}`)

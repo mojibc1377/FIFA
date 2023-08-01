@@ -24,10 +24,14 @@ const ChargingPage = () => {
     
     try {
             REQUEST.post('/api/users/charge-wallet',body)
-            sendSMSNotification("9330726042",607499,[
-            {name : "NAME", value:(JSON.parse(localStorage.getItem('user')).username)} ,
-            {name : "CREDIT" , value :amount}
-            ]);
+            sendSMSNotification(
+              JSON.parse(localStorage.getItem('user')).number,
+              607499,
+              [
+                {name : "NAME", value:(JSON.parse(localStorage.getItem('user')).username)} ,
+                {name : "CREDIT" , value :amount}
+              ]
+            );
             alert("your account has been charged")
             navigate('/')
             
@@ -39,9 +43,11 @@ const ChargingPage = () => {
     
 }
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-700">
-      <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center px-2 bg-gray-700">
+      <div className=" bg-gray-400 shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6">Charge Your Wallet</h1>
+        <h3 className='panel text-black'>panel e pardakht vasl nashode (NextPay.js)</h3>
+        <h2 className='panel text-black'>ishalla baade demo</h2>
         <form>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
