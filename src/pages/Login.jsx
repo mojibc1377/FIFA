@@ -39,7 +39,7 @@ function Login(onLogin) {
   };
 
   return (
-    <div className="flex flex-col fade-out h-full items-center ">
+    <div className="flex flex-col bg-pattern fade-out h-max items-center ">
       <form className="flex flex-col gap-4 mt-20" onSubmit={handleSubmit}>
         <input
           type="text"

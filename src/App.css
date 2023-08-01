@@ -1,14 +1,23 @@
 body{
   background-color: #282c34;
   background-image:url('https://s8.uupload.ir/files/bg_u5fz.png'); /* Replace with the URL of your pattern image */
-  background-size:contain;
-  background-repeat: repeat;
-  background-blend-mode: multiply;
+  background-size :contain;
+  background-repeat:repeat;
+  background-blend-mode :darken;
   
 }
 
 .App {
   text-align: center;
+ 
+}
+
+
+.bg-pattern{
+  background-image:url('https://s8.uupload.ir/files/bg_u5fz.png'); /* Replace with the URL of your pattern image */
+  background-size :contain;
+  background-repeat:repeat;
+  background-blend-mode :darken;
 }
 
 .App-logo {
@@ -33,11 +42,14 @@ body{
 }
 .header{
   position: absolute;
+  background-color:#3e4146 ;
+  background-image: none;
   width: 100%;
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
   justify-content: flex-start;
+  z-index: 1;
 }
 div{
   color: white;
@@ -180,12 +192,7 @@ Link{
   list-style: none;
 }
 /* ChallengesList.css */
-.backgroundPattern {
-  background-image:url('https://s8.uupload.ir/files/bg_u5fz.png'); /* Replace with the URL of your pattern image */
-  background-size:contain;
-  background-repeat: repeat;
-  background-blend-mode: multiply;
-}
+
 .btn{
   z-index: 1;
 }

@@ -53,7 +53,7 @@ function SideBar(){
                   className={`flex flex-row align-middle gap-2 my-8 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
                 >
                   <IoMdSettings className="mt-1 text-blue-400" />
-                  panel
+                  Panel
                 </li>
               </a>
             ) : (
@@ -62,11 +62,11 @@ function SideBar(){
                   className={`flex flex-row align-middle gap-2 my-8 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
                 >
                   <RiLoginBoxFill className="mt-1 text-blue-400" />
-                  login / signup
+                  Login / Signup
                 </li>
               </a>
             )}
-              <a href='/contactus'><li className='flex flex-row align-middle gap-2 my-8 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><IoIosCall className='mt-1 text-blue-400'/>contact us</li></a>
+              <a href='/contactus'><li className='flex flex-row align-middle gap-2 my-8 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><IoIosCall className='mt-1 text-blue-400'/>Contact Us</li></a>
             {(JSON.parse(localStorage.getItem('isLoggedIn'))) && (
               <a href='/'>
                 <li
@@ -74,7 +74,7 @@ function SideBar(){
                   className={`flex flex-row align-middle gap-2 my-8 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
                 >
                   <RiLogoutBoxRFill className="mt-1 text-red-400" />
-                  logout
+                  Logout
                 </li>
               </a>
             )}

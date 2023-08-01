@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import {json, useParams } from 'react-router-dom';
 import { request } from '../services/requests';
 import {IoMdSend} from "react-icons/io"
+import axios from 'axios';
 
 function ChallengeDetailPage() {
   const { challengeId } = useParams();
@@ -14,44 +15,92 @@ function ChallengeDetailPage() {
 
 
   const handleCommentChange = (e) => {
+
     setComment(e.target.value);
   };
 
   const handlePhotoChange = (e) => {
+
     setPhoto(e.target.files[0]);
   };
+  const [uploadedImageUrl, setUploadedImageUrl] = useState('');
 
   const handleSubmitComment = async(e) => {
+
+
     e.preventDefault();
+
     console.log('Comment:', comment);
+
     setCommentsList([...commentsList, comment]); // Add the new comment to the comments list
+
     setComment('');
+
     const timestamp = moment().toISOString(); // Generate the timestamp using moment
-    const challenge = await request.get(`/api/challenge/${challengeId}`)
+
+    const challenge = await request.get(`/api/challenge/${challengeId}`);
     
     const commentData = {
+
       commenterId : (JSON.parse(localStorage.getItem('user'))._id) === challenge.data.challengerId ? challenge.data.accepterId : (JSON.parse(localStorage.getItem('user'))._id) ,
       challengeId,
       receiverId : (JSON.parse(localStorage.getItem('user'))._id) === challenge.data.challengerId ? (JSON.parse(localStorage.getItem('user'))._id) : challenge.data.accepterId ,
       comment,
       createdAt : timestamp
+
     };
 
     try {
 
       request.post('/api/challenges/comments/new', commentData);
+      
       console.log('New comment sent:', commentData);
 
     } catch (error) {
 
       console.error('Error creating a challenge:', error);
+
       alert('An error occurred while posting the challenge');
 
-    
   };}
 
-  const handleUploadPhoto = () => {
-    console.log('Uploading photo:', photo);
+  const handleUploadPhoto = async() => {
+    if (!photo) {
+      console.log('No photo selected.');
+      return;
+    }
+  
+    // Create a new FormData object to send the photo to the API
+    const formData = new FormData();
+    formData.append('image', photo);
+  
+    try {
+      // Send the photo to imgbb API
+      const response = await axios.post(
+        'https://api.imgbb.com/1/upload',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+          params: {
+            key: 'cdf7bbd183c087fafee94b6ff477dcb8' // Your imgbb API key
+          }
+        }
+      );
+      const uploadedImageUrl = response.data.data.url;
+      setUploadedImageUrl(uploadedImageUrl);
+  
+      // Call your backend API to save the URL to the challenge with matching challengeId
+      await request.post(`/api/challenges/${challengeId}/update`, {
+        resultPhoto: uploadedImageUrl
+      });
+  
+      alert('Image uploaded successfully!');
+      setUploadedImageUrl('')
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
   };
   useEffect(() => {
     // Fetch comments for the specific challenge based on the challengeId
@@ -67,17 +116,12 @@ function ChallengeDetailPage() {
     fetchComments();
   }, [commentsList]);
 
-
-
-
   return (
     <div className="comment pt-20">
       <div
         className="challenge-detail block pt-20 bg-black bg-opacity-20 backdrop-blur-md text-white rounded-md p-6 shadow-lg max-w-md mx-auto"
       >
         <h2 className="text-3xl font-bold mb-4">Challenge Detail</h2>
-        {/* Comment Section */}
-        
         
         {/* Display Comments */}
         <div className="mt-6 flex w-full flex-col gap-7">

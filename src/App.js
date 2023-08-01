@@ -22,8 +22,9 @@ import MyChallenges from './component/mychallenges';
 function App() {
  
   return (
+  <>
+  <Header className="header z-1"/>
     <div className="App">
-      <Header/>
       <SideBar/>
       <Routes>
           <Route path='/' element={<HomePage/>}/>
@@ -43,7 +44,7 @@ function App() {
 
       </Routes>
      </div>
-
+     </>
   );
 }
 

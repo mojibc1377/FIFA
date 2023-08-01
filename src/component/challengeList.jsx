@@ -84,7 +84,7 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
     return `${hours}:${minutes}-${month}/${day}`;
   };
   return (
-    <div className="backgroundPattern text-gray-200 absolute w-full top-14 fade-out duration-2000 pt-4 pb-4 rounded-md ">
+    <div className="bg-pattern text-gray-200 absolute w-full top-14 fade-out duration-2000 pt-4 pb-4 rounded-md ">
     <h2 className="text-2xl font-semibold mb-4">{list ==="accepted" ? "Accepted challenges" : list=== "myChallenges"? " My Challenges": "Challenges List"}</h2>
     <ul className="flex flex-col gap-5 justify-center w-11/12 pl-9">
       {isLoading === true ? (
@@ -101,6 +101,7 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
                 {challenge.consoleType === 'xbox' && <img alt="consoleType" className='conoleType w-28  h-8 mb-2 mt-4' src='/images/systems/xbox.png'></img >}
                 {challenge.consoleType === 'pc' &&  <img alt="consoleType" className='conoleType w-24 h-auto ' src='/images/systems/pc.png'></img >}
                 <div className="challengeAmount align font-light text-lg mt-3 mr-2 animate-pulse">﷼ {challenge.challengeAmount}</div>
+               
 
             </div>  
             </div>
@@ -111,13 +112,13 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
               </div>
               
               <div className='lastRow flex flex-row justify-between'>
-              <div className="infoBtnWrapper justify-start lg:w-24 ">
+              {challenge.accepterId === "" ? formatTime(challenge.createdAt): ( <div className="infoBtnWrapper justify-start lg:w-24 ">
                   {list === "accepted" || list === "myChallenges" ? (
                     <Link to={`/challenge-detail/${challenge._id}`}>
                       <button className="infoBtn flex flex-row text-right gap-1"><MoreButton className="more" />More</button>{status}
                     </Link>
                   ) : status === true ? (formatTime(challenge.createdAt)) : null}
-              </div>
+              </div>)}
             {challenge.challengerId !== accepterId && status === true ? (
               <button className={`addBtn border-1 bg-green-600 bg-opacity-60 mb-0 rounded-md ${hasTwoAcceptedChallenges ? "disabled-button" : ""} px-4 py-2`} disabled={hasTwoAcceptedChallenges} onClick={() => handleChallengeConfirmation(index)}>
                 {hasTwoAcceptedChallenges ? <MdDoNotDisturb className='notDisturb text-xl'/> : "Accept"}
