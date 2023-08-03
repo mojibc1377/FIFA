@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
-import { REQUEST } from '../services/requests';
+import { REQUEST, REquest, request } from '../services/requests';
 import { useNavigate } from 'react-router-dom';
 import sendSMSNotification from "../component/Middleware/sendSms"
+// import Pay from '../component/Middleware/nextPay';
 
 
 
@@ -21,9 +23,9 @@ const ChargingPage = () => {
   
     const body =  JSON.stringify({ userId, amount }) // Pass userId and amount to the backend
   const handleCharge = () => {
-    
     try {
-            REQUEST.post('/api/users/charge-wallet',body)
+        
+      REQUEST.post('/api/users/charge-wallet',body)
             sendSMSNotification(
               JSON.parse(localStorage.getItem('user')).number,
               607499,
@@ -33,7 +35,6 @@ const ChargingPage = () => {
               ]
             );
             alert("your account has been charged")
-            navigate('/')
             
 
     } catch (error) {
