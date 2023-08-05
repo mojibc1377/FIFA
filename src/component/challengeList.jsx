@@ -102,7 +102,7 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
                 <div className='toptop flex flex-col text-right'>
                 {challenge.consoleType === 'ps5' && <img alt="consoleType" className='conoleType w-28  h-8 mb-2 mt-4 ' src='/images/systems/ps5.png'></img>}
                 {challenge.consoleType === 'ps4' && <img alt="consoleType" className='conoleType w-28  h-8 mb-2 mt-4 ' src='/images/systems/ps4.png'></img>}
-                {challenge.consoleType === 'xbox' && <img alt="consoleType" className='conoleType w-28  h-8 mb-2 mt-4' src='/images/systems/xbox.png'></img >}
+                {challenge.consoleType === 'xbox' && <img alt="consoleType" className='conoleType w-28  h-8 mb-2 mt-4' src='/images/systems/Xbox.png'></img >}
                 {challenge.consoleType === 'pc' &&  <img alt="consoleType" className='conoleType w-24 h-auto ' src='/images/systems/pc.png'></img >}
                 <div className="challengeAmount align font-light text-lg mt-3 mr-2 animate-pulse">﷼ {challenge.challengeAmount}</div>
                

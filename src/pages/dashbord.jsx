@@ -3,8 +3,6 @@ import Settings from '../component/Settings';
 
 function Dashboard() {
 
-
-
   return (
     <>
     <Settings/>
