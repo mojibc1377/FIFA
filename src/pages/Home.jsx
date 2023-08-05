@@ -41,7 +41,7 @@ function HomePage() {
 از هم‌اکنون شروع کنید و تجربه‌ی بی‌نظیری را در دنیای مسابقه‌های آنلاین داشته باشید </div>
 )}
  </p>
-          <button className="bg-gray-300 bg-opacity-20 hover:bg-gray-600 text-white rounded-md py-2 px-4  font-extralight text-sm ease-in-out duration-500" onClick={()=>setMore(!more)}>
+          <button className="bg-gray-300 bg-opacity-20 hover:bg-gray-600 text-white rounded-md py-2 px-4  font-extralight text-sm ease-in-out" onClick={()=>setMore(!more)}>
             {more ?<div className='flex flex-row gap-1'>{"کمتر"} <MdExpandLess className='mt-1 animate-pulse'/> </div> : <div className='flex flex-row gap-1'>{"بیشتر"} <MdOutlineExpandMore className='mt-1 animate-pulse'/> </div>}
           </button>
         </div>
@@ -72,7 +72,7 @@ function HomePage() {
 با اطمینان کامل از خدمات و امکانات بی‌نظیر ما استفاده کنید در انتظار شما هستیم تا بهترین تجربه‌ی ممکن را در دنیای مسابقه و بازی‌های آنلاین داشته باشید.          </div>)
 }
 </p>
-<button className="bg-gray-300 bg-opacity-20 hover:bg-gray-600 text-white rounded-md py-2 px-4 ease-in-out duration-500 font-extralight text-sm" onClick={()=>setMoreServices(!moreServices)}>
+<button className="bg-gray-300 bg-opacity-20 hover:bg-gray-600 text-white rounded-md py-2 px-4 ease-in-out font-extralight text-sm" onClick={()=>setMoreServices(!moreServices)}>
           {moreServices ?<div className='flex flex-row gap-1'>{"کمتر"} <MdExpandLess className='mt-1 animate-pulse'/> </div> : <div className='flex flex-row gap-1'>{"بیشتر"} <MdOutlineExpandMore className='mt-1 animate-pulse'/> </div>}
           </button>
         </div>
@@ -84,7 +84,7 @@ function HomePage() {
           <h2 className="text-4xl font-bold mb-8 text-gray-300">تماس با ما</h2>
           <p className="text-lg mb-12 text-right">
           ما از شنیدن از شما خوشحال می‌شویم! اگر سوالاتی دارید، نیاز به راهنمایی دارید یا به هر دلیلی نیاز به تماس با تیم ما دارید، با خوشی منتظر تماس شما هستیم         </p>
-          <a href='/contactus'><button className="bg-gray-300 bg-opacity-20 hover:bg-gray-600 text-white rounded-md py-2 px-4 transition-colors font-extralight ease-in-out duration-500 text-sm">
+          <a href='/contactus'><button className="bg-gray-300 bg-opacity-20 hover:bg-gray-600 text-white rounded-md py-2 px-4 transition-colors font-extralight ease-in-out text-sm">
             تماس با ما
           </button>
           </a>
