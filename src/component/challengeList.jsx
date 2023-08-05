@@ -63,6 +63,7 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
         sendSMSNotification(challenger.data[0].number ,455379, [{name : "NAME" , value : challenger.data[0].username }] )
         handleHideBackdrop();
         setIsLoading(false);
+        window.location.reload()
 
       } catch (error) {
         console.error('Error updating challenge:', error);
