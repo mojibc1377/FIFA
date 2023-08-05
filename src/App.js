@@ -18,9 +18,11 @@ import CurrentAcceptedChallenges from './pages/currentAcceptedChallenge';
 import ChallengeDetailPage from './component/challengeDetails';
 import MyChallenges from './component/mychallenges';
 import ChargingPage from './pages/chargeAccount';
+import Chals from './pages/challengesCat';
 
 
 function App() {
+
  
   return (
   <>
@@ -35,10 +37,11 @@ function App() {
           <Route path='/coins/buy' element={<KharidCoin/>}/>
           <Route path='/coins/sell' element={<FurushCoin/>}/>
           <Route path='/panel' element={<Dashbord/>}/>
-          <Route path='/panel/challenges/current' element={<CurrentAcceptedChallenges/>}/>
-          <Route path='/panel/challenges/my' element={<MyChallenges/>} />
+          <Route path='/challenges/current' element={<CurrentAcceptedChallenges/>}/>
+          <Route path='/challenges/my' element={<MyChallenges/>} />
+          <Route path='/challenges/all' element={<ChallengePage/>} />
           <Route path='/charge' element={<ChargingPage/>}/>
-          <Route path='/challenges' element={<ChallengePage/>}/>
+          <Route path='/challenges' element={<Chals/>}/>
           <Route path="/challenge-detail/:challengeId" element={<ChallengeDetailPage/>}/>
           <Route path='/challenges/new' element={<ChallengeForm/>}/>
           <Route path='/settings' element={<Settings/>}/>

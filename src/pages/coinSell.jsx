@@ -73,16 +73,16 @@ function FurushCoin() {
         <h2 className="text-3xl font-light mb-8">Sell Coins</h2>
         <div className="flex lg:flex-row flex-col gap-20">
           <input
-            className="rounded-md border bg-slate-600 text-gray-300 border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="rounded-md border bg-slate-600 bg-opacity-10 text-gray-300 border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="number"
             value={mizan}
             onChange={(e) => setMizan(e.target.value)}
             placeholder="Enter the amount of coins to purchase"
             required
           />
-          <p className="text-gray-300">Cost: ${cost.toFixed()}</p>
+          <p className="text-gray-300">قیمت: {cost.toFixed()}</p>
         </div>
-        <p className="text-gray-300">Account Credit: ${Number(accountCredit).toFixed()}</p>
+        <p className="text-gray-300">شارژ حساب کاربری: ${Number(accountCredit).toFixed()}</p>
         <button
           onClick={handlePurchase}
           className="bg-blue-500 hover:bg-blue-600 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-2"

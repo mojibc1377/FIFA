@@ -121,14 +121,14 @@ function ChallengeDetailPage() {
       <div
         className="challenge-detail block pt-20 bg-black bg-opacity-20 backdrop-blur-md text-white rounded-md p-6 shadow-lg max-w-md mx-auto"
       >
-        <h2 className="text-3xl font-bold mb-4">Challenge Detail</h2>
+        <h2 className="text-3xl font-bold mb-4">اطلاعات چالش</h2>
         
         {/* Display Comments */}
         <div className="mt-6 flex w-full flex-col gap-7">
-          <h3 className="text-xl font-bold mb-2">Mini Chat:  </h3>
+          <h3 className="text-xl font-bold mb-2">پیام ها</h3>
           {commentsList.length === 0 ? (
             <>
-            <p>No messages yet </p>
+            <p>هنوز پیامی ندارید</p>
             <form onSubmit={handleSubmitComment} className="comment-form flex flex-row bg-opacity-20 bg-gray-100 bg-blur align-middle text-white rounded-full">
   <input
     className="w-full bg-gray-500 text-2xl py-3 px-5 rounded-full focus:outline-none"
@@ -168,7 +168,7 @@ function ChallengeDetailPage() {
           )}
            </div>
           {/* Photo Upload */}
-          <h3 className='text-xl font-bold'>results</h3>
+          <h3 className='text-xl font-bold'>ارسال نتایج</h3>
         <input
           type="file"
           onChange={handlePhotoChange}
@@ -178,7 +178,7 @@ function ChallengeDetailPage() {
           onClick={handleUploadPhoto}
           className="mt-4 py-2 px-4 bg-blue-500 hover:bg-blue-600 rounded-md text-white"
         >
-          Upload Photo
+          اپلود عکس
         </button>
        
       </div>

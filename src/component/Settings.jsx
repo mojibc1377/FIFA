@@ -16,7 +16,6 @@ function Settings() {
   const name= user.name
   const credit = user.accountCredit
   const userId = user._id  
-  console.log(userId) 
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -76,12 +75,12 @@ function Settings() {
 
   return (
     <div className="bg-gray-700 absolute w-full top-14 sliding-div text-gray-100 p-8 rounded-md shadow-md">
-      <h2 className="text-2xl font-semibold mb-4">Account Settings</h2>
+      <h2 className="text-2xl font-semibold mb-4">تنظیمات حساب</h2>
       <div className="flex flex-col items-center"> 
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="username" className="block mb-1">
-            Username:
+            نام کاربری
           </label>
           <input
             type="text"
@@ -95,7 +94,7 @@ function Settings() {
         </div>
         <div className="mb-4">
           <label htmlFor="password" className="block mb-1">
-            Current Password:
+            رمز فعلی
           </label>
           <input
             type="password"
@@ -109,7 +108,7 @@ function Settings() {
         </div>
         <div className="mb-4">
           <label htmlFor="newPassword" className="block mb-1">
-            New Password:
+            رمز جدید
           </label>
           <input
             type="password"
@@ -123,7 +122,7 @@ function Settings() {
         </div>
         <div className="mb-4">
           <label htmlFor="phoneNumber" className="block mb-1">
-            Phone Number:
+            موبایل
           </label>
           <input
             type="number"
@@ -155,7 +154,7 @@ function Settings() {
             type="submit"
             className="bg-green-500 hover:bg-green-600 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500"
           >
-            Save Changes
+            ذخیره اطلاعات
           </button>
         </div>
       </form>

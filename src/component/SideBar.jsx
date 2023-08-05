@@ -45,32 +45,33 @@ function SideBar(){
   </div>
   <div className="offcanvas-body flex-col ">
         <ul className='offcanvas-list flex-col ps-4 text-left justify-between gap-0'>
-            <a href='/'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><HiHome className='mt-1 text-blue-400'/>Home</li></a>
-            <a href='/coins'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-2 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><FaBitcoin className='mt-1 text-blue-400'/>Coin</li></a>
-            <a href='/challenges'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><GiChampions className='mt-1 text-blue-400'/>Challenges</li></a>
+            <a href='/'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><HiHome className='mt-1 text-blue-400'/>خانه</li></a>
+            <a href='/coins'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-2 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><FaBitcoin className='mt-1 text-blue-400'/>کوین</li></a>
+            <a href='/challenges'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><GiChampions className=' text-blue-400'/>چالش ها</li></a>
 
             {JSON.parse(localStorage.getItem('isLoggedIn')) ? (
-              <a href="/panel">
+              <><a href="/panel">
                 <li
                   className={`flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
                 >
                   <IoMdSettings className="mt-1 text-blue-400" />
-                  Panel
-                </li>
+تنظیمات                </li>
               </a>
+                                      <a href='/charge'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><BsCreditCard2BackFill className='mt-1 text-blue-400'/>شارژ حساب</li></a>
+                                      </>
             ) : (
               <a href="/login">
                 <li
                   className={`flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
                 >
                   <RiLoginBoxFill className="mt-1 text-blue-400" />
-                  Login / Signup
+                  ورود
                 </li>
               </a>
+              
             )}
-                        <a href='/charge'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><BsCreditCard2BackFill className='mt-1 text-blue-400'/>Credit</li></a>
 
-              <a href='/contactus'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><IoIosCall className='mt-1 text-blue-400'/>Contact Us</li></a>
+              <a href='/contactus'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><IoIosCall className=' text-blue-400'/>تماس با ما</li></a>
             {(JSON.parse(localStorage.getItem('isLoggedIn'))) && (
               <a href='/'>
                 <li
@@ -78,23 +79,23 @@ function SideBar(){
                   className={`flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
                 >
                   <RiLogoutBoxRFill className="mt-1 text-red-400" />
-                  Logout
+                  خروج
                 </li>
               </a>
             )}
         </ul>
   </div>
   {(user && user.name) ? (
-              <div className="offcanvas-footer flex px-4 py-2 w-full lg:px-2 lg:py-3 md:px-1 md:py-2 sm:px-0.5 sm:py-1 Xs:px-1 Xs:py-1  bg-slate-700 gap-2 rounded-t-lg">
+              <div className="offcanvas-footer flex  px-4 py-2 w-full lg:px-2 lg:py-3 md:px-1 md:py-2 sm:px-0.5 sm:py-1 Xs:px-1 Xs:py-1  bg-slate-700 gap-3 rounded-t-lg">
                 <img className="profile-pic text-3xl lg:text-3xl md:text-2xl sm:text-xl text-center text-gray-100 w-10 rounded-full" src={(JSON.parse(localStorage.getItem("user"))).avatar} alt='user-avatar'/>
-                <span className="profile-userName font-black self-center text-left text-gray-50">
+                <span className="profile-userName font-black self-center text-left mt-1 text-gray-50">
                   {(localStorage.getItem('loggedInUser'))} 
                 </span>
               </div>
             ) : (
               <div className='offcanvas-footer flex  px-4 py-2 w-full lg:px-2 lg:py-3 md:px-1 md:py-2 sm:px-0.5 sm:py-1 Xs:px-1 Xs:py-1  bg-slate-700 gap-2 rounded-t-lg'>
         <FaRegUserCircle className='profile-pic text-3xl lg:text-3xl md:text-2xl sm:text-xl text-center text-gray-100'/>
-        <span className='profile-userName font-black self-center text-left text-gray-50'>GUEST USER</span>
+        <span className='profile-userName font-black self-center text-left text-gray-50'>کاربر مهمان</span>
   </div>
             )}
 </div>

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { REQUEST, REquest, request } from '../services/requests';
 import { useNavigate } from 'react-router-dom';
 import sendSMSNotification from "../component/Middleware/sendSms"
+import Dashboard from './dashbord';
 // import Pay from '../component/Middleware/nextPay';
 
 
@@ -35,24 +36,22 @@ const ChargingPage = () => {
               ]
             );
             alert("your account has been charged")
-            
-
     } catch (error) {
         console.error('Error registering user:', error);
                alert('An error occurred while charging account. Please try again Later.');
     }
-    
 }
   return (
     <div className="min-h-screen flex items-center justify-center px-2 bg-gray-700">
       <div className=" bg-gray-400 shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6">Charge Your Wallet</h1>
+
+        <h1 className="text-2xl font-bold mb-6">اکانت کاربری خود را شارژ کنید</h1>
         <h3 className='panel text-black'>panel e pardakht vasl nashode (NextPay.js)</h3>
         <h2 className='panel text-black'>ishalla baade demo</h2>
         <form>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              User ID:
+              ایدی کاربری
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -64,7 +63,7 @@ const ChargingPage = () => {
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              Amount:
+              مقدار
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -79,7 +78,7 @@ const ChargingPage = () => {
               type="button"
               onClick={handleCharge}
             >
-              Charge
+              شارژ
             </button>
           </div>
         </form>

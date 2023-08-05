@@ -11,7 +11,6 @@ function ChallengePage() {
     const fetchProducts = async() =>{
       const {data} = await request.get('/api/challenges');
       setChallenges(data)
-      console.log("challenges are fetched")
     }
     fetchProducts();
   },[])

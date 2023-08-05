@@ -59,7 +59,7 @@ const avatars = [
   
     return (
         <div className="par w-60 overflow-x-hidden relative hide-scrollbar">
-          <h3 className="text-lg font-bold mb-2">Select your avatar:</h3>
+          <h3 className="text-lg font-bold my-2">انتخاب عکس کاربری</h3>
           <div
             className="flex items-center gap-4 mb-4 overflow-x-auto"
             ref={containerRef}
@@ -78,7 +78,7 @@ const avatars = [
           </div>
           {selectedAvatar && (
             <div className="flex flex-col items-center">
-              <h3 className="text-lg font-bold mb-2">Preview:</h3>
+              <h3 className="text-lg font-bold mb-2">عکس انتخاب شده</h3>
               <img src={selectedAvatar} alt="Preview Avatar" className="rounded-full w-40 h-40" />
             </div>
           )}

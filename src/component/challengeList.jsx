@@ -111,7 +111,7 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
             </div>
               
           <div className='gamename flex flex-row justify-between '>
-            <div className='gamee pt-2 text-gray-400'>Game :</div>
+            <div className='gamee pt-2 text-gray-400'>بازی :</div>
               <div className="gameName flex flex-row text-left text-3xl font-light">{challenge.gameName}</div>
               </div>
               
@@ -119,7 +119,7 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
               {challenge.accepterId === "" ? formatTime(challenge.createdAt): ( <div className="infoBtnWrapper justify-start lg:w-24 ">
                   {list === "accepted" || list === "myChallenges" ? (
                     <Link to={`/challenge-detail/${challenge._id}`}>
-                      <button className="infoBtn flex flex-row text-right gap-1"><MoreButton className="more" />More</button>{status}
+                      <button className="infoBtn flex flex-row text-right gap-1"><MoreButton className="more" />بیشتر</button>{status}
                     </Link>
                   ) : status === true ? (formatTime(challenge.createdAt)) : null}
               </div>)}
@@ -144,20 +144,20 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
       <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-70 px-10">
         <div className="bg-gray-700 p-6 rounded-md shadow-md">
           <p className="text-lg font-semibold mb-4">
-            Are you sure you want to confirm this challenge?
+            ایا مطمعنید که این چالش را قبول میکنید؟
           </p>
           <div className="flex justify-between">
             <button
               className="ml-6 bg-green-500 hover:bg-green-600 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500"
               onClick={handleConfirmationYes}
             >
-              Yes
+              بله
             </button>
             <button
               className="mr-6 bg-red-500 hover:bg-red-600 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-red-500"
               onClick={handleConfirmationNo}
             >
-              No
+              خیر
             </button>
           </div>
         </div>

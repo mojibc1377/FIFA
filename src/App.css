@@ -1,3 +1,52 @@
+@font-face {
+  font-family: Shabnam;
+  src: url('/src/fonts/shabnam-font-v5/Shabnam.eot');
+  src: url('/src/fonts/shabnam-font-v5/Shabnam.eot?#iefix') format('embedded-opentype'),
+       url('/src/fonts/shabnam-font-v5/Shabnam.woff2') format('woff2'),
+       url('/src/fonts/shabnam-font-v5/Shabnam.woff') format('woff'),
+       url('/src/fonts/shabnam-font-v5/Shabnam.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Shabnam;
+  src: url('/src/fonts/shabnam-font-v5/Shabnam-Bold.eot');
+  src: url('/src/fonts/shabnam-font-v5/Shabnam-Bold.eot?#iefix') format('embedded-opentype'),
+       url('/src/fonts/shabnam-font-v5/Shabnam-Bold.woff2') format('woff2'),
+       url('/src/fonts/shabnam-font-v5/Shabnam-Bold.woff') format('woff'),
+       url('/src/fonts/shabnam-font-v5/Shabnam-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Shabnam;
+  src: url('/src/fonts/shabnam-font-v5/Shabnam-Thin.eot');
+  src: url('/src/fonts/shabnam-font-v5/Shabnam-Thin.eot?#iefix') format('embedded-opentype'),
+       url('/src/fonts/shabnam-font-v5/Shabnam-Thin.woff2') format('woff2'),
+       url('/src/fonts/shabnam-font-v5/Shabnam-Thin.woff') format('woff'),
+       url('/src/fonts/shabnam-font-v5/Shabnam-Thin.ttf') format('truetype');
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: Shabnam;
+  src: url('/src/fonts/shabnam-font-v5/Shabnam-Light.eot');
+  src: url('/src/fonts/shabnam-font-v5/Shabnam-Light.eot?#iefix') format('embedded-opentype'),
+       url('/src/fonts/shabnam-font-v5/Shabnam-Light.woff2') format('woff2'),
+       url('/src/fonts/shabnam-font-v5/Shabnam-Light.woff') format('woff'),
+       url('/src/fonts/shabnam-font-v5/Shabnam-Light.ttf') format('truetype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: Shabnam;
+  src: url('/src/fonts/shabnam-font-v5/Shabnam-Medium.eot');
+  src: url('/src/fonts/shabnam-font-v5/Shabnam-Medium.eot?#iefix') format('embedded-opentype'),
+       url('/src/fonts/shabnam-font-v5/Shabnam-Medium.woff2') format('woff2'),
+       url('/src/fonts/shabnam-font-v5/Shabnam-Medium.woff') format('woff'),
+       url('/src/fonts/shabnam-font-v5/Shabnam-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
 body{
   background-color: #282c34;
   background-image:url('https://s8.uupload.ir/files/bg_u5fz.png'); /* Replace with the URL of your pattern image */
@@ -9,6 +58,8 @@ body{
 
 .App {
   text-align: center;
+  font-family: 'Shabnam', sans-serif;  font-stretch: ultra-condensed;
+
  
 }
 
@@ -196,3 +247,4 @@ Link{
 .btn{
   z-index: 1;
 }
+
