@@ -70,9 +70,10 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
           const { data } = await request.put(`/api/challenges/${selectedChallenge._id}`, selectedChallenge);
           const challenger = await request.get(`/api/users?userId=${selectedChallenge.challengerId}`)
           sendSMSNotification(challenger.data[0].number, 455379, [{ name: "NAME", value: challenger.data[0].username }])
+          console.log(challenger.data[0].number)
           handleHideBackdrop();
           setIsLoading(false);
-          window.location.reload();
+          navigate('/')
         } else {
           alert('Not enough credit. Please charge your account.');
           navigate('/charge');
@@ -100,6 +101,7 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
     const day = utcDate.getUTCDate().toString().padStart(2, '0');
     return `${hours}:${minutes}-${month}/${day}`;
   };
+  
   return (
     <div className="bg-pattern text-gray-200 absolute w-full top-14 fade-out duration-2000 pt-4 pb-4 rounded-md ">
     <h2 className="text-2xl font-semibold mb-4">{list ==="accepted" ? "چالش های پذیرفته شده" : list=== "myChallenges"? "چالش های من": "چالش ها"}</h2>

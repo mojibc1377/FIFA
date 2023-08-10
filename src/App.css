@@ -180,17 +180,7 @@ challengelist {
 /* Reset default list styles */
 
 
-/* Style the chat container */
-.chat-list {
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  list-style: none;
-}
 
-.message{
-  background-color: #c5c6c7;
-}
 .more-button {
   display: flex;
   align-items: center;
@@ -235,13 +225,7 @@ challengelist {
     transform: translateY(-1px);
   }
 }
-.infoBtn{
-  text-decoration: none;
-}
-Link{
-  text-decoration: none;
-  list-style: none;
-}
+
 /* ChallengesList.css */
 
 .btn{

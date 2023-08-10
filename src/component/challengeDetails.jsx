@@ -6,6 +6,7 @@ import {json, useParams } from 'react-router-dom';
 import { request } from '../services/requests';
 import {IoMdSend} from "react-icons/io"
 import axios from 'axios';
+import {BsUpload} from "react-icons/bs"
 
 function ChallengeDetailPage() {
   const { challengeId } = useParams();
@@ -42,9 +43,9 @@ function ChallengeDetailPage() {
     
     const commentData = {
 
-      commenterId : (JSON.parse(localStorage.getItem('user'))._id) === challenge.data.challengerId ? challenge.data.accepterId : (JSON.parse(localStorage.getItem('user'))._id) ,
+      commenterId : (JSON.parse(localStorage.getItem('user'))._id) === challenge.data.challengerId ? challenge.data.accepterId : challenge.data.challengerId ,
       challengeId,
-      receiverId : (JSON.parse(localStorage.getItem('user'))._id) === challenge.data.challengerId ? (JSON.parse(localStorage.getItem('user'))._id) : challenge.data.accepterId ,
+      receiverId : (JSON.parse(localStorage.getItem('user'))._id) === challenge.data.challengerId ? challenge.data.challengerId : challenge.data.accepterId ,
       comment,
       createdAt : timestamp
 
@@ -124,43 +125,45 @@ function ChallengeDetailPage() {
       >
         <h2 className="text-3xl font-bold mb-4">اطلاعات چالش</h2>
         
-        {/* Display Comments */}
         <div className="mt-6 flex w-full flex-col gap-7">
           <h3 className="text-xl font-bold mb-2">پیام ها</h3>
           {commentsList.length === 0 ? (
             <>
             <p>هنوز پیامی ندارید</p>
-            <form onSubmit={handleSubmitComment} className="comment-form flex flex-row bg-opacity-20 bg-gray-100 bg-blur align-middle text-white rounded-full">
+            <form onSubmit={handleSubmitComment} className="comment-form flex flex-row bg-opacity-20 bg-gray-100 bg-blur align-middle text-white rounded-xl">
   <input
-    className="w-full bg-gray-500 text-2xl py-3 px-5 rounded-full focus:outline-none"
+    className="w-full bg-gray-500 text-2xl py-3 px-5 rounded-xl focus:outline-none"
     placeholder="Enter your message..."
     value={comment}
     onChange={handleCommentChange}
   />
   <button type="submit" className="">
-    <IoMdSend className='sendBtn text-4xl text-blue-600'/>
+    <IoMdSend className='sendBtn text-3xl text-blue-600'/>
   </button>
 </form>
 </>
           ) : (
-            <ul className="list-disc flex flex-col gap-3 chat-list p-3">
+            <ul className="list-disc flex flex-col gap-3 justify-center chat-list p-3">
                 
   {commentsList.map((comment, index, commenterId) => (
     
-    <li key={index} className="message bg-gray-800 rounded-3xl px-4 text-xl text-black py-2 max-w-s break-words whitespace-normal">
-      {comment.comment}
+    <li key={index} className={`message ${(JSON.parse(localStorage.getItem('user'))._id === comment.commenterId )? "reciever bg-gray-500 text-gray-300 flex-row self-start" : "sender bg-gray-700 flex-row-reverse text-white self-end"} list-none flex gap-5 rounded-2xl px-4 text-lg py-2 max-w-xs break-words whitespace-normal`}>
+      <div className={`comment relative max-w-full text-left`}>{comment.comment}</div>
+        <div className={`timestamp text-gray-100 opacity-70 text-xs self-end font-thin italic animate-pulse`}>
+            {moment(comment.createdAt).format("HH:mm")}
+        </div>
     </li>
     
   ))}
-  <form onSubmit={handleSubmitComment} className="comment-form flex flex-row bg-opacity-20 bg-gray-100 bg-blur align-middle text-white rounded-full">
+  <form onSubmit={handleSubmitComment} className="comment-form flex flex-row bg-opacity-20 mt-2 bg-gray-100 bg-blur align-middle text-white justify-around rounded-2xl">
   <input
-    className="w-full bg-gray-500 text-2xl py-3 px-3 rounded-full focus:border-0"
+    className="w-full bg-gray-500 text-2xl py-3 px-3 rounded-2xl focus:border-0"
     placeholder="Enter your message..."
     value={comment}
     onChange={handleCommentChange}
   />
   <button type="submit" className="">
-    <IoMdSend className='sendBtn text-4xl text-blue-600'/>
+    <IoMdSend className='sendBtn text-2xl self-center mx-3 text-center text-blue-600'/>
   </button>
 </form>
 
@@ -168,18 +171,17 @@ function ChallengeDetailPage() {
 
           )}
            </div>
-          {/* Photo Upload */}
-          <h3 className='text-xl font-bold'>ارسال نتایج</h3>
+          <h3 className='text-xl font-bold'>ارسال عکس نتیجه</h3>
         <input
           type="file"
           onChange={handlePhotoChange}
-          className="uploadField border-1 border-white rounded text-white mt-4 " /* Hide the default file input style */
+          className="uploadField border-1 border-white rounded 2xl text-white mt-4 " /* Hide the default file input style */
         />
         <button
           onClick={handleUploadPhoto}
-          className="mt-4 py-2 px-4 bg-blue-500 hover:bg-blue-600 rounded-md text-white"
+          className="mt-4 py-2 px-6 bg-blue-500 hover:bg-blue-500 rounded-md felx w-max flex-row text-sm text-white"
         >
-          اپلود عکس
+          اپلود عکس<BsUpload/>
         </button>
        
       </div>
