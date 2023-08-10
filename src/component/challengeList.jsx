@@ -21,6 +21,8 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
   const hasTwoAcceptedChallenges = useChallengeCount(accepterId);
   const [dataFetched, setDataFetched] = useState(false); // New state to track data fetching status
   const navigate = useNavigate();
+  const [confirmationLoading, setConfirmationLoading] = useState(false); //false
+
 
   useEffect(() => {
     setTimeout(() => {
@@ -47,6 +49,7 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
   const handleConfirmationYes = async () => {
     if (selectedChallengeIndex !== null) {
       try {
+        setConfirmationLoading(true); 
         const selectedChallenge = challenges[selectedChallengeIndex];
         if (!accepterId) {
           alert("You need to be logged in to accept challenges.");
@@ -58,9 +61,9 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
         // Check if the user has sufficient funds before accepting the challenge
         const response = await request.get(`/api/users?userId=${userId}`);
         const data = response.data;
-
         if (((challenges[selectedChallengeIndex]).challengeAmount) <= data[0].accountCredit) {
           selectedChallenge.accepterId = accepterId;
+         
           onAcceptChallenge(selectedChallenge);
           await request.post('/api/users/purchase-coins', {
             userId,
@@ -70,9 +73,9 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
           const { data } = await request.put(`/api/challenges/${selectedChallenge._id}`, selectedChallenge);
           const challenger = await request.get(`/api/users?userId=${selectedChallenge.challengerId}`)
           sendSMSNotification(challenger.data[0].number, 455379, [{ name: "NAME", value: challenger.data[0].username }])
-          console.log(challenger.data[0].number)
           handleHideBackdrop();
           setIsLoading(false);
+          setConfirmationLoading(false);
           navigate('/')
         } else {
           alert('Not enough credit. Please charge your account.');
@@ -162,7 +165,7 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
               className="ml-6 bg-green-500 hover:bg-green-600 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500"
               onClick={handleConfirmationYes}
             >
-              بله
+              {confirmationLoading ? <AiOutlineLoading className="loading mx-2 text-white animate-spin " /> : "بله"}
             </button>
             <button
               className="mr-6 bg-red-500 hover:bg-red-600 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-red-500"

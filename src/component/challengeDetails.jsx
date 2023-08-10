@@ -6,13 +6,15 @@ import {json, useParams } from 'react-router-dom';
 import { request } from '../services/requests';
 import {IoMdSend} from "react-icons/io"
 import axios from 'axios';
-import {BsUpload} from "react-icons/bs"
+import {AiOutlineLoading} from "react-icons/ai"
 
 function ChallengeDetailPage() {
   const { challengeId } = useParams();
   const [comment, setComment] = useState('');
   const [photo, setPhoto] = useState(null);
   const [commentsList, setCommentsList] = useState([]); // State to store the list of comments
+  const [confirmationLoading, setConfirmationLoading] = useState(false); //false
+
 
 
   const handleCommentChange = (e) => {
@@ -74,6 +76,7 @@ function ChallengeDetailPage() {
     // Create a new FormData object to send the photo to the API
     const formData = new FormData();
     formData.append('image', photo);
+    setConfirmationLoading(true)
   
     try {
       // Send the photo to imgbb API
@@ -96,7 +99,7 @@ function ChallengeDetailPage() {
       await request.post(`/api/challenges/${challengeId}/update`, {
         resultPhoto: uploadedImageUrl
       });
-  
+      setConfirmationLoading(false)
       alert('Image uploaded successfully!');
       setUploadedImageUrl('')
     } catch (error) {
@@ -181,7 +184,7 @@ function ChallengeDetailPage() {
           onClick={handleUploadPhoto}
           className="mt-4 py-2 px-6 bg-blue-500 hover:bg-blue-500 rounded-md felx w-max flex-row text-sm text-white"
         >
-          اپلود عکس<BsUpload/>
+          {confirmationLoading ? <AiOutlineLoading className="loading mx-3 text-white animate-spin " /> : "اپلود عکس"}
         </button>
        
       </div>

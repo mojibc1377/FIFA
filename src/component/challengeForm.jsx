@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { request } from '../services/requests';
 import moment from "moment"
+import {AiOutlineLoading} from "react-icons/ai"
 
 
 
@@ -14,6 +15,8 @@ function ChallengeForm() {
   const challengerId = (JSON.parse(localStorage.getItem('user'))?._id)
   const avatar = JSON.parse(localStorage.getItem('user'))?.avatar
   const navigate = useNavigate();
+  const [confirmationLoading, setConfirmationLoading] = useState(false); // test
+
 
 
   const handleGameNameChange = (event) => {
@@ -32,7 +35,8 @@ function ChallengeForm() {
 
   const HandleSubmit = async (event) => {
     event.preventDefault(); // Prevent the default form submission behavior
-  
+    setConfirmationLoading(true); 
+
     const timestamp = moment().toISOString();
   
     const challengeData = {
@@ -62,6 +66,7 @@ function ChallengeForm() {
         });
   
         alert('Your challenge is posted in challenges');
+        setConfirmationLoading(false); 
         navigate('/');
       } else {
         alert('Not enough credit. Please charge your account.');
@@ -138,7 +143,7 @@ function ChallengeForm() {
             type="submit"
             className=" fade-out bg-blue-500 hover:bg-blue-600 border-1 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            ثبت چالش
+            {confirmationLoading ? <AiOutlineLoading className="loading mx-3 text-white animate-spin " /> : "ثبت چالش"}
           </button>
         </div>
       </form>
