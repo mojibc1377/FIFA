@@ -88,14 +88,14 @@ function SideBar(){
   {(user && user.name) ? (
               <div className="offcanvas-footer flex  px-4 py-2 w-full lg:px-2 lg:py-3 md:px-1 md:py-2 sm:px-0.5 sm:py-1 Xs:px-1 Xs:py-1  bg-slate-700 gap-3 rounded-t-lg">
                 <img className="profile-pic text-3xl lg:text-3xl md:text-2xl sm:text-xl text-center text-gray-100 w-10 rounded-full" src={(JSON.parse(localStorage.getItem("user"))).avatar} alt='user-avatar'/>
-                <span className="profile-userName font-black self-center text-left mt-1 text-gray-50">
+                <span className="profile-userName tracking-wide font-black self-center text-left mt-1 text-gray-50">
                   {(localStorage.getItem('loggedInUser'))} 
                 </span>
               </div>
             ) : (
               <div className='offcanvas-footer flex  px-4 py-2 w-full lg:px-2 lg:py-3 md:px-1 md:py-2 sm:px-0.5 sm:py-1 Xs:px-1 Xs:py-1  bg-slate-700 gap-2 rounded-t-lg'>
         <FaRegUserCircle className='profile-pic text-3xl lg:text-3xl md:text-2xl sm:text-xl text-center text-gray-100'/>
-        <span className='profile-userName font-black self-center text-left text-gray-50'>کاربر مهمان</span>
+        <span className='profile-userName tracking-wide font-black self-center text-left text-gray-50'>کاربر مهمان</span>
   </div>
             )}
 </div>
