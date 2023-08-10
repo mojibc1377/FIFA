@@ -100,6 +100,7 @@ function ChallengeDetailPage() {
       setUploadedImageUrl('')
     } catch (error) {
       console.error('Error uploading image:', error);
+      console.log(error)
     }
   };
   useEffect(() => {

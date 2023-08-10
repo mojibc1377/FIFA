@@ -5,6 +5,7 @@ import { request } from '../services/requests';
 import checkIfLoggedIn from '../component/Middleware/checkLoggedIn';
 import Coins from '../component/coins';
 import { Navigate } from 'react-router-dom';
+import sendSMSNotification from '../component/Middleware/sendSms';
 
 
 function KharidCoin() {
@@ -52,6 +53,8 @@ function KharidCoin() {
         requestType: requestType, 
       });
   alert("subimted")
+  sendSMSNotification(user.number ,455379, [{name : "NAME" , value : user.username }] )       //kharide coin sms 
+
       // Update the account credit after successful purchase
       setAccountCredit(response.data.accountCredit);
   

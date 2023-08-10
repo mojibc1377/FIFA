@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { request } from '../services/requests';
 import moment from "moment"
+
 
 
 function ChallengeForm() {
@@ -11,6 +13,7 @@ function ChallengeForm() {
   const challengerName = (JSON.parse(localStorage.getItem('user'))?.name)
   const challengerId = (JSON.parse(localStorage.getItem('user'))?._id)
   const avatar = JSON.parse(localStorage.getItem('user'))?.avatar
+  const navigate = useNavigate();
 
 
   const handleGameNameChange = (event) => {
@@ -26,44 +29,50 @@ function ChallengeForm() {
     setChallengeAmount(value);
   };
   
-  const navigate = useNavigate();
 
   const HandleSubmit = async (event) => {
-    const timestamp = moment().toISOString(); // Generate the timestamp using moment
-
+    event.preventDefault(); // Prevent the default form submission behavior
+  
+    const timestamp = moment().toISOString();
+  
     const challengeData = {
       challengerName,
       gameName,
       consoleType,
       challengeAmount,
       challengerId,
-      accepterId : '',
-      avatar : avatar,
-      createdAt : timestamp
+      accepterId: '',
+      avatar: avatar,
+      createdAt: timestamp
     };
-   
- //api nextPay
-
-    try {
-
-      request.post('/api/challenges/new/post', challengeData);
-      request.post('/api/users/purchase-coins', {
-        userId: challengerId,
-        amount: parseFloat(challengeAmount),
-      });
   
-      alert('Your challenge is posted in challenges');
-      navigate('/');
-
-
+    const userId = challengerId;
+    const cost = parseFloat(challengeAmount);
+  
+    try {
+      const response = await request.get(`/api/users?userId=${userId}`);
+      const data = response.data;
+  
+      if (cost <= parseFloat(data[0].accountCredit)) {
+        // Proceed with posting the challenge and deducting credits
+        await request.post('/api/challenges/new/post', challengeData);
+        await request.post('/api/users/purchase-coins', {
+          userId: challengerId,
+          amount: cost,
+        });
+  
+        alert('Your challenge is posted in challenges');
+        navigate('/');
+      } else {
+        alert('Not enough credit. Please charge your account.');
+        navigate('/charge');
+      }
     } catch (error) {
-
       console.error('Error creating a challenge:', error);
       alert('An error occurred while posting the challenge');
-      navigate('/panel');
-
     }
   };
+  
 
   return (
     <div className=" absolute inset-0 h-max my-auto mx-5 md:bg-opacity-0 sm:bg-opacity-0 lg:bg-opacity-0 lg:w-1/2 lg:mx-0 lg:left-1/4 bg-gray-700 text-gray-100 p-8 px-10 rounded-md shadow-2xl ">

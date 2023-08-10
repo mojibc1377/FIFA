@@ -4,14 +4,13 @@ import { request } from '../services/requests';
 import {AiOutlineLoading} from "react-icons/ai"
 import {MdDoNotDisturb} from "react-icons/md"
 import {VscLoading} from "react-icons/vsc"
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import checkIfLoggedIn from './Middleware/checkLoggedIn';
 import sendSMSNotification from './Middleware/sendSms';
 import CheckChallengeCount from './Middleware/hasTwoAccepted';
 import useChallengeCount from "./Middleware/hasTwoAccepted"
 import {BsSkipForward} from "react-icons/bs"
 import MoreButton from './moreButton';
-
 
 
 function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
@@ -21,6 +20,7 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
   const [isLoading, setIsLoading] = useState(true);
   const hasTwoAcceptedChallenges = useChallengeCount(accepterId);
   const [dataFetched, setDataFetched] = useState(false); // New state to track data fetching status
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTimeout(() => {
@@ -51,26 +51,38 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
         if (!accepterId) {
           alert("You need to be logged in to accept challenges.");
         }
-        selectedChallenge.accepterId = accepterId;
-        onAcceptChallenge(selectedChallenge);
-        const response = await request.post('/api/users/purchase-coins', {
-          userId: JSON.parse(localStorage.getItem('user'))._id,
-          amount: parseFloat(selectedChallenge.challengeAmount),
-        });
+  
+        const userId = JSON.parse(localStorage.getItem('user'))._id;
+        const cost = parseFloat(selectedChallenge.challengeAmount);
+  
+        // Check if the user has sufficient funds before accepting the challenge
+        const response = await request.get(`/api/users?userId=${userId}`);
+        const data = response.data;
 
-        const { data } = await request.put(`/api/challenges/${selectedChallenge._id}`, selectedChallenge);
-        const challenger = await request.get(`/api/users?userId=${selectedChallenge.challengerId}`)
-        sendSMSNotification(challenger.data[0].number ,455379, [{name : "NAME" , value : challenger.data[0].username }] )
-        handleHideBackdrop();
-        setIsLoading(false);
-        window.location.reload()
-
+        if (((challenges[selectedChallengeIndex]).challengeAmount) <= data[0].accountCredit) {
+          selectedChallenge.accepterId = accepterId;
+          onAcceptChallenge(selectedChallenge);
+          await request.post('/api/users/purchase-coins', {
+            userId,
+            amount: cost,
+          });
+  
+          const { data } = await request.put(`/api/challenges/${selectedChallenge._id}`, selectedChallenge);
+          const challenger = await request.get(`/api/users?userId=${selectedChallenge.challengerId}`)
+          sendSMSNotification(challenger.data[0].number, 455379, [{ name: "NAME", value: challenger.data[0].username }])
+          handleHideBackdrop();
+          setIsLoading(false);
+          window.location.reload();
+        } else {
+          alert('Not enough credit. Please charge your account.');
+          navigate('/charge');
+        }
       } catch (error) {
         console.error('Error updating challenge:', error);
       }
     }
   };
-
+  
   const handleConfirmationNo = () => {
     handleHideBackdrop();
   };
@@ -90,7 +102,7 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
   };
   return (
     <div className="bg-pattern text-gray-200 absolute w-full top-14 fade-out duration-2000 pt-4 pb-4 rounded-md ">
-    <h2 className="text-2xl font-semibold mb-4">{list ==="accepted" ? "Accepted challenges" : list=== "myChallenges"? " My Challenges": "Challenges List"}</h2>
+    <h2 className="text-2xl font-semibold mb-4">{list ==="accepted" ? "چالش های پذیرفته شده" : list=== "myChallenges"? "چالش های من": "چالش ها"}</h2>
     <ul className="flex flex-col gap-5 justify-center w-11/12 pl-9">
       {isLoading === true ? (
         <AiOutlineLoading className="loading absolute left-1/2 mt-10 text-blue-400 animate-spin " />
@@ -106,16 +118,12 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
                 {challenge.consoleType === 'xbox' && <img alt="consoleType" className='conoleType w-28  h-8 mb-2 mt-4' src='/images/systems/Xbox.png'></img >}
                 {challenge.consoleType === 'pc' &&  <img alt="consoleType" className='conoleType w-24 h-auto ' src='/images/systems/pc.png'></img >}
                 <div className="challengeAmount align font-light text-lg mt-3 mr-2 animate-pulse">﷼ {challenge.challengeAmount}</div>
-               
-
             </div>  
             </div>
-              
           <div className='gamename flex flex-row justify-between '>
             <div className='gamee pt-2 text-gray-400'>بازی :</div>
               <div className="gameName flex flex-row text-left text-3xl font-light">{challenge.gameName}</div>
               </div>
-              
               <div className='lastRow flex flex-row justify-between'>
               {challenge.accepterId === "" ? formatTime(challenge.createdAt): ( <div className="infoBtnWrapper justify-start lg:w-24 ">
                   {list === "accepted" || list === "myChallenges" ? (

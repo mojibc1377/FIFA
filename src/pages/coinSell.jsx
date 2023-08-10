@@ -5,6 +5,7 @@ import { Navigate } from 'react-router-dom';
 import { request } from "../services/requests";
 import { useEffect } from 'react';
 import checkIfLoggedIn from '../component/Middleware/checkLoggedIn';
+import sendSMSNotification from '../component/Middleware/sendSms';
 
 
 function FurushCoin() {
@@ -53,6 +54,9 @@ function FurushCoin() {
       // Update the account credit after successful purchase
       // setAccountCredit(response.data.accountCredit);
       alert("subimted")
+      sendSMSNotification(user.number ,455379, [{name : "NAME" , value : user.username }] )
+      //kharide coin sms 
+
 
       // Reset the input field
       setMizan('');
