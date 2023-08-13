@@ -19,6 +19,7 @@ import ChallengeDetailPage from './component/challengeDetails';
 import MyChallenges from './component/mychallenges';
 import ChargingPage from './pages/chargeAccount';
 import Chals from './pages/challengesCat';
+import Guide from './pages/guide';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           <Route path='/challenges/new' element={<ChallengeForm/>}/>
           <Route path='/settings' element={<Settings/>}/>
           <Route path='/contactus' element={<ContactUs/>}/>
+          <Route path='/guide' element={<Guide/>}/>
 
       </Routes>
      </div>

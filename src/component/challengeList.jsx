@@ -60,10 +60,10 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
   
         // Check if the user has sufficient funds before accepting the challenge
         const response = await request.get(`/api/users?userId=${userId}`);
-        const data = response.data;
-        if (((challenges[selectedChallengeIndex]).challengeAmount) <= data[0].accountCredit) {
+        const dataa = response.data;
+        if (((challenges[selectedChallengeIndex]).challengeAmount) <= dataa[0].accountCredit) {
           selectedChallenge.accepterId = accepterId;
-         
+          
           onAcceptChallenge(selectedChallenge);
           await request.post('/api/users/purchase-coins', {
             userId,

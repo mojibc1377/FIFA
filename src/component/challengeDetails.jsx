@@ -160,7 +160,7 @@ function ChallengeDetailPage() {
   ))}
   <form onSubmit={handleSubmitComment} className="comment-form flex flex-row bg-opacity-20 mt-2 bg-gray-100 bg-blur align-middle text-white justify-around rounded-2xl">
   <input
-    className="w-full bg-gray-500 text-2xl py-3 px-3 rounded-2xl focus:border-0"
+    className="w-full bg-gray-500 text-2xl py-2 px-3 rounded-2xl focus:border-0"
     placeholder="Enter your message..."
     value={comment}
     onChange={handleCommentChange}

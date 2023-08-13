@@ -12,6 +12,7 @@ import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from "axios";
 import {request} from "../services/requests"
+import {BiSolidHelpCircle} from "react-icons/bi"
 
 
 
@@ -48,16 +49,19 @@ function SideBar(){
             <a href='/'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><HiHome className='mt-1 text-blue-400'/>خانه</li></a>
             <a href='/coins'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-2 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><FaBitcoin className='mt-1 text-blue-400'/>کوین</li></a>
             <a href='/challenges'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><GiChampions className=' text-blue-400'/>چالش ها</li></a>
-
+            
             {JSON.parse(localStorage.getItem('isLoggedIn')) ? (
-              <><a href="/panel">
+              <>
+              <a href="/panel">
                 <li
                   className={`flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
                 >
                   <IoMdSettings className="mt-1 text-blue-400" />
-تنظیمات                </li>
+                    تنظیمات                
+                </li>
               </a>
-                                      <a href='/charge'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><BsCreditCard2BackFill className='mt-1 text-blue-400'/>شارژ حساب</li></a>
+              <a href='/charge'>
+                <li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><BsCreditCard2BackFill className='mt-1 text-blue-400'/>شارژ حساب</li></a>
                                       </>
             ) : (
               <a href="/login">
@@ -72,6 +76,14 @@ function SideBar(){
             )}
 
               <a href='/contactus'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><IoIosCall className=' text-blue-400'/>تماس با ما</li></a>
+              <a href="/guide">
+                <li
+                  className={`flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
+                >
+                  <BiSolidHelpCircle className="mt-1 text-blue-400" />
+                    آموزش                
+                </li>
+              </a>
             {(JSON.parse(localStorage.getItem('isLoggedIn'))) && (
               <a href='/'>
                 <li
