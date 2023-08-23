@@ -48,7 +48,6 @@ function App() {
           <Route path='/settings' element={<Settings/>}/>
           <Route path='/contactus' element={<ContactUs/>}/>
           <Route path='/guide' element={<Guide/>}/>
-
       </Routes>
      </div>
      </>

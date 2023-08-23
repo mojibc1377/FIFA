@@ -80,7 +80,7 @@ function ChallengeForm() {
   
 
   return (
-    <div className=" absolute inset-0 h-max my-auto mx-5 md:bg-opacity-0 sm:bg-opacity-0 lg:bg-opacity-0 lg:w-1/2 lg:mx-0 lg:left-1/4 bg-gray-700 text-gray-100 p-8 px-10 rounded-md shadow-2xl ">
+    <div className="absolute inset-0 h-max my-auto mx-5 bg-opacity-30 self-center justify-center lg:w-1/2 lg:left-1/3 bg-gray-700 text-gray-100 py-10 px-10 rounded-md shadow-2xl ">
       <h2 className="animate-pulse text-2xl font-semibold text-gray-300 mb-4">ایجاد چالش جدید</h2>
       <form onSubmit={HandleSubmit}>
         <div className=" fade-out mb-4">
@@ -130,11 +130,11 @@ function ChallengeForm() {
             id="challengeAmount"
             value={challengeAmount}
             onChange={handleChallengeAmountChange}
-            placeholder="MONEY AMOUNT"
+            placeholder="مقدار چالش به ریال"
             required
-            max={50000} 
+            max={2500000} 
             step={1} // Set the step value to 1 (only accept integer values) or min value
-            className=" fade-out w-full px-3 py-2 rounded-md bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className=" fade-out w-full px-3 py-2 text-white rounded-md bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
         </div>

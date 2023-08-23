@@ -6,13 +6,14 @@ function HomePage() {
   const [more,setMore]=React.useState(false)
   const [moreServices,setMoreServices]=React.useState(false)
 
-
   return (
     <div className="bg-pattern fade-out min-h-screen text-2xl text-gray-400 pt-20 p-8">
-      { localStorage.getItem('isLoggedIn') ? <div className='animate-bounce text-gray-200 opacity-75'>Welcome {(JSON.parse(localStorage.getItem('user')).name)}</div> : <div className="max-w-md mx-auto  bg-gray-100 bg-opacity-30 backdrop-blur-3xl p-8 rounded-lg shadow-xl">
-        <h1 className="text-5xl font-bold mb-8 text-gray-300">به وبسایت ما خوش امدید</h1>
-        <p className="text-xl mb-12 text-right">جایی که می‌توانید سایر کاربران را در بازی‌های یک‌به‌یک به‌چالش بکشید و مهارت‌های خود را به‌نمایش بگذارید.
-</p>
+      { localStorage.getItem('token') ? 
+      <div className='animate-bounce text-gray-200 opacity-75'>Welcome {JSON.parse(localStorage.getItem('user'))?.name}</div> : 
+      <div className="max-w-md mx-auto  bg-gray-100 bg-opacity-30 backdrop-blur-3xl p-8 rounded-lg shadow-xl">
+        <p className="text-5xl font-bold mb-8 text-gray-300">خوش امدید</p>
+        <br/>
+        <p className="text-xl mb-12 text-right">جایی که می‌توانید سایر کاربران را در بازی‌های یک‌به‌یک به‌چالش بکشید و مهارت‌های خود را به‌نمایش بگذارید.</p>
         <div className="flex gap-4">
           <Link to="/login" className="bg-blue-500 hover:bg-blue-600 text-white rounded-md py-2 px-4 transition-colors">
             ورود
@@ -29,11 +30,11 @@ function HomePage() {
           <p className="text-lg mb-12 text-right">
 
          :بازی یک‌به‌یک <br/>در این قسمت امکان مسابقه با سایر کاربران وجود دارد. از بین بازی‌های مختلف مورد علاقه‌تان را انتخاب کنید وکاربران دیگر را به چالش بکشید. هر بازیکنی که توانایی‌های بالاتری داشته باشد، به عنوان برنده اعلام می‌شود 
-         <h1>
+        
           تمامی اموزش های لازم را می‌توانید از 
-          <a href='/guide' className=' text-blue-400'>اینجا</a>
+          <a href='/guide' className=' text-blue-400'> اینجا </a>
           ببینید
-          </h1>
+        
 {more && (
   <div className='fadeOut'>
   <br/>

@@ -20,17 +20,17 @@ function SideBar(){
   const location = useLocation();
   const [isActive, setIsActive] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false); 
-  const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
-    const storedIsLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
-    setIsLoggedIn(storedIsLoggedIn !== null ? storedIsLoggedIn : false);
+    const storedToken = localStorage.getItem('token');
+    setIsLoggedIn(!!storedToken);
+
   }, []);
 
   const handleLogout = () => {
-    localStorage.setItem('isLoggedIn', JSON.stringify(false)); 
-    setIsLoggedIn(false); 
     localStorage.clear()
+
+    setIsLoggedIn(false);
   };
   
     return(
@@ -40,7 +40,7 @@ function SideBar(){
   <div className="offcanvas-header">
   </div>
 </div>
-<div className="offcanvas offcanvas-start text-gray-400 w-60 lg:w-80 md:w-60 sm:w-40" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
+<div className="offcanvas offcanvas-start text-gray-400 w-60 lg:w-80 md:w-60 sm:w-40" tabIndex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
   <div className="offcanvas-header">
     <h5 className="offcanvas-title font-serif font-extralight italic" id="offcanvasWithBackdropLabel">FIFA MOJI</h5>
   </div>
@@ -50,7 +50,7 @@ function SideBar(){
             <a href='/coins'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-2 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><FaBitcoin className='mt-1 text-blue-400'/>کوین</li></a>
             <a href='/challenges'><li className='flex flex-row align-middle gap-2 my-6 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><GiChampions className=' text-blue-400'/>چالش ها</li></a>
             
-            {JSON.parse(localStorage.getItem('isLoggedIn')) ? (
+            {localStorage.getItem('user') ? (
               <>
               <a href="/panel">
                 <li
@@ -84,7 +84,7 @@ function SideBar(){
                     آموزش                
                 </li>
               </a>
-            {(JSON.parse(localStorage.getItem('isLoggedIn'))) && (
+            {localStorage.getItem('user') && (
               <a href='/'>
                 <li
                   onClick={handleLogout}
@@ -97,11 +97,11 @@ function SideBar(){
             )}
         </ul>
   </div>
-  {(user && user.name) ? (
+  {(localStorage.getItem('token') && localStorage.getItem('user')) ? (
               <div className="offcanvas-footer flex  px-4 py-2 w-full lg:px-2 lg:py-3 md:px-1 md:py-2 sm:px-0.5 sm:py-1 Xs:px-1 Xs:py-1  bg-slate-700 gap-3 rounded-t-lg">
-                <img className="profile-pic text-3xl lg:text-3xl md:text-2xl sm:text-xl text-center text-gray-100 w-10 rounded-full" src={(JSON.parse(localStorage.getItem("user"))).avatar} alt='user-avatar'/>
+                <img className="profile-pic text-3xl lg:text-3xl md:text-2xl sm:text-xl text-center text-gray-100 w-10 rounded-full" src={JSON.parse(localStorage.getItem('user')).avatar} alt='user-avatar'/>
                 <span className="profile-userName tracking-wide font-black self-center text-left mt-1 text-gray-50">
-                  {(localStorage.getItem('loggedInUser'))} 
+                  {JSON.parse(localStorage.getItem('user')).name} 
                 </span>
               </div>
             ) : (
@@ -112,7 +112,7 @@ function SideBar(){
             )}
 </div>
 
-<div className="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+<div className="offcanvas offcanvas-start" data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
   <div className="offcanvas-header">
     <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { request } from '../services/requests';
 import AvatarSelector from '../component/avatarSelector';
@@ -8,6 +8,9 @@ function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showError, setShowError] = useState(false);
+  const [isUsernameAvailable, setUsernameAvailable] = useState(false);
 
   const [phoneNumber, setPhoneNumber] = useState('');
   const [psnId, setPsnId] = useState('');
@@ -40,23 +43,49 @@ function Signup() {
   const handlePsnIdChange = (event) => {
     setPsnId(event.target.value);
   };
-
+  const clearError = () => {
+    setShowError(false);
+    setErrorMessage('');
+  };
+  const checkUsernameAvailability = async (username) => {
+    try {
+      const response = await request.get(`/api/check-username?username=${username}`);
+      console.log(response.data.available)
+      setUsernameAvailable(response.data.available);
+    } catch (error) {
+      console.error('Error checking username availability:', error);
+    }
+  };
+  
+  useEffect(() => {
+    if (username) {
+      checkUsernameAvailability(username);
+    }
+  }, [username]);
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
+    clearError();
     try {
       const users = await request.get('/api/users')
       const isUsernameTaken = (users.data).some((user) => user.username === username);
       if (isUsernameTaken) {
-          alert('Username is already taken. Please choose a different one.');
-          return;
+          setErrorMessage('Username is already taken. Please choose a different one.');
+      setShowError(true);
         }
         if (password !== passwordConfirm) {
-          alert('passwords doesnt match');
+          setErrorMessage('Passwords do not match.');
+          setShowError(true);
           return;
         }
+        
+       
     } catch (error) {
       console.error('Error registering user:', error);
+      setErrorMessage('An error occurred while registering user. Please try again later.');
+    setShowError(true);
     }
+   
     const userData = {
       name,
       username,
@@ -70,8 +99,10 @@ function Signup() {
 
       request.post('/api/signup', userData);
       alert('Signup successful. Please log in with your new account.');
-      navigate('/login');
-    } catch (error) {
+      setTimeout(() => {
+        navigate('/login');
+      }, 1000); 
+          } catch (error) {
 
       console.error('Error registering user:', error);
       alert('An error occurred while registering user. Please try again Later.');
@@ -81,7 +112,12 @@ function Signup() {
 
   return (
     <div className="flex flex-col fade-out items-center">
-      <form className="flex flex-col gap-4 mt-20" onSubmit={handleSubmit}>
+       {showError && (
+    <div className="bg-red-500 text-white py-2 px-4 mt-16 rounded-md">
+      {errorMessage}
+    </div>
+  )}
+      <form className="flex flex-col gap-4 mt-16" onSubmit={handleSubmit}>
         <input
           type="text"
           value={name}
@@ -90,14 +126,26 @@ function Signup() {
           placeholder="Name"
           required
         />
+       
         <input
           type="text"
           value={username}
           onChange={handleUsernameChange}
-          className="rounded-md border bg-slate-600 bg-opacity-40 text-gray-300 border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          onBlur={() => checkUsernameAvailability(username)}
+          className={`rounded-md border bg-slate-600 bg-opacity-40 text-gray-300 border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 ${
+            isUsernameAvailable ? 'focus:ring-green-500' : 'focus:ring-red-500'
+          }`}
           placeholder="Username"
           required
         />
+          {username && (
+            <p className={`absolute top-44 left-20 text-sm m-0 ${
+              isUsernameAvailable ? 'text-green-500' : 'text-red-500'
+            }`}>
+              {isUsernameAvailable ? 'Username available' : 'Username not available'}
+            </p>
+          )}
+
         <input
           type="password"
           value={password}
