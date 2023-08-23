@@ -59,8 +59,9 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
         const cost = parseFloat(selectedChallenge.challengeAmount);
   
         // Check if the user has sufficient funds before accepting the challenge
-        const user = JSON.parse(localStorage.getItem('user'))
-        if (((challenges[selectedChallengeIndex]).challengeAmount) <= user.accountCredit) {
+        const response = await request.get(`/api/users?userId=${userId}`);
+        const dataa = response.data;
+        if (((challenges[selectedChallengeIndex]).challengeAmount) <= dataa[0].accountCredit) {
           selectedChallenge.accepterId = accepterId;
           
           onAcceptChallenge(selectedChallenge);
