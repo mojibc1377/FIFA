@@ -59,9 +59,8 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
         const cost = parseFloat(selectedChallenge.challengeAmount);
   
         // Check if the user has sufficient funds before accepting the challenge
-        const response = await request.get(`/api/users?userId=${userId}`);
-        const dataa = response.data;
-        if (((challenges[selectedChallengeIndex]).challengeAmount) <= dataa[0].accountCredit) {
+        const user = JSON.parse(localStorage.getItem('user'))
+        if (((challenges[selectedChallengeIndex]).challengeAmount) <= user.accountCredit) {
           selectedChallenge.accepterId = accepterId;
           
           onAcceptChallenge(selectedChallenge);
@@ -90,11 +89,6 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
   const handleConfirmationNo = () => {
     handleHideBackdrop();
   };
-
-  if (!checkIfLoggedIn()) {
-    alert("please login first")
-    return <Navigate to="/login" replace={true} />;
-  }
 
   const formatTime = (utcTimestamp) => {
     const utcDate = new Date(utcTimestamp);
