@@ -183,11 +183,11 @@ function Signup() {
           type="submit"
           className="bg-blue-500 hover:bg-blue-600 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          Signup
+          اکانت بسازید
         </button>
       </form>
-      <p className="mt-4 text-sm">
-        Already have an account? <Link to="/login" className="text-blue-500">Log in</Link>
+      <p className="mt-4 mb-8 text-sm">
+         اکانت دارید؟ <Link to="/login" className="text-blue-500">وارد شوید </Link>
       </p>
     </div>
   );

@@ -132,27 +132,7 @@ input{
     opacity: 1;
   }
 }
-@keyframes loadingAnimation {
-  0% {
-    opacity: 0.1;
-  }
-  25% {
-    opacity: 0.5;
-  }
-  50%{
-    opacity: 1;
-  }
-  75% {
-    opacity: 0.3;
-  }
-  90%{
-    opacity: 0.5;
 
-  }
-  100%{
-    opacity: 1;
-  }
-}
 challengelist {
   animation: 3s infinite alternate slidein;
 }
@@ -230,5 +210,19 @@ challengelist {
 
 .btn{
   z-index: 1;
+}
+/* Example CSS for loading animation and image placeholder */
+.image-placeholder {
+  background-color: #ddd; /* Placeholder color */
+  animation: pulse 1.5s infinite alternate; /* Animation */
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.8;
+  }
 }
 

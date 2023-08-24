@@ -10,7 +10,7 @@ function HomePage() {
     <div className="bg-pattern fade-out min-h-screen text-2xl text-gray-400 pt-20 p-8">
       { localStorage.getItem('token') ? 
       <div className='animate-bounce text-gray-200 opacity-75'>Welcome {JSON.parse(localStorage.getItem('user'))?.name}</div> : 
-      <div className="max-w-md mx-auto  bg-gray-100 bg-opacity-30 backdrop-blur-3xl p-8 rounded-lg shadow-xl">
+      <div className="max-w-md mx-auto  bg-gray-100 bg-opacity-10 backdrop-blur-3xl p-8 rounded-lg shadow-xl">
         <p className="text-5xl font-bold mb-8 text-gray-300">خوش امدید</p>
         <br/>
         <p className="text-xl mb-12 text-right">جایی که می‌توانید سایر کاربران را در بازی‌های یک‌به‌یک به‌چالش بکشید و مهارت‌های خود را به‌نمایش بگذارید.</p>
@@ -25,7 +25,7 @@ function HomePage() {
       </div>}
 
       <section id="about" className="py-20">
-        <div className="max-w-md mx-auto  bg-opacity-30 backdrop-blur-3xl bg-gray-100 p-8 rounded-lg shadow-xl">
+        <div className="max-w-md mx-auto  bg-opacity-10 backdrop-blur-3xl bg-gray-100 p-8 rounded-lg shadow-xl">
           <h2 className="text-4xl font-bold mb-8 text-gray-300"> توضیحات</h2>
           <p className="text-lg mb-12 text-right">
 
@@ -54,7 +54,7 @@ function HomePage() {
         </div>
       </section>
 
-      <section id="services" className="py-20 bg-opacity-30 bg-gray-100 backdrop-blur-3xl p-8 rounded-lg shadow-xl">
+      <section id="services" className="py-20 bg-opacity-10 bg-gray-100 backdrop-blur-3xl p-8 rounded-lg shadow-xl">
         <div className="max-w-md mx-auto">
           <h2 className="text-4xl font-bold mb-8 text-gray-300">خدمات ما</h2>
           <p className="text-lg mb-12 text-right">
@@ -87,7 +87,7 @@ function HomePage() {
 
       {/* Contact Section */}
       <section id="contact" className="py-20">
-        <div className="max-w-md mx-auto bg-opacity-30 bg-gray-100 backdrop-blur-3xl p-8 rounded-lg shadow-xl">
+        <div className="max-w-md mx-auto bg-opacity-10 bg-gray-100 backdrop-blur-3xl p-8 rounded-lg shadow-xl">
           <h2 className="text-4xl font-bold mb-8 text-gray-300">تماس با ما</h2>
           <p className="text-lg mb-12 text-right">
           ما از شنیدن از شما خوشحال می‌شویم! اگر سوالاتی دارید، نیاز به راهنمایی دارید یا به هر دلیلی نیاز به تماس با تیم ما دارید، با خوشی منتظر تماس شما هستیم         </p>
@@ -99,7 +99,7 @@ function HomePage() {
       </section>
 
       {/* Sell/Buy Coins Section */}
-      <section id="sellBuyCoins" className="py-20 bg-opacity-30 bg-gray-100 backdrop-blur-3xl p-8 rounded-lg">
+      <section id="sellBuyCoins" className="py-20 bg-opacity-10 bg-gray-100 backdrop-blur-3xl p-8 rounded-lg">
         <div className="max-w-md mx-auto">
           <h2 className="text-4xl font-bold mb-8">قوانین خرید و فروش کوین</h2>
         <p className='text-xl mb-12 text-right'>
@@ -113,7 +113,7 @@ function HomePage() {
 
       {/* Daily Coin Prices Section */}
       <section id="dailyCoinPrices" className="py-20">
-        <div className="max-w-md mx-auto bg-opacity-30 bg-gray-100 backdrop-blur-3xl p-8 rounded-lg">
+        <div className="max-w-md mx-auto bg-opacity-10 bg-gray-100 backdrop-blur-3xl p-8 rounded-lg">
           <h2 className="text-4xl font-bold mb-8">قیمت کوین روزانه</h2>
           <p className='text-xl mb-12 text-right'>
           فرضا برای شما کارتی با نام مهدی طارمی به با مقدار بید ۱۰ هزار کوین و مقدار بای ناو ۱۴ هزار کوین لیست می شود. شما داخل فیلتر خود چهار متغیر دارید که هر متغیر رو باید نزدیک به این دو مقدار بذارید تا فیلترتون کاملا دقیق باشه. یعنی در این مثال<br/>
@@ -131,7 +131,7 @@ maximum buy now: 14100
       </section>
 
       {/* Site Rules Section */}
-      <section id="siteRules" className="py-20 bg-opacity-30 bg-gray-100 backdrop-blur-3xl p-8 rounded-lg">
+      <section id="siteRules" className="py-20 bg-opacity-10 bg-gray-100 backdrop-blur-3xl p-8 rounded-lg">
         <div className="max-w-md mx-auto">
           <h2 className="text-4xl font-bold mb-8">قوانین سایت</h2>
           <p className='text-xl mb-12 text-right'>

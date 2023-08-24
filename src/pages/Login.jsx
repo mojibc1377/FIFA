@@ -34,7 +34,7 @@ function Login() {
           className="rounded-md border  bg-gray-500 bg-opacity-20 text-gray-300 border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Username"
         />
-        {errors.username && <span className="text-red-500">Username is required</span>}
+        {errors.username && <span className="text-red-500">نام کاربری الزامیست</span>}
         
         <input
           type="password"
@@ -42,17 +42,17 @@ function Login() {
           className="rounded-md border bg-opacity-20 bg-gray-500 text-gray-300 border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Password"
         />
-        {errors.password && <span className="text-red-500">Password is required</span>}
+        {errors.password && <span className="text-red-500">پسورد الزامیست</span>}
         
         <button
           type="submit"
           className="bg-blue-500 hover:bg-blue-600 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          Login
+          وارد شوید
         </button>
       </form>
       <p className="mt-4 text-sm">
-        Don't have an account? <Link to="/signup" className="text-blue-500">Sign up</Link>
+        اکانت کاربری نداری ؟ <Link to="/signup" className="text-blue-500">اکانت بسازید</Link>
       </p>
     </div>
   );

@@ -69,7 +69,7 @@ const avatars = [
                 key={index}
                 src={avatar}
                 alt={`Avatar ${index + 1}`}
-                className={`cursor-pointer rounded-full w-16 h-16 border-2 ${
+                className={`cursor-pointer rounded-full w-16 h-16 mb-2 border-2 ${
                   selectedAvatar === avatar ? 'border-blue-500' : 'border-transparent'
                 }`}
                 onClick={() => handleAvatarChange(avatar)}

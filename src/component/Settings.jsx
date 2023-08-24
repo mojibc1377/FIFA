@@ -74,7 +74,7 @@ function Settings() {
   };
 
   return (
-    <div className="bg-gray-700 absolute w-full top-14 sliding-div text-gray-100 p-8 rounded-md shadow-md">
+    <div className="bg-gray-700 mx-10 pt-20 min-h-full mb-5 sliding-div text-gray-100 p-8 rounded-md shadow-md">
       <h2 className="text-2xl font-semibold mb-4">تنظیمات حساب</h2>
       <div className="flex flex-col items-center"> 
       <form onSubmit={handleSubmit}>
