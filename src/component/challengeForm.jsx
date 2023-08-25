@@ -46,6 +46,7 @@ function ChallengeForm() {
       challengeAmount,
       challengerId,
       accepterId: '',
+      winner: [],
       avatar: avatar,
       createdAt: timestamp
     };
@@ -80,7 +81,7 @@ function ChallengeForm() {
   
 
   return (
-    <div className="absolute inset-0 h-max my-auto mx-5 bg-opacity-30 self-center justify-center lg:w-1/2 lg:left-1/3 bg-gray-700 text-gray-100 py-10 px-10 rounded-md shadow-2xl ">
+    <div className="absolute inset-0 h-max my-auto sliding-div mx-5 bg-opacity-30 self-center justify-center lg:w-1/2 lg:left-1/3 bg-gray-700 text-gray-100 py-10 px-10 rounded-md shadow-2xl ">
       <h2 className="animate-pulse text-2xl font-semibold text-gray-300 mb-4">ایجاد چالش جدید</h2>
       <form onSubmit={HandleSubmit}>
         <div className=" fade-out mb-4">

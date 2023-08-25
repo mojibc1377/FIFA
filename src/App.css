@@ -113,7 +113,7 @@ input{
 /* Fade-out animation class */
 .fade-out {
   opacity: 1;
-  animation: fadeOut 1s ease-in-out forwards;
+  animation: fadeOut 2s ease-in-out forwards;
    /* Add pointer-events property */
 
 }
@@ -225,4 +225,15 @@ challengelist {
     opacity: 0.8;
   }
 }
-
+.btn-secondry{
+  margin-top: 10px;
+}
+.header-text{
+  margin-bottom: 4px;
+}
+.winner-button{
+  border: 1px dashed #c5c6c7;
+}
+.ersal{
+  border: 1px solid white;
+}

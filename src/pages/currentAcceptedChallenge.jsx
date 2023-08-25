@@ -5,7 +5,6 @@ import { request } from '../services/requests';
 function CurrentAcceptedChallenges (){
   const [acceptedChallenges, setAcceptedChallenges] = React.useState([]);
 
-// fetch accepted challenge based on accepterId(logged in User's id )
   React.useEffect(() => {
     const fetchAcceptedChallenges = async () => {
       try {

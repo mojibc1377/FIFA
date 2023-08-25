@@ -57,7 +57,6 @@ function ChallengeDetailPage() {
 
       request.post('/api/challenges/comments/new', commentData);
       
-      console.log('New comment sent:', commentData);
 
     } catch (error) {
 
@@ -97,7 +96,7 @@ function ChallengeDetailPage() {
   
       // Call your backend API to save the URL to the challenge with matching challengeId
       await request.post(`/api/challenges/${challengeId}/update`, {
-        resultPhoto: uploadedImageUrl
+        resultPhoto: [`user ${(JSON.parse(localStorage.getItem('user'))._id)} uploaded the result photo : ${uploadedImageUrl}`] 
       });
       setConfirmationLoading(false)
       alert('Image uploaded successfully!');
@@ -107,6 +106,9 @@ function ChallengeDetailPage() {
       console.log(error)
     }
   };
+  const [selectedWinner, setSelectedWinner] = useState(null);
+
+
   useEffect(() => {
     // Fetch comments for the specific challenge based on the challengeId
     const fetchComments = async () => {
@@ -120,6 +122,33 @@ function ChallengeDetailPage() {
 
     fetchComments();
   }, [commentsList]);
+const handleersal= async() =>{
+  try {
+    const challenge = await request.get(`/api/challenge/${challengeId}`);
+      if( selectedWinner === "me"){
+        var winner = (JSON.parse(localStorage.getItem('user'))._id)
+
+      }
+      else if(selectedWinner === "opponent") {
+      if((JSON.parse(localStorage.getItem('user'))._id) === challenge.data.challengerId ){
+        winner = challenge.data.accepterId
+
+      }
+  else{
+    winner = challenge.data.challengerId
+  }
+}
+await request.post(`/api/challenges/${challengeId}/update`, {
+  winner: [`user ${(JSON.parse(localStorage.getItem('user'))._id)} reported the winner is : ${winner}`] 
+});
+    
+  } catch (error) {
+    console.error('Error submitting winner:', error);
+  }
+}
+  
+
+
 
   return (
     <div className="comment pt-20">
@@ -135,7 +164,7 @@ function ChallengeDetailPage() {
             <p>هنوز پیامی ندارید</p>
             <form onSubmit={handleSubmitComment} className="comment-form flex flex-row bg-opacity-20 bg-gray-100 bg-blur align-middle text-white rounded-xl">
   <input
-    className="w-full bg-gray-500 text-2xl py-3 px-5 rounded-xl focus:outline-none"
+    className="w-full bg-gray-500 text-xl py-3 px-5 rounded-xl focus:outline-none"
     placeholder="Enter your message..."
     value={comment}
     onChange={handleCommentChange}
@@ -160,7 +189,7 @@ function ChallengeDetailPage() {
   ))}
   <form onSubmit={handleSubmitComment} className="comment-form flex flex-row bg-opacity-20 mt-2 bg-gray-100 bg-blur align-middle text-white justify-around rounded-2xl">
   <input
-    className="w-full bg-gray-500 text-2xl py-2 px-3 rounded-2xl focus:border-0"
+    className="w-full bg-gray-500 text-xl py-2 px-3 rounded-2xl focus:border-0"
     placeholder="Enter your message..."
     value={comment}
     onChange={handleCommentChange}
@@ -173,13 +202,40 @@ function ChallengeDetailPage() {
 </ul>
 
           )}
+<hr/>
+          <div className='result-section '>
+            <p className='text-3xl font-bold'>اعلام نتیجه</p>
+            <br/>
+            <p className='text-xl'>انتخاب برنده</p>
+          <div className="winner-selection my-4 flex align-middle justify-center gap-4">
+          
+
+  <button
+    onClick={() => setSelectedWinner("me")}
+    className={`winner-button ${selectedWinner === "me" ? "bg-blue-500 bg-opacity-60" : "bg-gray-200 bg-opacity-20"} py-2 px-4 rounded-full transition-colors duration-300`}
+  >
+    من
+  </button>
+  <button
+    onClick={() => setSelectedWinner("opponent")}
+    className={`winner-button ${selectedWinner === "opponent" ? "bg-red-500 bg-opacity-60" : "bg-gray-200 bg-opacity-20"} py-2 px-4 rounded-full transition-colors duration-300`}
+  >
+    حریف
+  </button>
+  <button className='ersal px-4 py-1 bg-blue-500 bg-opacity-30 rounded-lg'
+  onClick={handleersal}
+  >ثبت برنده</button>
+</div>
+
+          </div>
            </div>
-          <h3 className='text-xl font-bold'>ارسال عکس نتیجه</h3>
+          <h3 className='text-xl mt-3 '>ارسال عکس نتیجه</h3>
         <input
           type="file"
           onChange={handlePhotoChange}
-          className="uploadField border-1 border-white rounded 2xl text-white mt-4 " /* Hide the default file input style */
+          className="uploadField border-1 border-white rounded 2xl text-white mt-4 w-2/3"
         />
+        <br/>
         <button
           onClick={handleUploadPhoto}
           className="mt-4 py-2 px-6 bg-blue-500 hover:bg-blue-500 rounded-md felx w-max flex-row text-sm text-white"

@@ -35,38 +35,38 @@ function SideBar(){
   
     return(
         <>
-<button className="btn btn-secondry text-white bg-blue-600 absolute mx-0 ms-2 mt-2 left-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop"><RxHamburgerMenu/></button>
+<button className="btn btn-secondry text-white bg-blue-600 absolute mx-0 ms-2 left-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop"><RxHamburgerMenu/></button>
 <div className="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabIndex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
   <div className="offcanvas-header">
   </div>
 </div>
 <div className="offcanvas offcanvas-start text-gray-400 w-60 lg:w-80 md:w-60 sm:w-40" tabIndex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
   <div className="offcanvas-header">
-    <h5 className="offcanvas-title font-serif font-extralight italic" id="offcanvasWithBackdropLabel">FIFA MOJI</h5>
+    <h5 className="offcanvas-title font-serif font-extralight italic" id="offcanvasWithBackdropLabel">ChampsPlus+</h5>
   </div>
   <div className="offcanvas-body flex-col ">
-        <ul className='offcanvas-list flex-col ps-4 text-left justify-between gap-0'>
-            <a href='/'><li className='flex flex-row align-middle gap-2 my-3 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><HiHome className='mt-1 text-blue-400'/>خانه</li></a>
-            <a href='/coins'><li className='flex flex-row align-middle gap-2 my-3 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-2 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><FaBitcoin className='mt-1 text-blue-400'/>کوین</li></a>
-            <a href='/challenges'><li className='flex flex-row align-middle gap-2 my-3 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><GiChampions className=' text-blue-400'/>چالش ها</li></a>
+        <ul className='offcanvas-list flex-col ps-4 lg:ps-1 text-left justify-between gap-0'>
+            <a href='/'><li className='flex flex-row align-middle gap-2 my-3 lg:py-0.5 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><HiHome className='mt-1 text-blue-400'/>خانه</li></a>
+            <a href='/coins'><li className='flex flex-row align-middle gap-2 my-3 lg:py-0.5 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-2 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><FaBitcoin className='mt-1 text-blue-400'/>کوین</li></a>
+            <a href='/challenges'><li className='flex flex-row align-middle gap-2 my-3 lg:py-0.5 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><GiChampions className=' text-blue-400'/>چالش ها</li></a>
             
             {localStorage.getItem('user') ? (
               <>
               <a href="/panel">
                 <li
-                  className={`flex flex-row align-middle gap-2 my-3 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
+                  className={`flex flex-row align-middle gap-2 my-3 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
                 >
                   <IoMdSettings className="mt-1 text-blue-400" />
                     تنظیمات                
                 </li>
               </a>
               <a href='/charge'>
-                <li className='flex flex-row align-middle gap-2 my-3 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><BsCreditCard2BackFill className='mt-1 text-blue-400'/>شارژ حساب</li></a>
+                <li className='flex flex-row align-middle gap-2 my-3 lg:my-0 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><BsCreditCard2BackFill className='mt-1 text-blue-400'/>شارژ حساب</li></a>
                                       </>
             ) : (
               <a href="/login">
                 <li
-                  className={`flex flex-row align-middle gap-2 my-3 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
+                  className={`flex flex-row align-middle gap-2 my-3 lg:my-0 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
                 >
                   <RiLoginBoxFill className="mt-1 text-blue-400" />
                   ورود
@@ -75,10 +75,10 @@ function SideBar(){
               
             )}
 
-              <a href='/contactus'><li className='flex flex-row align-middle gap-2 my-3 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><IoIosCall className=' text-blue-400'/>تماس با ما</li></a>
+              <a href='/contactus'><li className='flex flex-row align-middle gap-2 my-3 lg:my-0 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><IoIosCall className=' text-blue-400'/>تماس با ما</li></a>
               <a href="/guide">
                 <li
-                  className={`flex flex-row align-middle gap-2 my-3 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
+                  className={`flex flex-row align-middle gap-2 my-3 lg:my-0 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
                 >
                   <BiSolidHelpCircle className="mt-1 text-blue-400" />
                     آموزش                
@@ -88,7 +88,7 @@ function SideBar(){
               <a href='/'>
                 <li
                   onClick={handleLogout}
-                  className={`flex flex-row align-middle gap-2 my-3 lg:text-xl md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
+                  className={`flex flex-row align-middle gap-2 mt-3 mb-0 lg:my-0 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
                 >
                   <RiLogoutBoxRFill className="mt-1 text-red-400" />
                   خروج

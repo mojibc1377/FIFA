@@ -108,7 +108,7 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
         <AiOutlineLoading className="loading absolute left-1/2 mt-10 text-blue-400 animate-spin " />
       ) : (
         challenges?.map((challenge, index) => (
-          <li key={index} className="border-1 flex flex-col fade-out bg-opacity-50 bg-gray-500 backdrop-blur-xl rounded-xl border-gray-600 shadow-2xl p-4 challenge-card">
+          <li key={index} className="flex flex-col fade-out bg-opacity-50 bg-gray-500 w-full backdrop-blur-xl rounded-xl border-gray-600 shadow-2xl p-4 challenge-card">
             <div className="challengeData flex flex-col gap-4 align-middle justify-center">
               <div className="avatar-wrapper flex flex-row justify-between">
                 <img alt="avatar" src={challenge.avatar} className="avatar mr-0 rounded-2xl w-24 h-28" />
