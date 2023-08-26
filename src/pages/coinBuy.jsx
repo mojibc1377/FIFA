@@ -59,7 +59,7 @@ function KharidCoin() {
       //   userId: JSON.parse(localStorage.getItem('user'))._id,
       //   amount: parseFloat(mizan*8),
       // });
-      
+
       // setAccountCredit(response.data.accountCredit);
   
       // Reset the input field
@@ -86,7 +86,7 @@ function KharidCoin() {
             type="number"
             value={mizan}
             onChange={(e) => setMizan(e.target.value)}
-            placeholder="Enter the amount of coins to purchase"
+            placeholder="مقدار کوین برای فروش"
             required
           />
           <p className="text-gray-300">قیمت: {cost.toFixed()}</p>

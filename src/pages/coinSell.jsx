@@ -82,7 +82,7 @@ function FurushCoin() {
             type="number"
             value={mizan}
             onChange={(e) => setMizan(e.target.value)}
-            placeholder="Enter the amount of coins to purchase"
+            placeholder="مقدار کوین برای فروش"
             required
           />
           <p className="text-gray-300">قیمت: {cost.toFixed()}</p>
