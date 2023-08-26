@@ -87,7 +87,9 @@ a:hover{
   color: white;
   width: 100%;
 }
-
+a{
+  height: 60px;
+}
 .offcanvas{
   background-color: #17191e;
 }
