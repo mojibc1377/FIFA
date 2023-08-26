@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react'; // Step 1
 import { Link, useNavigate } from 'react-router-dom';
 import { request } from '../services/requests';
 import { useForm } from 'react-hook-form'; 
 
 function Login() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false); // Step 2
   const { register, handleSubmit, formState: { errors } } = useForm(); 
 
   const onSubmit = async (data) => {
     try {
+      setIsLoading(true); // Step 3
+
       const response = await request.post('/api/login', {
         username: data.username,
         password: data.password,
@@ -22,6 +25,8 @@ function Login() {
     } catch (error) {
       console.error('Login error:', error);
       alert('Login failed. Please check your credentials.');
+    } finally {
+      setIsLoading(false); // Step 3
     }
   };
 
@@ -44,11 +49,13 @@ function Login() {
         />
         {errors.password && <span className="text-red-500">پسورد الزامیست</span>}
         
+        {/* Step 4: Conditionally render the login button */}
         <button
           type="submit"
           className="bg-blue-500 hover:bg-blue-600 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          disabled={isLoading} // Disable the button while loading
         >
-          وارد شوید
+          {isLoading ? '... در حال ورود' : 'وارد شوید'}
         </button>
       </form>
       <p className="mt-4 text-sm">

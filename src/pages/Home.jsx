@@ -15,10 +15,10 @@ function HomePage() {
         <br/>
         <p className="text-xl mb-12 text-right">جایی که می‌توانید سایر کاربران را در بازی‌های یک‌به‌یک به‌چالش بکشید و مهارت‌های خود را به‌نمایش بگذارید.</p>
         <div className="flex gap-4">
-          <Link to="/login" className="bg-blue-500 hover:bg-blue-600 text-white rounded-md py-2 px-4 transition-colors">
+          <Link to="/login" className="bg-blue-500 hover:bg-blue-600 lg:text-xl text-base text-white rounded-md py-2 px-4 transition-colors">
             ورود
           </Link>
-          <Link to="/signup" className="bg-blue-500 hover:bg-blue-600 text-white rounded-md py-2 px-4 transition-colors">
+          <Link to="/signup" className="bg-blue-500 hover:bg-blue-600 lg:text-xl text-base text-white rounded-md py-2 px-4 transition-colors">
             ساخت حساب 
           </Link>
         </div>

@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 import axios from "axios";
 import {request} from "../services/requests"
 import {BiSolidHelpCircle} from "react-icons/bi"
+import checkIfLoggedIn from './Middleware/checkLoggedIn';
 
 
 
@@ -50,7 +51,7 @@ function SideBar(){
             <a href='/coins'><li className='flex flex-row align-middle gap-2 my-3 lg:py-0.5 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-2 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><FaBitcoin className='mt-1 text-blue-400'/>کوین</li></a>
             <a href='/challenges'><li className='flex flex-row align-middle gap-2 my-3 lg:py-0.5 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><GiChampions className=' text-blue-400'/>چالش ها</li></a>
             
-            {localStorage.getItem('user') ? (
+            {checkIfLoggedIn() ? (
               <>
               <a href="/panel">
                 <li
@@ -84,7 +85,7 @@ function SideBar(){
                     آموزش                
                 </li>
               </a>
-            {localStorage.getItem('user') && (
+            {checkIfLoggedIn() && (
               <a href='/'>
                 <li
                   onClick={handleLogout}
@@ -97,7 +98,7 @@ function SideBar(){
             )}
         </ul>
   </div>
-  {(localStorage.getItem('token') && localStorage.getItem('user')) ? (
+  {(localStorage.getItem('token') && checkIfLoggedIn()) ? (
               <div className="offcanvas-footer flex  px-4 py-2 w-full lg:px-2 lg:py-3 md:px-1 md:py-2 sm:px-0.5 sm:py-1 Xs:px-1 Xs:py-1  bg-slate-700 gap-3 rounded-t-lg">
                 <img className="profile-pic text-3xl lg:text-3xl md:text-2xl sm:text-xl text-center text-gray-100 w-10 rounded-full" src={JSON.parse(localStorage.getItem('user')).avatar} alt='user-avatar'/>
                 <span className="profile-userName tracking-wide font-black self-center text-left mt-1 text-gray-50">
