@@ -15,7 +15,7 @@ function Coins(){
   const isFurushActive = useMatch('/coins/sell');
 
   return (
-    <div className="coinss flex fade-out flex-row justify-center gap-20 pt-16">
+    <div className="coinss flex fade-out flex-row justify-center gap-20 mx-10 lg:mx-96 xl:mx-96 md:mx-64 pt-16">
       <Link to="/coins/buy">
         <div
           className={`coin-buttons border-solid border-1 rounded-md py-1 px-4 text-2xl border-blue-400 ${

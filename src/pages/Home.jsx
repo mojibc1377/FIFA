@@ -14,11 +14,11 @@ function HomePage() {
         <p className="text-5xl font-bold mb-8 text-gray-300">خوش امدید</p>
         <br/>
         <p className="text-xl mb-12 text-right">جایی که می‌توانید سایر کاربران را در بازی‌های یک‌به‌یک به‌چالش بکشید و مهارت‌های خود را به‌نمایش بگذارید.</p>
-        <div className="flex gap-4">
-          <Link to="/login" className="bg-blue-500 hover:bg-blue-600 lg:text-xl text-base text-white rounded-md py-2 px-4 transition-colors">
+        <div className="flex gap-3">
+          <Link to="/login" className="bg-blue-500 hover:bg-blue-600 lg:text-xl text-base pt-3 space-x-4 text-white rounded-md py-1 px-2 w-2/4 transition-colors">
             ورود
           </Link>
-          <Link to="/signup" className="bg-blue-500 hover:bg-blue-600 lg:text-xl text-base text-white rounded-md py-2 px-4 transition-colors">
+          <Link to="/signup" className="bg-blue-500 hover:bg-blue-600 lg:text-xl text-base pt-3 space-x-4 text-white rounded-md py-1 px-2 w-3/4 transition-colors">
             ساخت حساب 
           </Link>
         </div>

@@ -167,8 +167,9 @@ function SideBar(){
 className="text-white flex flex-row w-full"
 type="button"
 data-bs-dismiss="offcanvas"
+onClick={handleLogout}
 >
-              <Link to='/'>
+              <a href='/'>
                 <li
                   onClick={handleLogout}
                   className={`flex flex-row hover:text-white align-middle gap-2 mt-3 mb-0 lg:my-0 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
@@ -176,7 +177,7 @@ data-bs-dismiss="offcanvas"
                   <RiLogoutBoxRFill className="mt-1 text-red-400" />
                   خروج
                 </li>
-              </Link>
+              </a>
               </button>
             )}
         </ul>

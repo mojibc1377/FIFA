@@ -11,15 +11,15 @@ function ContactUs() {
     <div className="flex flex-col items-center gap-10 fade-out pt-20">
       <h2 className="text-3xl font-light mb-8">تماس با ما</h2>
       <div className="flex lg:flex-row flex-col  gap-20">
-        <a href={`tel:${phoneNumber}`} className="flex fade-out  items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-md">
+        <a href={`tel:${phoneNumber}`} className="flex fade-out h-12 items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 rounded-md shadow-md">
           <FaPhone className="text-xl animate-bounce mr-2" />
           تلفن
         </a>
-        <a href={`https://wa.me/${whatsappNumber}`} className="flex fade-out  items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md shadow-md">
+        <a href={`https://wa.me/${whatsappNumber}`} className="flex fade-out h-12  items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md shadow-md">
           <FaWhatsapp className="text-xl animate-bounce mr-2" />
           واتس اپ
         </a>
-        <a href={`mailto:${email}`} className="flex fade-out items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md shadow-md">
+        <a href={`mailto:${email}`} className="flex fade-out items-center h-12 gap-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md shadow-md">
           <FaEnvelope className="text-xl animate-bounce mr-2" />
           ایمیل
         </a>
