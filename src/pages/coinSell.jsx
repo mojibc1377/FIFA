@@ -6,6 +6,7 @@ import { request } from "../services/requests";
 import { useEffect } from 'react';
 import checkIfLoggedIn from '../component/Middleware/checkLoggedIn';
 import sendSMSNotification from '../component/Middleware/sendSms';
+import {AiOutlineLoading} from "react-icons/ai"
 
 
 function FurushCoin() {
@@ -14,6 +15,7 @@ function FurushCoin() {
   const requestType = "sell";
   const [cost, setCost] = React.useState(0);
   const [accountCredit, setAccountCredit] = React.useState(0);
+  const [isLoading , setIsLoading] = React.useState(false)
   useEffect(() => {
     // Calculate the cost whenever the mizan value changes
     if (mizan) {
@@ -29,8 +31,6 @@ function FurushCoin() {
     const fetchAccountCredit = async () => {
       try {
         const { data } = await request.get(`/api/users?userId=${(JSON.parse(localStorage.getItem('user'))._id)}`);
-       
-        console.log(data[0])
         setAccountCredit(data[0].accountCredit);
       } catch (error) {
         console.error('Error fetching account credit:', error);
@@ -42,6 +42,7 @@ function FurushCoin() {
 
   const handlePurchase = async () => {
     try {
+      setIsLoading(true)
       // const response = await request.post('/api/users/sell-coins', {
       //   userId: JSON.parse(localStorage.getItem('user'))._id,
       //   amount: parseFloat(mizan),
@@ -53,7 +54,6 @@ function FurushCoin() {
       });
       // Update the account credit after successful purchase
       // setAccountCredit(response.data.accountCredit);
-      alert("subimted")
       sendSMSNotification(user.number ,455379, [{name : "NAME" , value : user.username }] )
       //kharide coin sms 
 
@@ -61,7 +61,8 @@ function FurushCoin() {
       // Reset the input field
       setMizan('');
       setCost(0);
-  
+      setIsLoading(false)
+
       alert('Coins purchased successfully!');
     } catch (error) {
       console.error('Error purchasing coins:', error);
@@ -90,9 +91,11 @@ function FurushCoin() {
         <button
           onClick={handlePurchase}
           className="bg-blue-500 hover:bg-blue-600 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-2"
-        >
-          ثبت سفارش
-        </button>
+          disabled = {isLoading}
+          >
+            {isLoading ? <AiOutlineLoading className=' animate-spin'/> : 'ثبت سفارش'}
+          </button>
+        
       </div>
       ) : (
         alert("please login first"),

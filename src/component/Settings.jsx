@@ -43,14 +43,15 @@ function Settings() {
 
 
   const handleSubmit = (event) => {
+
     const dataToUpdate = {
       name,
-      username,
-      password : newPassword,
-      number,
-      psnId,
+      username : (username.trim() || JSON.parse(localStorage.getItem('user'))?.username),
+      password : (newPassword.trim() || JSON.parse(localStorage.getItem('user'))?.password),
+      number : (number.trim() || JSON.parse(localStorage.getItem('user'))?.number),
+      psnId :(psnId.trim() || JSON.parse(localStorage.getItem('user'))?.psnId),
       credit,
-      avatar
+      avatar : (avatar || JSON.parse(localStorage.getItem('user'))?.avatar)
     };
     // name: String,
     // username: String,
@@ -83,14 +84,15 @@ function Settings() {
             نام کاربری
           </label>
           <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={handleUsernameChange}
-            placeholder="Enter your new username"
-            required
-            className="w-full px-3 py-2 rounded-md bg-gray-600 text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+  type="text"
+  id="username"
+  value={username}
+  defaultValue={JSON.parse(localStorage.getItem('user'))?.username}
+  placeholder={JSON.parse(localStorage.getItem('user'))?.username}
+  onChange={handleUsernameChange}
+  className="w-full px-3 py-2 rounded-md bg-gray-600 text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+/>
+
         </div>
         <div className="mb-4">
           <label htmlFor="password" className="block mb-1">
@@ -114,9 +116,9 @@ function Settings() {
             type="password"
             id="newPassword"
             value={newPassword}
+            defaultValue={password}
             onChange={handleNewPasswordChange}
             placeholder="Enter your new password"
-            required
             className="w-full px-3 py-2 rounded-md bg-gray-600 text-gray-400  focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -130,7 +132,7 @@ function Settings() {
             value={number}
             onChange={handlePhoneNumberChange}
             placeholder="Enter your phone number"
-            required
+            defaultValue={JSON.parse(localStorage.getItem('user'))?.number}
             className="w-full px-3 py-2 rounded-md bg-gray-600 text-gray-400  focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -144,7 +146,7 @@ function Settings() {
             value={psnId}
             onChange={handlePsnIdChange}
             placeholder="Enter your PSN ID"
-            required
+            defaultValue={JSON.parse(localStorage.getItem('user'))?.psnId}
             className="w-full px-3 py-2 rounded-md bg-gray-600 text-gray-400  focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
       <AvatarSelector onAvatarSelect={handleAvatarSelect} />

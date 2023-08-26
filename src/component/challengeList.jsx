@@ -159,6 +159,7 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
             <button
               className="ml-6 bg-green-500 hover:bg-green-600 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500"
               onClick={handleConfirmationYes}
+              disabled={confirmationLoading}
             >
               {confirmationLoading ? <AiOutlineLoading className="loading mx-2 text-white animate-spin " /> : "بله"}
             </button>

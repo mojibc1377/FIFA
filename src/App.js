@@ -23,11 +23,28 @@ import Guide from './pages/guide';
 
 
 function App() {
+  const [isRefreshing, setIsRefreshing] = React.useState(false);
+  const handleTouchStart = (e) => {
+    if (e.touches.length === 1) {
+      const startY = e.touches[0].clientY;
+      if (startY <= 10 && !isRefreshing) {
+        setIsRefreshing(true);
+      }
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsRefreshing(false);
+  };
 
  
   return (
-  <>
-  <Header className="header z-1"/>
+<div
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      className={`App ${isRefreshing ? 'refreshing' : ''}`}
+    >  
+    <Header className="header z-1"/>
     <div className="App">
       <SideBar/>
       <Routes>
@@ -50,7 +67,7 @@ function App() {
           <Route path='/guide' element={<Guide/>}/>
       </Routes>
      </div>
-     </>
+</div>
   );
 }
 

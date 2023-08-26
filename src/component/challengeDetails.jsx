@@ -14,6 +14,8 @@ function ChallengeDetailPage() {
   const [photo, setPhoto] = useState(null);
   const [commentsList, setCommentsList] = useState([]); // State to store the list of comments
   const [confirmationLoading, setConfirmationLoading] = useState(false); //false
+  const [sendLoading, setSendLoading] = useState(false)
+  const [saveWinner , setSaveWinner] = useState(false)
 
 
 
@@ -124,18 +126,23 @@ function ChallengeDetailPage() {
   }, [commentsList]);
 const handleersal= async() =>{
   try {
+    setSendLoading(true)
+
     const challenge = await request.get(`/api/challenge/${challengeId}`);
       if( selectedWinner === "me"){
         var winner = (JSON.parse(localStorage.getItem('user'))._id)
+        setSendLoading(false)
 
       }
       else if(selectedWinner === "opponent") {
       if((JSON.parse(localStorage.getItem('user'))._id) === challenge.data.challengerId ){
         winner = challenge.data.accepterId
+        setSendLoading(false)
 
       }
   else{
     winner = challenge.data.challengerId
+    setSendLoading(false)
   }
 }
 await request.post(`/api/challenges/${challengeId}/update`, {
@@ -181,7 +188,7 @@ await request.post(`/api/challenges/${challengeId}/update`, {
     
     <li key={index} className={`message ${(JSON.parse(localStorage.getItem('user'))._id === comment.commenterId )? "reciever bg-gray-500 text-gray-300 flex-row self-start" : "sender bg-gray-700 flex-row-reverse text-white self-end"} list-none flex gap-5 rounded-2xl px-4 text-lg py-2 max-w-xs break-words whitespace-normal`}>
       <div className={`comment relative max-w-full text-left`}>{comment.comment}</div>
-        <div className={`timestamp text-gray-100 opacity-70 text-xs self-end font-thin italic animate-pulse`}>
+        <div className={`timestamp text-gray-200 opacity-70 text-xs self-end font-thin italic `}>
             {moment(comment.createdAt).format("HH:mm")}
         </div>
     </li>
@@ -224,7 +231,11 @@ await request.post(`/api/challenges/${challengeId}/update`, {
   </button>
   <button className='ersal px-4 py-1 bg-blue-500 bg-opacity-30 rounded-lg'
   onClick={handleersal}
-  >ثبت برنده</button>
+  disabled = {sendLoading}
+
+  >{sendLoading ? <AiOutlineLoading className=' animate-spin' /> :'ثبت برنده'}
+
+  </button>
 </div>
 
           </div>
@@ -234,11 +245,15 @@ await request.post(`/api/challenges/${challengeId}/update`, {
           type="file"
           onChange={handlePhotoChange}
           className="uploadField border-1 border-white rounded 2xl text-white mt-4 w-2/3"
+          disabled={sendLoading}
+
         />
         <br/>
         <button
           onClick={handleUploadPhoto}
           className="mt-4 py-2 px-6 bg-blue-500 hover:bg-blue-500 rounded-md felx w-max flex-row text-sm text-white"
+          disabled={confirmationLoading}
+
         >
           {confirmationLoading ? <AiOutlineLoading className="loading mx-3 text-white animate-spin " /> : "اپلود عکس"}
         </button>

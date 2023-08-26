@@ -8,7 +8,7 @@ import {GiChampions} from "react-icons/gi"
 import {IoIosCall,IoMdSettings} from "react-icons/io"
 import {BsCreditCard2BackFill} from "react-icons/bs"
 import {RiLoginBoxFill,RiLogoutBoxRFill} from "react-icons/ri"
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from "axios";
 import {request} from "../services/requests"
@@ -21,6 +21,7 @@ function SideBar(){
   const location = useLocation();
   const [isActive, setIsActive] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false); 
+  const navigate = useNavigate()
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');

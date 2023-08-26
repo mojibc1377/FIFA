@@ -79,9 +79,9 @@ function ChallengeForm() {
     }
   };
   
-
   return (
-    <div className="absolute inset-0 h-max my-auto sliding-div mx-5 bg-opacity-30 self-center justify-center lg:w-1/2 lg:left-1/3 bg-gray-700 text-gray-100 py-10 px-10 rounded-md shadow-2xl ">
+    <div className='flex flex-row justify-center align-middle pt-20'>
+    <div className=" h-max my-auto sliding-div mx-5 bg-opacity-30 self-center justify-center lg:w-1/2 lg:left-1/3 bg-gray-700 text-gray-100 py-10 px-10 rounded-md shadow-2xl ">
       <h2 className="animate-pulse text-2xl font-semibold text-gray-300 mb-4">ایجاد چالش جدید</h2>
       <form onSubmit={HandleSubmit}>
         <div className=" fade-out mb-4">
@@ -143,11 +143,13 @@ function ChallengeForm() {
           <button
             type="submit"
             className=" fade-out bg-blue-500 hover:bg-blue-600 border-1 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
+            disabled={confirmationLoading}
+>
             {confirmationLoading ? <AiOutlineLoading className="loading mx-3 text-white animate-spin " /> : "ثبت چالش"}
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 }

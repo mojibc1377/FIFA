@@ -6,6 +6,7 @@ import checkIfLoggedIn from '../component/Middleware/checkLoggedIn';
 import Coins from '../component/coins';
 import { Navigate } from 'react-router-dom';
 import sendSMSNotification from '../component/Middleware/sendSms';
+import { AiOutlineLoading } from 'react-icons/ai';
 
 
 function KharidCoin() {
@@ -15,6 +16,7 @@ function KharidCoin() {
   const user = (JSON.parse(localStorage.getItem('user')));
 
   const [accountCredit, setAccountCredit] = useState(0);
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     // Calculate the cost whenever the mizan value changes
@@ -43,25 +45,28 @@ function KharidCoin() {
 
   const handlePurchase = async () => {
     try {
-      const response = await request.post('/api/users/purchase-coins', {
-        userId: JSON.parse(localStorage.getItem('user'))._id,
-        amount: parseFloat(mizan*8),
-      });
+      setIsLoading(true)
+      
       request.post('/api/coins', {
         mizan: parseFloat(mizan),
         psnId: user.psnId, 
         requestType: requestType, 
       });
-  alert("subimted")
   sendSMSNotification(user.number ,455379, [{name : "NAME" , value : user.username }] )       //kharide coin sms 
 
       // Update the account credit after successful purchase
-      setAccountCredit(response.data.accountCredit);
+      // const response = await request.post('/api/users/purchase-coins', {
+      //   userId: JSON.parse(localStorage.getItem('user'))._id,
+      //   amount: parseFloat(mizan*8),
+      // });
+      
+      // setAccountCredit(response.data.accountCredit);
   
       // Reset the input field
       setMizan('');
       setCost(0);
-  
+      setIsLoading(false)
+
       alert('Coins purchased successfully!');
     } catch (error) {
       console.error('Error purchasing coins:', error);
@@ -90,8 +95,9 @@ function KharidCoin() {
         <button
           onClick={handlePurchase}
           className="bg-blue-500 hover:bg-blue-600 text-white rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-2"
+          disabled = {isLoading}
         >
-          ثبت سفارش
+          {isLoading ? <AiOutlineLoading className=' animate-spin'/> : 'ثبت سفارش'}
         </button>
       </div>
       ) : (
