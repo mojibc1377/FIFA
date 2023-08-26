@@ -42,7 +42,7 @@ function SideBar(){
     return(
         <>
 <button 
-  className="btn btn-secondry text-white bg-blue-600 absolute mx-0 ms-2 left-0"   
+  className="btn btn-secondry text-white bg-blue-600 absolute ms-2 top-1 left-0"   
   onClick={() => setSidebarOpen(!sidebarOpen)} // Toggle the sidebar
   type="button" 
   data-bs-toggle="offcanvas" 
