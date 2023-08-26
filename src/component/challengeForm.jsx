@@ -96,7 +96,7 @@ function ChallengeForm() {
             value={gameName}
             onChange={handleGameNameChange}
             required
-            className=" fade-out w-full px-3 py-2 rounded-md bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className=" fade-out w-full text-center px-3 py-2 rounded-md bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">انتخاب بازی</option>
             <option value="FIFA 23">FIFA 23</option>
@@ -112,7 +112,7 @@ function ChallengeForm() {
             value={consoleType}
             onChange={handleConsoleTypeChange}
             required
-            className=" fade-out w-full px-3 py-2 rounded-md bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className=" fade-out w-full text-center px-3 py-2 rounded-md bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">پلتفرم</option>
             <option value="ps5">PS5</option>
@@ -135,7 +135,7 @@ function ChallengeForm() {
             required
             max={2500000} 
             step={1} // Set the step value to 1 (only accept integer values) or min value
-            className=" fade-out w-full px-3 py-2 text-white rounded-md bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className=" fade-out w-full text-center px-3 py-2 text-white rounded-md bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
         </div>

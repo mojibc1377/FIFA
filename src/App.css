@@ -83,7 +83,10 @@ body{
 }
 
 
-
+a:hover{
+  color: white;
+  width: 100%;
+}
 
 .offcanvas{
   background-color: #17191e;
