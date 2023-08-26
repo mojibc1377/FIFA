@@ -1,25 +1,21 @@
 import * as React from 'react';
 
-function Guide(){
-
-    return(
-        <>
+function Guide() {
+    return (
         <div className='flex flex-col gap-6 text-right px-3 pt-24'>
+            <div className='headerInfo text-xl self-end border-1 rounded-xl bg-gray-600 bg-opacity-30 w-28 px-4 py-2'>آموزش</div>
+            <div>
+                در این صفحه تمامی آموزش‌های لازم برای استفاده از این پلتفرم به شما داده می‌شود
+                آموزش ثبت چالش - پذیرفتن چالش دیگران - هماهنگی با کاربر دیگر - خرید و فروش کوین - تغییر مشخصات کاربری
+            </div>
 
-            <h1 className='headerInfo text-xl self-end border-1 rounded-xl bg-gray-600 bg-opacity-30 w-28 px-4 py-2'>آموزش</h1>
-                <div className=''>
-                    در این صفحه تمامی اموزش های لازم برای استفاده از این پلتفرم به شما داده میشود<br/>
-                    آموزش ثبت چالش - پذیرفتن چالش دیگران - هماهنگی با کاربر دیگر - خرید و فروش کوین - تغییر مشخصات کاربری
-                </div>
-                <h1 className='headerInfo text-xl self-end border-1 rounded-xl bg-gray-600 bg-opacity-30 w-32 px-4 py-2'>چالش ها</h1>
-                <div className='pics flex gap-1 flex-row lg:justify-evenly md:justify-evenly'>
-                    
-                    <img src='/images/help/1.png' alt="menu" className='image-guide w-40 h-auto rounded-lg border-1 border-opacity-5'></img>
-                    <img src='/images/help/2.png' alt="challs" className='image-guide w-40 h-auto rounded-lg border-1 border-opacity-5'></img>
-
-                </div>
-                <h3>ابتدا از منو چالش ها را انتخاب کنید</h3>
-
+            <div className='headerInfo text-xl self-end border-1 rounded-xl bg-gray-600 bg-opacity-30 w-32 px-4 py-2'>چالش ها</div>
+            <div className='pics flex gap-1 flex-row lg:justify-evenly md:justify-evenly'>
+                <img src='/images/help/1.png' alt="menu" className='image-guide w-40 h-auto rounded-lg border-1 border-opacity-5' />
+                <img src='/images/help/2.png' alt="challs" className='image-guide w-40 h-auto rounded-lg border-1 border-opacity-5' />
+            </div>
+            <h3>ابتدا از منو چالش ها را انتخاب کنید</h3>
+            
                 <div className='flex flex-col gap-1'>
                     <div className='head '>در این قسمت شما توانایی انجام چندین کار را دارید</div>
                     <br/>
@@ -81,8 +77,6 @@ function Guide(){
 
                 </div>
         </div>
-        
-        </>
     )
 }
 export default Guide;
