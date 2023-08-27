@@ -18,8 +18,8 @@ function Coins(){
     <div className="coinss flex fade-out flex-row justify-center gap-20 mx-10 lg:mx-96 xl:mx-96 md:mx-64 pt-20">
       <Link to="/coins/buy">
         <div
-          className={`coin-buttons border-solid border-1 rounded-md py-1 px-4 text-2xl border-blue-400 ${
-            isKharidActive || isActive ? 'bg-gray-500 border-blue-500 bg-opacity-20' : 'hover:bg-blue-500 hover:bg-opacity-50 hover:border-white'
+          className={`coin-buttons border-solid border-1 rounded-md backdrop-blur-sm py-1 px-4 text-2xl border-blue-400 ${
+            isKharidActive || isActive ? 'bg-gray-500 border-blue-500 bg-opacity-70' : 'hover:bg-blue-500 hover:bg-opacity-70 hover:border-white'
           }`}
           onClick={() => setIsActive(!isActive)}
         >
@@ -28,8 +28,8 @@ function Coins(){
       </Link>
       <Link to="/coins/sell">
         <div
-          className={`coin-buttons border-solid border-1 rounded-md py-1 px-4 text-2xl border-blue-400 ${
-            isFurushActive ? 'bg-gray-500 border-blue-500 bg-opacity-20' : 'hover:bg-blue-500 hover:bg-opacity-50 hover:border-white'
+          className={`coin-buttons border-solid border-1 rounded-md py-1 px-4  backdrop-blur-sm text-2xl border-blue-400 ${
+            isFurushActive ? 'bg-gray-500 border-blue-500 bg-opacity-70' : 'hover:bg-blue-500 hover:bg-opacity-70 hover:border-white'
           }`}
         >
           فروش

@@ -53,19 +53,53 @@ function SideBar(){
   <div className="offcanvas-header">
   </div>
 </div>
-<div className="offcanvas offcanvas-start text-gray-400 w-60 lg:w-80 md:w-60 sm:w-40" tabIndex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
-  <div className="offcanvas-header">
-    <h5 className="offcanvas-title font-serif font-extralight italic" id="offcanvasWithBackdropLabel">ChampsPlus+</h5>
+<div className="offcanvas offcanvas-start text-gray-400 w-60 p-0" tabIndex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
+<div className="offcanvas-header w-full text-left p-0">
+<a href='/panel'>
+
+  {(localStorage.getItem('token') && checkIfLoggedIn()) ? (
+    <div className="offcanvas-header py-2 px-4 w-full flex flex-col gap-1 shadow-lg justify-between bg-gray-900">
+      <div className="flex justify-between items-center gap-16 mt-3">
+      <img
+          className="profile-pic w-12 rounded-full"
+          src={JSON.parse(localStorage.getItem('user')).avatar}
+          alt="user-avatar"
+        />
+        <span className="creditt text-xs px-3 py-2 border-solid border-1 rounded-full border-opacity-20">
+          {JSON.parse(localStorage.getItem('user')).accountCredit} 
+        </span>
+        
+      </div>
+      <div className="flex flex-col self-start gap-0">
+        <p className="profile-userName text-base font-extrabold text-gray-50">
+          {JSON.parse(localStorage.getItem('user')).name}
+        </p>
+        <p className="font-light text-sm mb-2">
+          {JSON.parse(localStorage.getItem('user')).username}
+        </p>
+      </div>
+    </div>
+  ) : (
+    <div className="offcanvas-header p-4 w-full flex flex-col gap-3 justify-start items-start bg-gray-900">
+      <FaRegUserCircle className="profile-pic text-3xl lg:text-3xl md:text-2xl sm:text-xl text-center text-gray-100" />
+      <p className="profile-userName tracking-wide self-start text-left text-gray-50">
+        کاربر مهمان
+      </p>
+    </div>
+  )}
+  </a>
+
   </div>
-  <div className="offcanvas-body flex-col ">
-        <ul className='offcanvas-list flex-col ps-4 lg:ps-1 text-left justify-between gap-0'>
+
+  <div className="offcanvas-body flex-col mt-5">
+        <ul className='offcanvas-list flex-col ps-2 lg:ps-1 text-left justify-between gap-0'>
         <button
-  className="text-white flex flex-row w-full"
+  className="text-white mt-2 flex flex-row w-full"
   type="button"
   data-bs-dismiss="offcanvas"
 >
   <Link to="/">
-    <li className="flex hover:text-white flex-row align-middle gap-2 my-3 lg:py-0.5 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100">
+    <li className="flex flex-row align-middle gap-2 my-3 lg:py-0.5 lg:text-lg md:text-sm px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100">
       <HiHome className="mt-1 text-blue-400" />
       خانه
     </li>
@@ -78,7 +112,7 @@ function SideBar(){
 >
 
 
-<Link to='/coins'><li className='flex hover:text-white flex-row align-middle gap-2 my-3 lg:py-0.5 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-2 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><FaBitcoin className='mt-1 text-blue-400'/>کوین</li></Link>
+<Link to='/coins'><li className='flex flex-row align-middle gap-2 my-3 lg:py-0.5 lg:text-lg md:text-sm px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><FaBitcoin className='mt-1 text-blue-400'/>کوین</li></Link>
 
 </button>
 
@@ -90,36 +124,19 @@ function SideBar(){
   type="button"
   data-bs-dismiss="offcanvas"
 >
-            <Link to='/challenges'><li className='flex hover:text-white flex-row align-middle gap-2 my-3 lg:py-0.5 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><GiChampions className=' text-blue-400'/>چالش ها</li></Link>
+            <Link to='/challenges'><li className='flex flex-row align-middle gap-2 my-3 lg:py-0.5 lg:text-lg md:text-sm px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><GiChampions className=' text-blue-400'/>چالش ها</li></Link>
             </button>
             {checkIfLoggedIn() ? (
               <>
-              <button
-  className="hover:text-white flex flex-row w-full"
-  type="button"
-  data-bs-dismiss="offcanvas"
->
-              <Link to="/panel">
-                <li
-                  className={`flex hover:text-white flex-row align-middle gap-2 my-3 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
-                >
-                  <IoMdSettings className="mt-1 text-blue-400" />
-                    تنظیمات                
-                </li>
-              </Link>
-              </button>
-              
-
               <button
   className="text-white flex flex-row w-full"
   type="button"
   data-bs-dismiss="offcanvas"
 >
               <Link to='/charge'>
-                <li className='flex hover:text-white flex-row align-middle gap-2 my-3 lg:my-0 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><BsCreditCard2BackFill className='mt-1 text-blue-400'/>شارژ حساب</li></Link>
+                <li className='flex flex-row align-middle gap-2 my-3 lg:my-0 lg:text-lg md:text-sm px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><BsCreditCard2BackFill className='mt-1 text-blue-400'/>شارژ حساب</li></Link>
               
                 </button>
-              
               </>
             ) : (
               <button
@@ -129,7 +146,7 @@ function SideBar(){
 >
               <Link to="/login">
                 <li
-                  className={`flex hover:text-white flex-row align-middle gap-2 my-3 lg:my-0 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
+                  className={`flex flex-row align-middle gap-2 my-3 lg:my-0 lg:text-lg md:text-sm px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
                 >
                   <RiLoginBoxFill className="mt-1 text-blue-400" />
                   ورود
@@ -144,7 +161,7 @@ function SideBar(){
   data-bs-dismiss="offcanvas"
 >
 
-              <Link to='/contactus'><li className='flex hover:text-white flex-row align-middle gap-2 my-3 lg:my-0 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><IoIosCall className=' text-blue-400'/>تماس با ما</li></Link>
+              <Link to='/contactus'><li className='flex flex-row align-middle gap-2 my-3 lg:my-0 lg:text-lg md:text-sm px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100'><IoIosCall className=' text-blue-400'/>تماس با ما</li></Link>
               </button>
               
               <button
@@ -154,7 +171,7 @@ function SideBar(){
 >
               <Link to="/guide">
                 <li
-                  className={`flex flex-row align-middle hover:text-white gap-2 my-3 lg:my-0 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
+                  className={`flex flex-row align-middle gap-2 my-3 lg:my-0 lg:text-lg md:text-sm px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
                 >
                   <BiSolidHelpCircle className="mt-1 text-blue-400" />
                     آموزش                
@@ -172,7 +189,7 @@ onClick={handleLogout}
               <a href='/'>
                 <li
                   onClick={handleLogout}
-                  className={`flex flex-row hover:text-white align-middle gap-2 mt-3 mb-0 lg:my-0 lg:text-lg md:text-sm sm:text-xs px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
+                  className={`flex flex-row align-middle gap-2 mt-3 mb-0 lg:my-0 lg:text-lg md:text-sm px-5 py-2 rounded w-full ps-1 hover:bg-sky-400 hover:bg-opacity-20 hover:text-gray-100`}
                 >
                   <RiLogoutBoxRFill className="mt-1 text-red-400" />
                   خروج
@@ -182,19 +199,9 @@ onClick={handleLogout}
             )}
         </ul>
   </div>
-  {(localStorage.getItem('token') && checkIfLoggedIn()) ? (
-              <div className="offcanvas-footer flex  px-4 py-2 w-full lg:px-2 lg:py-3 md:px-1 md:py-2 sm:px-0.5 sm:py-1 Xs:px-1 Xs:py-1  bg-slate-700 gap-3 rounded-t-lg">
-                <img className="profile-pic text-3xl lg:text-3xl md:text-2xl sm:text-xl text-center text-gray-100 w-10 rounded-full" src={JSON.parse(localStorage.getItem('user')).avatar} alt='user-avatar'/>
-                <span className="profile-userName tracking-wide font-black self-center text-left mt-1 text-gray-50">
-                  {JSON.parse(localStorage.getItem('user')).name} 
-                </span>
-              </div>
-            ) : (
-              <div className='offcanvas-footer flex px-4 py-2 w-full lg:px-2 lg:py-3 md:px-1 md:py-2 sm:px-0.5 sm:py-1 Xs:px-1 Xs:py-1  bg-slate-700 gap-2 rounded-t-lg'>
-        <FaRegUserCircle className='profile-pic text-3xl lg:text-3xl md:text-2xl sm:text-xl text-center text-gray-100'/>
-        <span className='profile-userName tracking-wide font-black self-center text-left text-gray-50'>کاربر مهمان</span>
-  </div>
-            )}
+  <h5 className="offcanvas-title font-serif font-extralight italic" id="offcanvasWithBackdropLabel">ChampsPlus+</h5>
+
+  
 </div>
 
 <div className="offcanvas offcanvas-start" data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">

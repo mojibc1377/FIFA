@@ -21,12 +21,6 @@ module.exports = {
       '2xl': {'min': '1536px'},
       // => @media (min-width: 1536px) { ... }
     },
-    colors :{
-      avvalie : "#189157",
-      sanavie : "#1b201c",
-      segane : "#0a3d25"
-    }
-  
   },
   plugins: [],
   // screens: {

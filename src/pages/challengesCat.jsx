@@ -1,62 +1,84 @@
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
-import {MdPlaylistAddCheck} from "react-icons/md"
-import {CgPlayListAdd} from "react-icons/cg"
-import {HiOutlineClipboardList} from "react-icons/hi"
-import {PiUserListDuotone} from "react-icons/pi"
-
+import { MdPlaylistAddCheck } from 'react-icons/md';
+import { CgPlayListAdd } from 'react-icons/cg';
+import { HiOutlineClipboardList } from 'react-icons/hi';
+import { PiUserListDuotone } from 'react-icons/pi';
+import ChallengeForm from '../component/challengeForm';
+import ChallengePage from './mosabeqat';
+import MyChallenges from '../component/mychallenges';
+import CurrentAcceptedChallenges from './currentAcceptedChallenge';
 
 function Chals() {
+  const [activeTab, setActiveTab] = React.useState('all');
+  
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+  };
 
-    const navigate = useNavigate();
-  
-    const handleCreateChallenge = () => {
-      navigate('/challenges/new');
-    };
-    const handleCurrentChallenges = () =>{
-      navigate('/challenges/current')
-    }
-    const handleMyChallenges = () =>{
-      navigate('/challenges/my')
-    }
-    const handleAllChallenges = () => {
-      navigate('/challenges/all');
-    };
-  
-    return (
-      <div className=" text-gray-100 pt-20 p-8 rounded-md fade-out flex flex-col items-center">
-        <button
-          type="button"
-          onClick={handleAllChallenges}
-          className="bg-green-500 border-1 hover:bg-green-600 text-white flex felx-row  gap-2 bg-opacity-20 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-green-500 mt-2"
+  return (
+    <div className="text-gray-100 self-center flex flex-col pt-20 p-8 rounded-md fade-out xl:flex-col lg:flex-col lg:justify-between">
+      <div className="flex flex-wrap gap-2 md:justify-center sm:justify-center justify-center space-y-0 space-x-0">
+        <TabButton
+          active={activeTab === 'all'}
+          onClick={() => {handleTabChange('all')}}
+          icon={<HiOutlineClipboardList className="mr-2 " />}
         >
-          تمام چالش ها <HiOutlineClipboardList className='mt-1'/>
-        </button>
-        <button
-          type="submit"
-          onClick={handleCreateChallenge}
-          className="bg-blue-500 border-1 hover:bg-blue-600 text-white flex felx-row  gap-2 bg-opacity-20 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-2"
-        >
-          ایجاد چالش جدید <CgPlayListAdd className="mt-1"/>
-        </button>
-        <button
-          type="submit"
-          onClick={handleCurrentChallenges}
-          className="bg-blue-500 border-1 hover:bg-blue-600  flex felx-row  gap-2  text-white bg-opacity-20 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-2"
-        >
-          چالش های پذیرفته شده <MdPlaylistAddCheck className='mt-1'/>
-        </button>
-        <button
-          type="submit"
-          onClick={handleMyChallenges}
-          className="bg-blue-500 border-1 hover:bg-red-600 text-white flex felx-row  gap-2  bg-opacity-20 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 mt-2"
-        >
-          چالش های من <PiUserListDuotone className='mt-1'/>
-        </button>
+          تمام چالش ها
+        </TabButton>
         
+        <TabButton
+          active={activeTab === 'accepted'}
+          onClick={() => {handleTabChange('accepted')}}
+          icon={<MdPlaylistAddCheck className="mr-2" />}
+        >
+          چالش های پذیرفته شده
+        </TabButton>
+        <TabButton
+          active={activeTab === 'my'}
+          onClick={() => {handleTabChange('my')}}
+          icon={<PiUserListDuotone className="mr-2" />}
+        >
+          چالش های من
+        </TabButton>
+        <TabButton
+          active={activeTab === 'create'}
+          onClick={() => {handleTabChange('create')}}
+          icon={<CgPlayListAdd className="mr-2 mt-1" />}
+        >
+          ایجاد چالش جدید
+        </TabButton>
       </div>
-    );
-  }
-  
-  export default Chals;
-  
+      <div className="mt-2">
+        {activeTab === 'all' && <ChallengePage/>}
+        {activeTab === 'create' && <ChallengeForm/>}
+        {activeTab === 'accepted' && <CurrentAcceptedChallenges/>}
+        {activeTab === 'my' && <MyChallenges/>}
+      </div>
+    </div>
+  );
+}
+
+function TabButton({ active, onClick, icon, children }) {
+  const baseClasses =
+    'border-b-2 border-l-2 border-r-2 border-transparent bg-gray-700 hover:text-gray-800 py-2 px-4 rounded-xl focus:outline-none';
+  const activeClasses = active
+    ? 'border-gray-300 bg-white text-black'
+    : 'hover:bg-gray-100';
+  const inactiveClasses = !active
+    ? 'hover:bg-gray-100'
+    : 'border-gray-300 bg-white text-black';
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`${baseClasses} ${activeClasses} ${inactiveClasses} flex items-center space-x-2`}
+      style={{ minWidth: '140px' }} // Adjust the minimum width as needed
+    >
+      {icon}
+      {children}
+    </button>
+  );
+}
+
+export default Chals;

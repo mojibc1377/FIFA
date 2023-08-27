@@ -101,14 +101,15 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
   };
   
   return (
-    <div className="bg-pattern text-gray-200 absolute w-full top-14 fade-out duration-2000 pt-4 pb-4 rounded-md ">
+    <div className="text-gray-200 fade-out py-2 rounded-md ">
     <h2 className="text-2xl font-semibold mb-4">{list ==="accepted" ? "چالش های پذیرفته شده" : list=== "myChallenges"? "چالش های من": "چالش ها"}</h2>
-    <ul className="flex flex-col gap-5 justify-center w-11/12 pl-9">
+    <ul className="flex flex-col lg:grid xl:grid lg:grid-cols-2 md:grid md:grid-cols-2 xl:grid-cols-3 gap-3 justify-center w-full ">
+
       {isLoading === true ? (
         <AiOutlineLoading className="loading absolute left-1/2 mt-10 text-blue-400 animate-spin " />
       ) : (
         challenges?.map((challenge, index) => (
-          <li key={index} className="flex flex-col fade-out bg-opacity-50 bg-gray-500 w-full rounded-xl border-gray-600 shadow-2xl p-4 challenge-card">
+          <li key={index} className="flex flex-col fade-out bg-opacity-50 backdrop-blur-sm bg-gray-500 rounded-xl border-gray-600 shadow-2xl p-4 challenge-card">
             <div className="challengeData flex flex-col gap-4 align-middle justify-center">
               <div className="avatar-wrapper flex flex-row justify-between">
                 <img alt="avatar" src={challenge.avatar} className="avatar mr-0 rounded-2xl w-24 h-28" />
@@ -124,7 +125,7 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
             <div className='gamee pt-2 text-gray-400'>بازی :</div>
               <div className="gameName flex flex-row text-left text-3xl font-light">{challenge.gameName}</div>
               </div>
-              <div className='lastRow flex flex-row justify-between'>
+              <div className='lastRow flex flex-row justify-between items-center'>
               {challenge.accepterId === "" ? formatTime(challenge.createdAt): ( <div className="infoBtnWrapper justify-start lg:w-24 ">
                   {list === "accepted" || list === "myChallenges" ? (
                     <Link to={`/challenge-detail/${challenge._id}`}>
@@ -133,8 +134,8 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
                   ) : status === true ? (formatTime(challenge.createdAt)) : null}
               </div>)}
             {challenge.challengerId !== accepterId && status === true ? (
-              <button className={`addBtn border-1 bg-green-600 bg-opacity-60 mb-0 rounded-md ${hasTwoAcceptedChallenges ? "disabled-button" : ""} px-4 py-2`} disabled={hasTwoAcceptedChallenges} onClick={() => handleChallengeConfirmation(index)}>
-                {hasTwoAcceptedChallenges ? <MdDoNotDisturb className='notDisturb text-xl'/> : "Accept"}
+              <button className={`addBtn border-1 bg-green-600 bg-opacity-60 mb-0 rounded-md ${hasTwoAcceptedChallenges ? "disabled-button" : ""} px-3 py-1`} disabled={hasTwoAcceptedChallenges} onClick={() => handleChallengeConfirmation(index)}>
+                {hasTwoAcceptedChallenges ? <MdDoNotDisturb className='notDisturb text-3xl'/> : "پذیرش"}
               </button>
             ) : (
               <button className="addBtn" onClick={() => alert("waiting to be accepted")}>
@@ -150,7 +151,7 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
     </ul>
   
     {showBackdrop && (
-      <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-70 px-10">
+      <div className="fixed inset-0 flex justify-center fade-out-fast items-center bg-black bg-opacity-70 px-10">
         <div className="bg-gray-700 p-6 rounded-md shadow-md">
           <p className="text-lg font-semibold mb-4">
             ایا مطمعنید که این چالش را قبول میکنید؟

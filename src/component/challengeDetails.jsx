@@ -160,7 +160,7 @@ await request.post(`/api/challenges/${challengeId}/update`, {
   return (
     <div className="comment pt-20">
       <div
-        className="challenge-detail block pt-20 bg-black bg-opacity-20 backdrop-blur-md text-white rounded-md p-6 shadow-lg max-w-md mx-auto"
+        className="challenge-detail block pt-20 bg-black bg-opacity-50 backdrop-blur-sm text-white rounded-md p-6 shadow-lg max-w-md mx-auto"
       >
         <h2 className="text-3xl font-bold mb-4">اطلاعات چالش</h2>
         
@@ -172,7 +172,7 @@ await request.post(`/api/challenges/${challengeId}/update`, {
             <form onSubmit={handleSubmitComment} className="comment-form flex flex-row bg-opacity-20 bg-gray-100 bg-blur align-middle text-white rounded-xl">
   <input
     className="w-full bg-gray-500 text-xl py-3 px-5 rounded-xl focus:outline-none"
-    placeholder="Enter your message..."
+    placeholder="پیام خود را وارد کنید"
     value={comment}
     onChange={handleCommentChange}
   />
@@ -196,8 +196,8 @@ await request.post(`/api/challenges/${challengeId}/update`, {
   ))}
   <form onSubmit={handleSubmitComment} className="comment-form flex flex-row bg-opacity-20 mt-2 bg-gray-100 bg-blur align-middle text-white justify-around rounded-2xl">
   <input
-    className="w-full bg-gray-500 text-xl py-2 px-3 rounded-2xl focus:border-0"
-    placeholder="Enter your message..."
+    className="w-full bg-gray-500 text-xl py-2 px-3 rounded-2xl focus:border-none"
+    placeholder="پیام خود را وارد کنید"
     value={comment}
     onChange={handleCommentChange}
   />

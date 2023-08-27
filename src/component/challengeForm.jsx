@@ -80,8 +80,8 @@ function ChallengeForm() {
   };
   
   return (
-    <div className='flex flex-row justify-center align-middle pt-20'>
-    <div className=" h-max my-auto sliding-div mx-5 bg-opacity-30 self-center justify-center lg:w-1/2 lg:left-1/3 bg-gray-700 text-gray-100 py-10 px-10 rounded-md shadow-2xl ">
+    <div className='flex flex-row justify-center pt-20'>
+    <div className=" h-max my-auto sliding-div bg-opacity-60 backdrop-blur-sm  bg-gray-700 text-gray-100 py-10 px-5 rounded-md shadow-2xl ">
       <h2 className="animate-pulse text-2xl font-semibold text-gray-300 mb-4">ایجاد چالش جدید</h2>
       <form onSubmit={HandleSubmit}>
         <div className=" fade-out mb-4">
