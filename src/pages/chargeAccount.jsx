@@ -4,7 +4,6 @@ import { REQUEST, REquest, request } from '../services/requests';
 import { useNavigate } from 'react-router-dom';
 import sendSMSNotification from "../component/Middleware/sendSms"
 import Dashboard from './dashbord';
-// import Pay from '../component/Middleware/nextPay';
 
 
 
@@ -12,6 +11,7 @@ const ChargingPage = () => {
     const [userId, setUserId] = useState(JSON.parse(localStorage.getItem('user'))._id);
     const [amount, setAmount] = useState('');
     const navigate = useNavigate()
+
     const handleUserIdChange = (e) => {
       setUserId(e.target.value);
     };
@@ -25,7 +25,7 @@ const ChargingPage = () => {
     const body =  JSON.stringify({ userId, amount }) // Pass userId and amount to the backend
   const handleCharge = () => {
     try {
-        
+      
       REQUEST.post('/api/users/charge-wallet',body)
             sendSMSNotification(
               JSON.parse(localStorage.getItem('user')).number,
@@ -35,11 +35,14 @@ const ChargingPage = () => {
                 {name : "CREDIT" , value :amount}
               ]
             );
+            
             alert("your account has been charged")
+
     } catch (error) {
         console.error('Error registering user:', error);
                alert('An error occurred while charging account. Please try again Later.');
     }
+
 }
   return (
     <div className="min-h-screen flex items-center justify-center px-2 bg-gray-700">

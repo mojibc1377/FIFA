@@ -13,6 +13,7 @@ import {BsSkipForward} from "react-icons/bs"
 import MoreButton from './moreButton';
 
 
+
 function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
   const [showBackdrop, setShowBackdrop] = useState(false);
   const [selectedChallengeIndex, setSelectedChallengeIndex] = useState(null);
@@ -22,7 +23,6 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
   const [dataFetched, setDataFetched] = useState(false); // New state to track data fetching status
   const navigate = useNavigate();
   const [confirmationLoading, setConfirmationLoading] = useState(false); //false
-
 
   useEffect(() => {
     setTimeout(() => {
@@ -45,7 +45,7 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
   const handleChallengeConfirmation = (index) => {
     handleShowBackdrop(index);
   };
-
+  
   const handleConfirmationYes = async () => {
     if (selectedChallengeIndex !== null) {
       try {
@@ -76,16 +76,38 @@ function ChallengesList({ challenges, onAcceptChallenge, status,list }) {
           handleHideBackdrop();
           setIsLoading(false);
           setConfirmationLoading(false);
-          navigate('/')
+          const login = async()=>{
+            const response = await request.post('/api/login', {
+              username: JSON.parse(localStorage.getItem('user'))?.username,
+              password: JSON.parse(localStorage.getItem('user'))?.password
+            });
+          
+            const { token, user } = response.data;
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(user));
+          }
+           if (checkIfLoggedIn){ 
+            login();
+            const user = JSON.parse(localStorage.getItem('user') );
+             if (user && (user.accountCredit !== Number(dataa[0].accountCredit) - cost)){
+              window.location.reload()
+             }
+            }
+            navigate('/')
+
+
         } else {
           alert('Not enough credit. Please charge your account.');
           navigate('/charge');
         }
+        window.location.reload()
       } catch (error) {
         console.error('Error updating challenge:', error);
       }
     }
   };
+  
+
   
   const handleConfirmationNo = () => {
     handleHideBackdrop();

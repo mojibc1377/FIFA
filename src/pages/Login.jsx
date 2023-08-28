@@ -10,23 +10,20 @@ function Login() {
 
   const onSubmit = async (data) => {
     try {
-      setIsLoading(true); // Step 3
-
+      setIsLoading(true); 
       const response = await request.post('/api/login', {
         username: data.username,
         password: data.password,
       });
-
       const { token, user } = response.data;
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
-
+      localStorage.setItem('token', token || "");
+      localStorage.setItem('user', JSON.stringify(user) || "");
       navigate('/');
     } catch (error) {
       console.error('Login error:', error);
       alert('Login failed. Please check your credentials.');
     } finally {
-      setIsLoading(false); // Step 3
+      setIsLoading(false); 
     }
   };
 

@@ -50,7 +50,6 @@ function Signup() {
   const checkUsernameAvailability = async (username) => {
     try {
       const response = await request.get(`/api/check-username?username=${username}`);
-      console.log(response.data.available)
       setUsernameAvailable(response.data.available);
     } catch (error) {
       console.error('Error checking username availability:', error);
@@ -111,7 +110,7 @@ function Signup() {
    
 
   return (
-    <div className="flex flex-col fade-out items-center">
+    <div className="flex flex-col fade-out gap-0 pt-10 items-center">
        {showError && (
     <div className="bg-red-500 text-white py-2 px-4 mt-16 rounded-md">
       {errorMessage}
@@ -138,14 +137,15 @@ function Signup() {
           placeholder="Username"
           required
         />
+        <div className='m-0 p-0'>
           {username && (
-            <p className={`absolute top-44 left-20 text-sm m-0 ${
+            <p className={`text-sm m-0 ${
               isUsernameAvailable ? 'text-green-500' : 'text-red-500'
             }`}>
               {isUsernameAvailable ? 'Username available' : 'Username not available'}
             </p>
           )}
-
+</div>
         <input
           type="password"
           value={password}

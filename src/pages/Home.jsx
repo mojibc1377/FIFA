@@ -6,6 +6,7 @@ function HomePage() {
   const [more,setMore]=React.useState(false)
   const [moreServices,setMoreServices]=React.useState(false)
 
+
   return (
     <div className="bg-pattern fade-out min-h-screen text-2xl text-gray-400 pt-20 p-8">
       { localStorage.getItem('token') ? 
@@ -85,7 +86,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Contact Section */}
       <section id="contact" className="py-20">
         <div className="max-w-md mx-auto bg-opacity-10 bg-gray-100 backdrop-blur-3xl p-8 rounded-lg shadow-xl">
           <h2 className="text-4xl font-bold mb-8 text-gray-300">تماس با ما</h2>

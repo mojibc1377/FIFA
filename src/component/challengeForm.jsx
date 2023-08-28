@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { request } from '../services/requests';
 import moment from "moment"
 import {AiOutlineLoading} from "react-icons/ai"
+import checkIfLoggedIn from './Middleware/checkLoggedIn';
 
 
 
@@ -59,20 +60,39 @@ function ChallengeForm() {
       const data = response.data;
   
       if (cost <= parseFloat(data[0].accountCredit)) {
-        // Proceed with posting the challenge and deducting credits
+
         await request.post('/api/challenges/new/post', challengeData);
         await request.post('/api/users/purchase-coins', {
           userId: challengerId,
           amount: cost,
+
         });
-  
+        const login = async()=>{
+          const response = await request.post('/api/login', {
+            username: JSON.parse(localStorage.getItem('user'))?.username,
+            password: JSON.parse(localStorage.getItem('user'))?.password
+          });
+        
+          const { token, user } = response?.data;
+          localStorage.setItem('token', token || "");
+          localStorage.setItem('user', JSON.stringify(user) || "");
+        }
+        if (checkIfLoggedIn){ 
+          login();
+          const user = JSON.parse(localStorage.getItem('user') );
+           if (user && (user.accountCredit !== Number(data[0].accountCredit) - cost)){
+            window.location.reload()
+           }
+          }
+          navigate('/')
         alert('Your challenge is posted in challenges');
         setConfirmationLoading(false); 
-        navigate('/');
+        navigate('/')
       } else {
         alert('Not enough credit. Please charge your account.');
         navigate('/charge');
       }
+
     } catch (error) {
       console.error('Error creating a challenge:', error);
       alert('An error occurred while posting the challenge');
@@ -81,12 +101,12 @@ function ChallengeForm() {
   
   return (
     <div className='flex flex-row justify-center pt-20'>
-    <div className=" h-max my-auto sliding-div bg-opacity-60 backdrop-blur-sm  bg-gray-700 text-gray-100 py-10 px-5 rounded-md shadow-2xl ">
+    <div className=" h-max my-auto sliding-div bg-opacity-60 backdrop-blur-sm  bg-gray-700 text-gray-100 py-10 px-5 lg:px-24 rounded-md shadow-2xl ">
       <h2 className="animate-pulse text-2xl font-semibold text-gray-300 mb-4">ایجاد چالش جدید</h2>
       <form onSubmit={HandleSubmit}>
         <div className=" fade-out mb-4">
           <label htmlFor="challengerName" className=" fade-out block mb-1 font-extrabold text-2xl text-blue-500">
-            {localStorage.getItem("loggedInUser")}
+          {JSON.parse(localStorage.getItem('user')).name}          
           </label>
           <label htmlFor="gameName" className=" fade-out block mb-1">
             بازی
