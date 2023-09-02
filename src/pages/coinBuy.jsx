@@ -52,6 +52,7 @@ function KharidCoin() {
         psnId: user.psnId, 
         requestType: requestType, 
       });
+      
   sendSMSNotification(user.number ,455379, [{name : "NAME" , value : user.username }] )       //kharide coin sms 
 
       // Update the account credit after successful purchase
@@ -59,10 +60,9 @@ function KharidCoin() {
       //   userId: JSON.parse(localStorage.getItem('user'))._id,
       //   amount: parseFloat(mizan*8),
       // });
-
       // setAccountCredit(response.data.accountCredit);
-  
       // Reset the input field
+
       setMizan('');
       setCost(0);
       setIsLoading(false)

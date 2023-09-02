@@ -42,7 +42,6 @@ const ChargingPage = () => {
         console.error('Error registering user:', error);
                alert('An error occurred while charging account. Please try again Later.');
     }
-
 }
   return (
     <div className="min-h-screen flex items-center justify-center px-2 bg-gray-700">

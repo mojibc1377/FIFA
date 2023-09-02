@@ -158,7 +158,7 @@ await request.post(`/api/challenges/${challengeId}/update`, {
 
 
   return (
-    <div className="comment pt-20">
+    <div className="comment pt-20 mb-10">
       <div
         className="challenge-detail block pt-20 bg-black bg-opacity-50 backdrop-blur-sm text-white rounded-md p-6 shadow-lg max-w-md mx-auto"
       >
